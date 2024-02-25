@@ -9,7 +9,6 @@ namespace PyrrhicSilva
         static public WorkController Instance;
         [SerializeField] GameObject[] games;
         [SerializeField] int currentGame = 0;
-        [SerializeField] GameObject loading;
         GameObject workingGame;
 
         void Awake()
@@ -19,8 +18,6 @@ namespace PyrrhicSilva
 
         void Start()
         {
-            loading.SetActive(false);
-
             // instantiate first game
             workingGame = Instantiate(games[0]);
         }
@@ -36,7 +33,6 @@ namespace PyrrhicSilva
             if (currentGame >= games.Length)
             {
                 // end the computer session
-                loading.SetActive(true);
                 this.GetComponent<SplashController>().StartGame(); 
             }
             else
@@ -44,10 +40,6 @@ namespace PyrrhicSilva
                 // instantiate next game
                 workingGame = Instantiate(games[currentGame]);
             }
-        }
-
-        public void Submit() {
-            loading.SetActive(false); 
         }
     }
 }
