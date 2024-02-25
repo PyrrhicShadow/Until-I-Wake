@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SwitchesGame
+namespace WorkGame
 {
     public class Switch : MonoBehaviour
     {
@@ -20,7 +20,7 @@ namespace SwitchesGame
 
             if (isOn)
             {
-                SwitchManager.Instance.SwitchChange(1);
+                WorkManager.Instance.PointsChange(1);
             }
         }
 
@@ -32,11 +32,11 @@ namespace SwitchesGame
             isOn = !isOn;
             if (isOn)
             {
-                SwitchManager.Instance.SwitchChange(1);
+                WorkManager.Instance.PointsChange(1);
             }
             else
             {
-                SwitchManager.Instance.SwitchChange(-1);
+                WorkManager.Instance.PointsChange(-1);
             }
             SetUp();
         }

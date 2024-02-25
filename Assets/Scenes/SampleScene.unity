@@ -526,7 +526,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247007901}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1004,7 +1004,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399ce60aba004b249840693fe86caceb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchCount: 5
+  game: 0
+  pointsCount: 5
   winText: {fileID: 467181608}
   fillBar: {fileID: 407599859}
   onCount: 0
@@ -2163,6 +2164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1751907132}
   - component: {fileID: 1751907133}
+  - component: {fileID: 1751907134}
   m_Layer: 0
   m_Name: Wires BG
   m_TagString: Untagged
@@ -2239,6 +2241,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1751907134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751907131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399ce60aba004b249840693fe86caceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  game: 1
+  pointsCount: 4
+  winText: {fileID: 467181608}
+  fillBar: {fileID: 0}
+  onCount: 0
 --- !u!4 &1808634765 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4183249975068498289, guid: 7624daa4e711e094891d1e4cebc6d2fb, type: 3}
