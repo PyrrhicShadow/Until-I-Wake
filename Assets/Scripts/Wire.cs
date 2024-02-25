@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace WorkGame
+namespace PyrrhicSilva
 {
     public class Wire : MonoBehaviour
     {
@@ -39,7 +39,7 @@ namespace WorkGame
                     if (transform.parent.name.Equals(c.transform.parent.name))
                     {
                         // add points 
-                        WorkManager.Instance.PointsChange(1); 
+                        WorkGameManager.Instance.PointsChange(1); 
 
                         // solder connection 
                         c.GetComponent<Wire>()?.Done();

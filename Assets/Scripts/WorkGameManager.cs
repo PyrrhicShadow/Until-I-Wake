@@ -1,36 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace WorkGame
+namespace PyrrhicSilva
 {
     public enum WorkType
     {
         switches, wires
     }
-    public class WorkManager : MonoBehaviour
+    public class WorkGameManager : MonoBehaviour
     {
-        static public WorkManager Instance;
+        static public WorkGameManager Instance;
         [SerializeField] WorkType game;
-        [SerializeField] protected int pointsCount;
+        [SerializeField] int currPoints = 0;
+        [SerializeField] protected int reqPoints;
         [SerializeField] GameObject winText;
         [SerializeField] Image fillBar;
-        [SerializeField] int onCount = 0;
 
         void Awake()
         {
             Instance = this;
         }
 
+        void Start() {
+            winText.SetActive(false); 
+        }
+
         public void PointsChange(int points)
         {
-            onCount += points;
+            currPoints += points;
             if (game == WorkType.switches) {
-                fillBar.fillAmount = (float)onCount / pointsCount;
+                fillBar.fillAmount = (float)currPoints / reqPoints;
             }
 
-            if (onCount == pointsCount)
+            if (currPoints == reqPoints)
             {
                 winText.SetActive(true);
             }
@@ -38,6 +43,10 @@ namespace WorkGame
             {
                 winText.SetActive(false);
             }
+        }
+
+        public void SubmitButton() {
+            WorkController.Instance.NextGame(); 
         }
     }
 }

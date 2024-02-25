@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace WorkGame
+namespace PyrrhicSilva
 {
     public class Switch : MonoBehaviour
     {
@@ -20,7 +20,7 @@ namespace WorkGame
 
             if (isOn)
             {
-                WorkManager.Instance.PointsChange(1);
+                WorkGameManager.Instance.PointsChange(1);
             }
         }
 
@@ -32,11 +32,11 @@ namespace WorkGame
             isOn = !isOn;
             if (isOn)
             {
-                WorkManager.Instance.PointsChange(1);
+                WorkGameManager.Instance.PointsChange(1);
             }
             else
             {
-                WorkManager.Instance.PointsChange(-1);
+                WorkGameManager.Instance.PointsChange(-1);
             }
             SetUp();
         }
