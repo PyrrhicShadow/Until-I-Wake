@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Wire : MonoBehaviour
@@ -7,6 +8,7 @@ public class Wire : MonoBehaviour
     Vector3 startPoint;
     Vector3 defaultPosition; 
     [SerializeField] SpriteRenderer wireEnd;
+    [SerializeField] GameObject lightOn; 
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +21,34 @@ public class Wire : MonoBehaviour
     {
         // convert mouse position to world point 
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        newPosition.z = 0;
+        newPosition.z = 0; 
+
+        // check for nearby connection points
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(newPosition, .2f); 
+        foreach (Collider2D c in colliders) {
+            // make sure it's not myself 
+            if (c.gameObject != gameObject) {
+                // snap to connection 
+                UpdateWire(c.transform.position); 
+
+                //check color of connection 
+                if (transform.parent.name.Equals(c.transform.parent.name)) {
+                    c.GetComponent<Wire>()?.Done(); 
+                    Done(); 
+                }
+
+                return; 
+            }
+        }
 
         UpdateWire(newPosition); 
 
+    }
+
+    void Done() {
+        // turn on light
+        lightOn.SetActive(true); 
+        Destroy(this); 
     }
 
     void OnMouseUp()

@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wireEnd: {fileID: 1537747364779705141}
+  lightOn: {fileID: 6001213055459696126}
 --- !u!1 &4883770162667803502
 GameObject:
   m_ObjectHideFlags: 0
