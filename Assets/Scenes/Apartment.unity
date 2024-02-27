@@ -3159,10 +3159,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2004189826703255218, guid: 78076ca5425c28c468d81e7f8cf711ab, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 8204767107365459085}
     - target: {fileID: 5635540391372896681, guid: 78076ca5425c28c468d81e7f8cf711ab, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1388034400}
+    - target: {fileID: 5854212243062485574, guid: 78076ca5425c28c468d81e7f8cf711ab, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 09693f89928d5024b96bc8e5ebe76b21, type: 3}
     - target: {fileID: 7341087507291861245, guid: 78076ca5425c28c468d81e7f8cf711ab, type: 3}
       propertyPath: m_Name
       value: Audio Source

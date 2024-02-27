@@ -18,7 +18,7 @@ namespace PyrrhicSilva
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            WakeUp(); 
+            alarmClock.InteractAction(); 
         }
 
         // Update is called once per frame
@@ -43,7 +43,7 @@ namespace PyrrhicSilva
             dropItem.transform.SetLocalPositionAndRotation(relativePos, dropItem.transform.localRotation); 
         } 
 
-        void WakeUp() {
+        internal void WakeUp() {
             playerAnimator.enabled = true; 
             StartCoroutine(wakeUp()); 
         }
@@ -52,6 +52,7 @@ namespace PyrrhicSilva
             playerAnimator.Play("WakeUp"); 
             yield return new WaitForSeconds(5.5f); 
             playerAnimator.enabled = false; 
+            alarmClock.enabled = false; 
         }
     }
 }

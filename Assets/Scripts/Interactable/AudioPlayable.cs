@@ -18,13 +18,15 @@ namespace PyrrhicSilva.Interactable
         {
             base.InteractAction();
 
+
             if (audioSource.isPlaying)
             {
-                audioSource.Play();
+                audioSource.Stop();
+                gameManager.WakeUp(); 
             }
             else
             {
-                audioSource.Stop();
+                audioSource.Play();
             }
         }   
     }
