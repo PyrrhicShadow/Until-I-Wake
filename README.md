@@ -13,4 +13,7 @@ You get a paid position testing something for the Company. Your job is to do som
 
 ## Assets used: 
 
-sample assets ripped from Among Us 
+sample assets for tasks ripped from Among Us 
+
+Keyboard texture: Photo by <a href="https://unsplash.com/@stefentan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Stefen Tan</a> on <a href="https://unsplash.com/photos/black-and-orange-computer-keyboard-KYw1eUx1J7Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  

@@ -10,6 +10,7 @@ namespace PyrrhicSilva {
         [SerializeField] Canvas loadingScreen; 
         [SerializeField] Image loadingBar; 
 
+        [ContextMenu("Start Game")]
         public void StartGame() {
             StartCoroutine(LoadMainScene()); 
             loadingScreen.enabled = true; 
