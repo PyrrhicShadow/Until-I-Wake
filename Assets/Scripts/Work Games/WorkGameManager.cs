@@ -26,6 +26,8 @@ namespace PyrrhicSilva
 
         void Start() {
             winText.SetActive(false); 
+            // unlock cursor 
+            Cursor.lockState = CursorLockMode.None;
         }
 
         public void PointsChange(int points)

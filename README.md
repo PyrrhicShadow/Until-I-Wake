@@ -15,5 +15,6 @@ You get a paid position testing something for the Company. Your job is to do som
 
 sample assets for tasks ripped from Among Us 
 
-Keyboard texture: Photo by <a href="https://unsplash.com/@stefentan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Stefen Tan</a> on <a href="https://unsplash.com/photos/black-and-orange-computer-keyboard-KYw1eUx1J7Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+Computer keyboard texture: Photo by <a href="https://unsplash.com/@stefentan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Stefen Tan</a> on <a href="https://unsplash.com/photos/black-and-orange-computer-keyboard-KYw1eUx1J7Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
+Talking Giberish: https://freesound.org/people/170026/sounds/407767/ CC-BY-NC 4.0 

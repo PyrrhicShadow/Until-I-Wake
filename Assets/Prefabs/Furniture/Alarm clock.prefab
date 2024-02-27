@@ -661,6 +661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 816967310562553579}
   - component: {fileID: 1120203935022923966}
+  - component: {fileID: 2004189826703255218}
   m_Layer: 6
   m_Name: Alarm clock
   m_TagString: Untagged
@@ -708,3 +709,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.61886597, y: 0.25848794, z: 0.2104845}
   m_Center: {x: -0.0018868446, y: 0.0009434223, z: 0.0007915497}
+--- !u!114 &2004189826703255218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8936863326101162092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de8e26716e4f06347ada1164d2fe025b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  _col: {fileID: 1120203935022923966}
+  repeatable: 1
+  interactDelay: 0.5
+  interactable: 1
+  audioSource: {fileID: 5854212243062485574}
