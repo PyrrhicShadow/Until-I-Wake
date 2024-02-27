@@ -12,11 +12,13 @@ namespace PyrrhicSilva
         [SerializeField] GameObject hands;
         [SerializeField] AudioPlayable speaker; 
         [SerializeField] AudioPlayable alarmClock; 
-        
+        [SerializeField] Animator playerAnimator; 
+
         // Start is called before the first frame update
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
+            WakeUp(); 
         }
 
         // Update is called once per frame
@@ -39,6 +41,17 @@ namespace PyrrhicSilva
             GameObject dropItem = hands.transform.GetChild(0).gameObject; 
             dropItem.transform.SetParent(newSpot.transform); 
             dropItem.transform.SetLocalPositionAndRotation(relativePos, dropItem.transform.localRotation); 
+        } 
+
+        void WakeUp() {
+            playerAnimator.enabled = true; 
+            StartCoroutine(wakeUp()); 
+        }
+
+        IEnumerator wakeUp() {
+            playerAnimator.Play("WakeUp"); 
+            yield return new WaitForSeconds(5.5f); 
+            playerAnimator.enabled = false; 
         }
     }
 }
