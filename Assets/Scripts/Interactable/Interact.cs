@@ -14,8 +14,8 @@ namespace PyrrhicSilva {
 
         public void Press() {
             RaycastHit hit;
-            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit);
-            GameObject target = hit.transform.gameObject; 
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 2);
+            GameObject target = hit.transform?.gameObject; 
 
             // Interact action
             Interactable.Interactable interactable = target.GetComponent<Interactable.Interactable>();

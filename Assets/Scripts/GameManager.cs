@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using PyrrhicSilva.Interactable;
 using UnityEditor.Search;
 using UnityEngine;
@@ -12,13 +13,14 @@ namespace PyrrhicSilva
         [SerializeField] GameObject hands;
         [SerializeField] AudioPlayable speaker; 
         [SerializeField] AudioPlayable alarmClock; 
-        [SerializeField] Animator playerAnimator; 
+        [SerializeField] CinemachineVirtualCamera wakeUpCamera; 
+        [SerializeField] Canvas wakeUpCanvas; 
 
         // Start is called before the first frame update
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            alarmClock.InteractAction(); 
+            Asleep(); 
         }
 
         // Update is called once per frame
@@ -43,16 +45,25 @@ namespace PyrrhicSilva
             dropItem.transform.SetLocalPositionAndRotation(relativePos, dropItem.transform.localRotation); 
         } 
 
+        internal void Asleep() {
+            wakeUpCamera.Priority += 10; 
+            wakeUpCanvas.enabled = true; 
+            // play 2D alarm sound
+        }
+
         internal void WakeUp() {
-            playerAnimator.enabled = true; 
+            alarmClock.enabled = false; 
             StartCoroutine(wakeUp()); 
         }
 
         IEnumerator wakeUp() {
-            playerAnimator.Play("WakeUp"); 
+            wakeUpCamera.gameObject.GetComponent<Animator>().Play("WakeUp"); 
             yield return new WaitForSeconds(5.5f); 
-            playerAnimator.enabled = false; 
-            alarmClock.enabled = false; 
+            wakeUpCamera.Priority -= 10; 
+        } 
+
+        internal void WakeUpCheck() {
+            alarmClock.InteractAction(); 
         }
     }
 }
