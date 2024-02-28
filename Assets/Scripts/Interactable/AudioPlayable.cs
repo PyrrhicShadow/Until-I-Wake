@@ -22,7 +22,7 @@ namespace PyrrhicSilva.Interactable
             if (audioSource.isPlaying)
             {
                 audioSource.Stop();
-                gameManager.WakeUp(); 
+                gameManager.Agenda.WakeUp(); 
             }
             else
             {

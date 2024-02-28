@@ -4,7 +4,7 @@ using Cinemachine;
 using PyrrhicSilva.Interactable;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using TMPro; 
+using TMPro;
 
 namespace PyrrhicSilva
 {
@@ -14,27 +14,19 @@ namespace PyrrhicSilva
         [SerializeField] Canvas uiCanvas;
         [SerializeField] PlayerInput playerInput;
         [SerializeField] GameObject hands;
-        [SerializeField] bool _isHolding = false; 
+        [SerializeField] bool _isHolding = false;
         public bool IsHolding { get { return _isHolding; } protected set { _isHolding = value; } }
-        [Header("Agenda")]
-        [SerializeField] Canvas agendaCanvas; 
-        [SerializeField] TMP_Text objectiveText; 
-        [SerializeField] TMP_Text subObjectiveText; 
-        [Header("Wake Up")]
-        [SerializeField] AudioPlayable alarmClock;
-        [SerializeField] CinemachineVirtualCamera wakeUpCamera;
-        [SerializeField] Canvas wakeUpCanvas;
+        [Header("Agenda Setup")]
+        [SerializeField] AgendaManager _agenda;
+        public AgendaManager Agenda { get { return _agenda; } protected set { _agenda = value; } }
         [Header("Doors")]
-        [SerializeField] CinemachineVirtualCamera doorCamera;
         [SerializeField] AudioClip doorSound;
         [Header("Chairs")]
         CinemachineVirtualCamera currentChairCamera;
-        [SerializeField] internal bool isSeated; 
+        [SerializeField] internal bool isSeated;
         [SerializeField] AudioClip chairSound;
-        [Header("Bedtime")]
-        [SerializeField] AudioPlayable speaker;
         [Header("Save Data")]
-        [SerializeField] CinemachineVirtualCamera currentActiveCamera; 
+        [SerializeField] CinemachineVirtualCamera currentActiveCamera;
         // cycle, day, task, capsule world transform
 
         void Awake()
@@ -48,7 +40,28 @@ namespace PyrrhicSilva
         // Start is called before the first frame update
         void Start()
         {
-            Asleep();
+            // if restarting week day 
+            Agenda.Asleep();  
+
+            // if returning from computer 
+            // Agenda: unwind 
+            // current camera: computer chair
+            // is seated: true
+
+            // if returning from TV 
+            // Agenda: get ready for bed 
+            // current camera: couch 
+            // is seated: true 
+
+            // if returning from Travel
+            // Agenda: unwind 
+            // current camera: front door
+            // is seated: false
+
+            // if starting last day 
+            // Nightmare(); 
+
+
         }
 
         // Update is called once per frame
@@ -63,16 +76,22 @@ namespace PyrrhicSilva
 
         }
 
+        internal void WakeUpCheck()
+        {
+            // enable 3D interaction 
+            CharacterMovement(true);
+        }
+
         /// <summary>
         /// Transfers one gameObject in Container to player's "hands"
         /// </summary>
         /// <param name="thing">The Container to take from</param>
         public void Hold(Container container)
         {
-            GameObject thing = container.contents.transform.GetChild(0).gameObject; 
+            GameObject thing = container.contents.transform.GetChild(0).gameObject;
             thing.transform.SetParent(hands.transform);
             thing.transform.SetLocalPositionAndRotation(Vector3.zero, thing.transform.localRotation);
-            IsHolding = true; 
+            IsHolding = true;
         }
 
         /// <summary>
@@ -82,10 +101,10 @@ namespace PyrrhicSilva
         /// <param name="index">The index of the specific gameObject within the container</param>
         public void Hold(Container container, int index)
         {
-            GameObject thing = container.contents.transform.GetChild(index).gameObject; 
+            GameObject thing = container.contents.transform.GetChild(index).gameObject;
             thing.transform.SetParent(hands.transform);
             thing.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
-            IsHolding = true; 
+            IsHolding = true;
         }
 
         /// <summary>
@@ -99,8 +118,9 @@ namespace PyrrhicSilva
             dropItem.transform.SetParent(newSpot.contents.transform);
             dropItem.transform.SetLocalPositionAndRotation(Vector3.zero, dropItem.transform.localRotation);
 
-            if (hands.transform.childCount == 0) {
-                IsHolding = false; 
+            if (hands.transform.childCount == 0)
+            {
+                IsHolding = false;
             }
         }
 
@@ -114,37 +134,7 @@ namespace PyrrhicSilva
             {
                 Destroy(hands.transform.GetChild(i).gameObject);
             }
-            IsHolding = false; 
-        }
-
-        internal void Asleep()
-        {
-            wakeUpCamera.Priority += 20;
-            wakeUpCanvas.enabled = true;
-            CharacterMovement(false);
-            alarmClock.InteractAction();
-        }
-
-        internal void WakeUp()
-        {
-            alarmClock.enabled = false;
-            StartCoroutine(wakeUp());
-        }
-
-        IEnumerator wakeUp()
-        {
-            CharacterMovement(false); 
-            wakeUpCamera.gameObject.GetComponent<Animator>().Play("WakeUp");
-            yield return new WaitForSeconds(4.5f);
-            wakeUpCamera.Priority -= 20;
-            yield return new WaitForSeconds(2f); 
-            CharacterMovement(true); 
-        }
-
-        internal void WakeUpCheck()
-        {
-            // enable 3D interaction 
-            CharacterMovement(true);
+            IsHolding = false;
         }
 
         internal void GetSeated(CinemachineVirtualCamera chairCamera)
@@ -154,9 +144,9 @@ namespace PyrrhicSilva
             {
                 StartCoroutine(getSeated());
             }
-            else 
+            else
             {
-                Debug.Log("You are not sitting in a chair."); 
+                Debug.Log("You are not sitting in a chair.");
             }
         }
 
@@ -164,8 +154,8 @@ namespace PyrrhicSilva
         {
             currentChairCamera.Priority += 10;
             // currentChairCamera.GetComponent<Animator>().Play("SitInChair");
-            yield return new WaitForSeconds(2f); 
-            isSeated = true; 
+            yield return new WaitForSeconds(2f);
+            isSeated = true;
         }
 
         internal void GetUnSeated()
@@ -174,9 +164,9 @@ namespace PyrrhicSilva
             {
                 StartCoroutine(getUnSeated());
             }
-            else 
+            else
             {
-                Debug.Log("You are not sitting in a chair."); 
+                Debug.Log("You are not sitting in a chair.");
             }
         }
 
@@ -184,8 +174,8 @@ namespace PyrrhicSilva
         {
             currentChairCamera.Priority -= 10;
             // currentChairCamera.GetComponent<Animator>().Play("StandFromChair");
-            yield return new WaitForSeconds(2f); 
-            isSeated = false; 
+            yield return new WaitForSeconds(2f);
+            isSeated = false;
         }
 
         internal void CharacterMovement(bool state)
@@ -206,6 +196,5 @@ namespace PyrrhicSilva
             Debug.Log(playerInput.currentActionMap.name);
 
         }
-
     }
 }

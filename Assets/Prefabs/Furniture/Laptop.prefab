@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4334758551797264836}
   - component: {fileID: 7900188230982828202}
   - component: {fileID: 3719500314083556914}
-  - component: {fileID: 5182423345260692372}
   m_Layer: 6
   m_Name: Loading Canvas
   m_TagString: Untagged
@@ -87,23 +86,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &5182423345260692372
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 485023417752695338}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &843340746166840418
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,6 +634,8 @@ MonoBehaviour:
   interactable: 1
   defaultCanvas: {fileID: 8716470057233520795}
   splashController: {fileID: 4640242162766955837}
+  chairCamera: {fileID: 0}
+  laptopCamera: {fileID: 0}
 --- !u!1 &6036030361001445058
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +940,6 @@ GameObject:
   - component: {fileID: 9068320525204998753}
   - component: {fileID: 1842685520774131812}
   - component: {fileID: 7942516539007982162}
-  - component: {fileID: 1109782795887771722}
   - component: {fileID: 4640242162766955837}
   m_Layer: 6
   m_Name: Laptop Screen Canvas
@@ -1032,23 +1015,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &1109782795887771722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7717343249035654452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &4640242162766955837
 MonoBehaviour:
   m_ObjectHideFlags: 0

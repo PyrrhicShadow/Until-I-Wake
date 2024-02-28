@@ -5,12 +5,10 @@ using UnityEngine;
 
 namespace PyrrhicSilva.Interactable
 {
-    public class ComputerInteractable : Interactable
+    public class ComputerInteractable : ChairInteractable
     {
         [SerializeField] Canvas defaultCanvas;
         [SerializeField] SplashController splashController;
-        [SerializeField] CinemachineVirtualCamera chairCamera;
-        [SerializeField] CinemachineVirtualCamera laptopCamera;
 
         // Start is called before the first frame update
         void Start()
@@ -18,25 +16,10 @@ namespace PyrrhicSilva.Interactable
 
         }
 
-        public override void InteractAction()
-        {
-            base.InteractAction();
-
-            // initiate animation that moves camera to seated view 
-            gameManager.GetSeated(chairCamera);
-
-            if (gameManager.isSeated)
-            {
-                // move to laptop view
-                StartCoroutine(LookAtLaptop());
-            }
-
-        }
-
-        IEnumerator LookAtLaptop()
+        protected new IEnumerator LookAtTarget()
         {
             gameManager.CharacterMovement(false); 
-            laptopCamera.Priority += 20;
+            targetCamera.Priority += 20;
             yield return new WaitForSeconds(2f);
 
             // begin loading other scene 
