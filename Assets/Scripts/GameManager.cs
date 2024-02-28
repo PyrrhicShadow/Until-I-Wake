@@ -27,7 +27,6 @@ namespace PyrrhicSilva
         [SerializeField] AudioClip chairSound;
         [Header("Save Data")]
         [SerializeField] CinemachineVirtualCamera currentActiveCamera;
-        // cycle, day, task, capsule world transform
 
         void Awake()
         {
@@ -35,20 +34,29 @@ namespace PyrrhicSilva
             {
                 playerInput = gameObject.GetComponent<PlayerInput>();
             }
+            LoadGame(); 
         }
 
         // Start is called before the first frame update
         void Start()
         {
             // if restarting week day 
-            Agenda.Asleep();  
+            if (Agenda.task == Task.WakeUp || Agenda.task == Task.WakeUp)
+            {
+                Agenda.Asleep();
+            }
 
             // if returning from computer 
-            // Agenda: unwind 
-            // current camera: computer chair
-            // is seated: true
+            if (Agenda.task == Task.Work || Agenda.task == Task.Dinner)
+            {
+                Agenda.BeginDinner();
+            }
 
             // if returning from TV 
+            if (Agenda.task == Task.TV || Agenda.task == Task.Betdime)
+            {
+                Agenda.GetNightClothes(); 
+            }
             // Agenda: get ready for bed 
             // current camera: couch 
             // is seated: true 
@@ -80,6 +88,30 @@ namespace PyrrhicSilva
         {
             // enable 3D interaction 
             CharacterMovement(true);
+        }
+
+        [ContextMenu("Save Game")]
+        public void SaveGame()
+        {
+            // cycle, day, task
+            PlayerPrefs.SetInt("cycle", (int)Agenda.cycle);
+            PlayerPrefs.SetInt("day", (int)Agenda.day);
+            PlayerPrefs.SetInt("task", (int)Agenda.task);
+        }
+
+        [ContextMenu("Load Game")]
+        public void LoadGame()
+        {
+            Agenda.cycle = (Cycle)PlayerPrefs.GetInt("cycle", 0);
+            Agenda.day = (Day)PlayerPrefs.GetInt("day", 0);
+            Agenda.task = (Task)PlayerPrefs.GetInt("task", 0);
+        }
+
+        [ContextMenu("Clear Save Data")]
+        public void ClearSave() {
+            PlayerPrefs.SetInt("cycle", 0); 
+            PlayerPrefs.SetInt("day", 0); 
+            PlayerPrefs.SetInt("task", 0); 
         }
 
         /// <summary>

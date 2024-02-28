@@ -9,7 +9,7 @@ namespace PyrrhicSilva.Interactable
     {
         [SerializeField] protected CinemachineVirtualCamera chairCamera; 
         [SerializeField] protected CinemachineVirtualCamera targetCamera; 
-        [SerializeField] Interactable target; 
+        [SerializeField] MealInteractable target; 
 
         // Start is called before the first frame update
         void Start()
