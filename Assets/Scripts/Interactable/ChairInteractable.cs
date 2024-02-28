@@ -7,9 +7,11 @@ namespace PyrrhicSilva.Interactable
 {
     public class ChairInteractable : Interactable
     {
-        [SerializeField] protected CinemachineVirtualCamera chairCamera; 
-        [SerializeField] protected CinemachineVirtualCamera targetCamera; 
-        [SerializeField] MealInteractable target; 
+        [SerializeField] protected CinemachineVirtualCamera chairCamera;
+        [SerializeField] protected CinemachineVirtualCamera targetCamera;
+        [SerializeField] protected Transform _exitTransform;
+        public Transform ExitTransform { get { return _exitTransform; } protected set { _exitTransform = value; } }
+        [SerializeField] MealInteractable target;
 
         // Start is called before the first frame update
         void Start()
@@ -33,14 +35,13 @@ namespace PyrrhicSilva.Interactable
 
         protected IEnumerator LookAtTarget()
         {
-            gameManager.CharacterMovement(false); 
+            gameManager.CharacterMovement(false);
             targetCamera.Priority += 20;
             yield return new WaitForSeconds(2f);
 
-            target.InteractAction(); 
-            yield return new WaitForSeconds(interactDelay); 
-            gameManager.CharacterMovement(true); 
+            target.InteractAction();
+            yield return new WaitForSeconds(interactDelay);
+            gameManager.CharacterMovement(true);
         }
-
     }
 }

@@ -16,8 +16,9 @@ namespace PyrrhicSilva.Interactable
         // Start is called before the first frame update
         void Start()
         {
-            if (destroyOnDrop) {
-                isTaken = true; 
+            if (destroyOnDrop)
+            {
+                isTaken = true;
             }
         }
 
@@ -33,6 +34,23 @@ namespace PyrrhicSilva.Interactable
                     if (destroyOnDrop)
                     {
                         gameManager.EmptyHands();
+                        switch (gameManager.Agenda.task)
+                        {
+                            case Task.MorningBathroom:
+                                // gameManager.Agenda.BeginBreakfast();
+                                break;
+                            case Task.NightBathroom:
+                                // gameManager.Agenda.SleepTunes();
+                                break;
+                            case Task.MakeBreakfast:
+                                gameManager.Agenda.TakeBreakfast();
+                                break;
+                            case Task.MakeDinner:
+                                // gameManager.Agenda.TakeDinner(); 
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     else
                     {
@@ -43,6 +61,24 @@ namespace PyrrhicSilva.Interactable
                         }
                     }
                     isTaken = false;
+
+                    switch (gameManager.Agenda.task)
+                    {
+                        case Task.TakeBreakfast:
+                            gameManager.Agenda.EatBreakfast();
+                            break;
+                        case Task.TakeDinner:
+                            gameManager.Agenda.EatDinner();
+                            break;
+                        case Task.TakeBreakfastHQ:
+                            break;
+                        case Task.TakeDinnerHQ:
+                            break;
+                        case Task.TakeLunch:
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
             else
@@ -55,6 +91,18 @@ namespace PyrrhicSilva.Interactable
                         audioSource.PlayOneShot(pickUp);
                     }
                     isTaken = true;
+
+                    switch (gameManager.Agenda.task)
+                    {
+                        case Task.MorningClothes:
+                            gameManager.Agenda.MorningBathroom();
+                            break;
+                        case Task.NightClothes:
+                            gameManager.Agenda.NightBathroom();
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 

@@ -10,52 +10,66 @@ namespace PyrrhicSilva
 {
     public class GameManager : MonoBehaviour
     {
+        public static GameManager gameManager;
         [SerializeField] Interact interact;
         [SerializeField] Canvas uiCanvas;
         [SerializeField] PlayerInput playerInput;
-        [SerializeField] GameObject hands;
-        [SerializeField] bool _isHolding = false;
-        public bool IsHolding { get { return _isHolding; } protected set { _isHolding = value; } }
         [Header("Agenda Setup")]
         [SerializeField] AgendaManager _agenda;
         public AgendaManager Agenda { get { return _agenda; } protected set { _agenda = value; } }
-        [Header("Doors")]
-        [SerializeField] AudioClip doorSound;
         [Header("Chairs")]
         CinemachineVirtualCamera currentChairCamera;
         [SerializeField] internal bool isSeated;
-        [SerializeField] AudioClip chairSound;
-        [Header("Save Data")]
-        [SerializeField] CinemachineVirtualCamera currentActiveCamera;
+        [Header("Hands")]
+        [SerializeField] GameObject hands;
+        [SerializeField] bool _isHolding = false;
+        public bool IsHolding { get { return _isHolding; } protected set { _isHolding = value; } }
 
         void Awake()
         {
+            // if (gameManager == null)
+            // {
+            //     DontDestroyOnLoad(this.gameObject);
+            //     gameManager = this;
+            // }
+            // else
+            // {
+            //     Destroy(this.gameObject);
+            // }
+
             if (playerInput == null)
             {
                 playerInput = gameObject.GetComponent<PlayerInput>();
             }
-            LoadGame(); 
+
+            if (uiCanvas == null) {
+                this.enabled = false; 
+            }
+            LoadGame();
         }
 
         // Start is called before the first frame update
         void Start()
         {
             // if restarting week day 
-            if (Agenda.task == Task.WakeUp || Agenda.task == Task.WakeUp)
+            if (Agenda.task == Task.Asleep || Agenda.task == Task.EndTask)
             {
-                Agenda.Asleep();
+                Agenda.WakeUp();
             }
 
             // if returning from computer 
-            if (Agenda.task == Task.Work || Agenda.task == Task.Dinner)
+            if (Agenda.task == Task.Work)
             {
-                Agenda.BeginDinner();
+                isSeated = true;
+                Agenda.ReturnFromWork();
+
             }
 
             // if returning from TV 
-            if (Agenda.task == Task.TV || Agenda.task == Task.Betdime)
+            if (Agenda.task == Task.UnwindTV)
             {
-                Agenda.GetNightClothes(); 
+                isSeated = true;
+                Agenda.ReturnFromTV();
             }
             // Agenda: get ready for bed 
             // current camera: couch 
@@ -76,6 +90,11 @@ namespace PyrrhicSilva
         void Update()
         {
 
+        }
+
+        void OnExit()
+        {
+            SaveGame();
         }
 
         void OnInteract()
@@ -108,10 +127,11 @@ namespace PyrrhicSilva
         }
 
         [ContextMenu("Clear Save Data")]
-        public void ClearSave() {
-            PlayerPrefs.SetInt("cycle", 0); 
-            PlayerPrefs.SetInt("day", 0); 
-            PlayerPrefs.SetInt("task", 0); 
+        public void ClearSave()
+        {
+            PlayerPrefs.SetInt("cycle", 0);
+            PlayerPrefs.SetInt("day", 0);
+            PlayerPrefs.SetInt("task", 0);
         }
 
         /// <summary>
@@ -208,6 +228,24 @@ namespace PyrrhicSilva
             // currentChairCamera.GetComponent<Animator>().Play("StandFromChair");
             yield return new WaitForSeconds(2f);
             isSeated = false;
+
+            switch (Agenda.task)
+            {
+                case Task.Work:
+                    Agenda.BeginDinner();
+                    break;
+                case Task.EatBreakfast:
+                    Agenda.EatBreakfast();
+                    break;
+                case Task.EatDinner:
+                    Agenda.EatDinner(); 
+                    break;
+                case Task.UnwindTV:
+                    Agenda.UnwindTV(); 
+                    break;
+                default:
+                    break;
+            }
         }
 
         internal void CharacterMovement(bool state)
@@ -227,6 +265,11 @@ namespace PyrrhicSilva
 
             Debug.Log(playerInput.currentActionMap.name);
 
+        }
+
+        public void TeleportCharacter(Transform newTransform)
+        {
+            this.transform.SetPositionAndRotation(newTransform.position, newTransform.rotation);
         }
     }
 }

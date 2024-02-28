@@ -19,12 +19,30 @@ namespace PyrrhicSilva
 
     public enum Task
     {
-        WakeUp, Work, Dinner, TV, Betdime, Leave, Arrive, Interview
+        Asleep, WakeUp, 
+        MorningClothes, MorningBathroom, 
+        BeginBreakfast, MakeBreakfast, TakeBreakfast, EatBreakfast, CleanBreakfast,
+        Work, 
+        BeginDinner, TakePan, MakeDinner, TakeDinner, EatDinner, CleanDinner,
+        UnwindTV, 
+        NightClothes, NightBathroom, 
+        SleepTunes, Sleep, 
+        PackDorm, LeaveDorm, ArriveHQ, 
+        TakeDinnerHQ, UnwindHQ, 
+        SleepHQ, 
+        WakeUpHQ,
+        TakeLunch, EatLunch, 
+        PreInterview, Interview, 
+        UnwindHQSad, 
+        TakeBreakfastHQ, EatBreakfastHQ, 
+        LeaveHQ, ArriveDorm, 
+        EndTask,
+
     }
 
     public class AgendaManager : MonoBehaviour
     {
-        [SerializeField] GameManager gameManager;
+        // [SerializeField] GameManager gameManager;
         [Header("Temporal Positioning")]
         [SerializeField] Cycle _cycle = Cycle.Guided;
         [SerializeField] Day _day = Day.Mon;
@@ -38,33 +56,37 @@ namespace PyrrhicSilva
         [SerializeField] TMP_Text subObjectiveText;
         [SerializeField] TMP_Text[] clocks;
         [Header("Wake Up")]
-        [SerializeField] WakeUp wakeUpGame;
+        [SerializeField] WakeUpGame wakeUpGame;
         [SerializeField] AudioPlayable alarmClock;
         [SerializeField] CinemachineVirtualCamera wakeUpCamera;
         [SerializeField] Canvas wakeUpCanvas;
         [Header("Get Ready")]
         [SerializeField] Container dresser;
         [SerializeField] Container bathroomDoor;
-        [SerializeField] Canvas bathroomCanvas;
         [SerializeField] Container fridge;
         [SerializeField] Container microwave;
         [SerializeField] Container placeSetting;
-        [SerializeField] Interactable.Interactable food;
+        [SerializeField] MealInteractable food;
+        [SerializeField] ChairInteractable mealChair; 
         [Header("Computer Work")]
-        [SerializeField] ComputerInteractable computer;
+        [SerializeField] ComputerInteractable computer; 
+        [SerializeField] ChairInteractable deskChair; 
         [Header("Unwind")]
-        [SerializeField] Interactable.Interactable unwindTV;
+        [SerializeField] ChairInteractable unwindTV;
+        [SerializeField] ChairInteractable couch; 
         [Header("Bedtime")]
         [SerializeField] AudioPlayable speaker;
         [SerializeField] Interactable.Interactable bed;
+        [Header("Travel")] 
+        [SerializeField] DoorInteractable frontDoor; 
 
 
         private void Awake()
         {
-            if (gameManager == null)
-            {
-                gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
-            }
+            // if (gameManager == null)
+            // {
+            //     gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+            // }
         }
 
         private void Start()
@@ -80,16 +102,21 @@ namespace PyrrhicSilva
             microwave.DisableTrigger();
             placeSetting.DisableTrigger();
             food.DisableTrigger();
+            // mealChair.DisableTrigger(); 
 
             // computer work 
             computer.DisableTrigger();
 
             // unwind 
-            unwindTV.DisableTrigger();
+            // unwindTV.DisableTrigger();
+            // couch.DisableTrigger(); 
 
             // bedtime 
             speaker.DisableTrigger();
-            bed.DisableTrigger();
+            // bed.DisableTrigger();
+
+            // travel
+            // frontDoor.DisableTrigger(); 
         }
 
         void UpdateClocks(string time)
@@ -118,17 +145,22 @@ namespace PyrrhicSilva
 
         /******* Wake Up *******/
 
-        public void Asleep()
+        public void Asleep() {
+            task = Task.Asleep; 
+            wakeUpGame.StartMinigame(); 
+        }
+
+        public void WakeUp()
         {
             task = Task.WakeUp; 
             UpdateClocks("08:00");
             wakeUpCamera.Priority += 20;
             wakeUpCanvas.enabled = true;
-            gameManager.CharacterMovement(false);
+            GameManager.gameManager.CharacterMovement(false);
             alarmClock.InteractAction();
         }
 
-        internal void WakeUp()
+        internal void AlarmOff()
         {
             alarmClock.enabled = false;
             StartCoroutine(wakeUp());
@@ -136,57 +168,66 @@ namespace PyrrhicSilva
 
         IEnumerator wakeUp()
         {
-            gameManager.CharacterMovement(false);
+            GameManager.gameManager.CharacterMovement(false);
             wakeUpCamera.gameObject.GetComponent<Animator>().Play("WakeUp");
             yield return new WaitForSeconds(4.5f);
             wakeUpCamera.Priority -= 20;
             yield return new WaitForSeconds(2f);
-            gameManager.CharacterMovement(true);
+            GameManager.gameManager.CharacterMovement(true);
             alarmClock.DisableTrigger();
         }
 
         /****** Get Ready ******/
 
-        public void GetDayClothes()
+        public void MorningClothes()
         {
+            task = Task.MorningClothes; 
             dresser.EnableTrigger();
             // dresser.Store(0); 
             objectiveText.text = "Get ready for the day";
             subObjectiveText.text = "Get dressed \nUse the bathroom";
         }
 
-        public void Bathroom()
+        public void MorningBathroom()
         {
+            task = Task.MorningBathroom; 
             bathroomDoor.EnableTrigger();
-            bathroomCanvas.enabled = true;
         }
 
         public void BeginBreakfast()
         {
+            task = Task.BeginBreakfast; 
+            UpdateClocks("08:27");
             fridge.EnableTrigger();
             // fridge.Store(0);
             subObjectiveText.text = "Make breakfast \nEat breakfast";
         }
 
-        public void MicrowaveBreakfast()
+        public void MakeBreakfast()
         {
+            task = Task.MakeBreakfast;
+            UpdateClocks("08:39"); 
             microwave.EnableTrigger();
             // microwave.Store(0);
         }
 
-        public void TakeMicrowaveFood()
+        public void TakeBreakfast()
         {
+            task = Task.TakeBreakfast; 
             placeSetting.EnableTrigger();
         }
 
-        public void EatFood()
+        public void EatBreakfast()
         {
+            task  = Task.EatBreakfast; 
+            UpdateClocks("08:46");
             // food.EnableTrigger();
-            CleanUpFood(); 
+            CleanUpBreakfast(); 
         }
 
-        public void CleanUpFood()
+        public void CleanUpBreakfast()
         {
+            task = Task.CleanBreakfast; 
             // placeSetting.EnableTrigger();
             // sink.EnableTrigger(); 
             subObjectiveText.text = "Clean up";
@@ -198,64 +239,117 @@ namespace PyrrhicSilva
         public void WorkTime()
         {
             task = Task.Work; 
+            UpdateClocks("09:00");
             computer.EnableTrigger();
             objectiveText.text = "Work";
             subObjectiveText.text = string.Empty;
+        }
+
+        public void ReturnFromWork() {
+            UpdateClocks("17:00");
+            GameManager.gameManager.TeleportCharacter(computer.ExitTransform); 
+            GameManager.gameManager.GetUnSeated(); 
         }
 
         /****** Unwind ******/
 
         public void BeginDinner()
         {
-            task = Task.Dinner; 
+            task = Task.BeginDinner; 
             fridge.EnableTrigger();
             // fridge.Store(1); 
             objectiveText.text = "Unwind";
             subObjectiveText.text = "Make Dinner \nEat dinner";
         }
 
-        public void GetPan()
+        public void TakePan()
         {
+            task = Task.TakePan; 
             // cabinet.EnableTrigger(); 
-            CookDinner(); 
+            MakeDinner(); 
         }
 
-        public void CookDinner()
+        public void MakeDinner()
         {
+            task = Task.MakeDinner; 
             // stove.EnableTrigger(); 
+            TakeDinner(); 
+        }
+
+        public void TakeDinner() {
+            task = Task.TakeDinner; 
+            // stove.EnableTrigger(); 
+            EatDinner(); 
+        }
+
+        public void EatDinner() {
+            task = Task.EatDinner; 
+            UpdateClocks("17:37");
+            // food.EnableTrigger(); 
+            CleanUpDinner(); 
+        }
+
+        public void CleanUpDinner() {
+            task = Task.CleanDinner; 
             UnwindTV(); 
         }
 
-        // eat food in pan on table and clean up same as before 
-
         public void UnwindTV()
         {
-            task = Task.TV; 
+            task = Task.UnwindTV; 
+            UpdateClocks("17:43");
             // unwindTV.EnableTrigger();
             subObjectiveText.text = "Play games on the TV"; 
             GetNightClothes(); 
+        }
+
+        public void ReturnFromTV() {
+            UpdateClocks("23:30");
+            GameManager.gameManager.TeleportCharacter(unwindTV.ExitTransform); 
+            GameManager.gameManager.GetUnSeated(); 
         }
 
         /****** Bedtime *******/
 
         public void GetNightClothes()
         {
-            task = Task.Betdime; 
+            task = Task.NightClothes; 
             dresser.EnableTrigger();
             // dresser.Store(1); 
             objectiveText.text = "Get ready for bed";
             subObjectiveText.text = "Grab bed clothes \nTake a shower";
         }
 
+        public void NightBathroom()
+        {
+            task = Task.NightBathroom; 
+            bathroomDoor.EnableTrigger();
+        }
+
         public void SleepTunes()
         {
+            task = Task.SleepTunes; 
+            UpdateClocks("23:04");
             speaker.EnableTrigger();
             subObjectiveText.text = "Put on some tunes \nGo to sleep";
         }
 
         public void Bedtime()
         {
-            bed.EnableTrigger();
+            task = Task.Sleep; 
+            UpdateClocks("23:14");
+            // bed.EnableTrigger();
+            EndDay(); 
+        }
+
+        public void EndDay() {
+            task = Task.EndTask; 
+            IncrementDay(); 
+            Asleep(); 
+        }
+
+        public void ReturnFromTravel() {
+            GameManager.gameManager.TeleportCharacter(frontDoor.ExitTransform); 
         }
 
     }
