@@ -42,7 +42,7 @@ namespace PyrrhicSilva
 
     public class AgendaManager : MonoBehaviour
     {
-        // [SerializeField] GameManager gameManager;
+        [SerializeField] GameManager gameManager;
         [Header("Temporal Positioning")]
         [SerializeField] Cycle _cycle = Cycle.Guided;
         [SerializeField] Day _day = Day.Mon;
@@ -83,16 +83,15 @@ namespace PyrrhicSilva
 
         private void Awake()
         {
-            // if (gameManager == null)
-            // {
-            //     gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
-            // }
+            if (gameManager == null)
+            {
+                gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+            }
         }
 
         private void Start()
         {
             // wake up
-            alarmClock.DisableTrigger();
             wakeUpCanvas.enabled = false;
 
             // get ready 
@@ -101,15 +100,15 @@ namespace PyrrhicSilva
             fridge.DisableTrigger();
             microwave.DisableTrigger();
             placeSetting.DisableTrigger();
-            food.DisableTrigger();
-            // mealChair.DisableTrigger(); 
+            // food.enabled = false;
+            // mealChair.enabled = false(); 
 
             // computer work 
-            computer.DisableTrigger();
+            computer.enabled = false;
 
             // unwind 
             // unwindTV.DisableTrigger();
-            // couch.DisableTrigger(); 
+            // couch.enabled = false; 
 
             // bedtime 
             speaker.DisableTrigger();
@@ -144,10 +143,10 @@ namespace PyrrhicSilva
         }
 
         /******* Wake Up *******/
-
         public void Asleep() {
             task = Task.Asleep; 
             wakeUpGame.StartMinigame(); 
+            WakeUp(); 
         }
 
         public void WakeUp()
@@ -156,7 +155,7 @@ namespace PyrrhicSilva
             UpdateClocks("08:00");
             wakeUpCamera.Priority += 20;
             wakeUpCanvas.enabled = true;
-            GameManager.gameManager.CharacterMovement(false);
+            gameManager.CharacterMovement(false);
             alarmClock.InteractAction();
         }
 
@@ -168,13 +167,13 @@ namespace PyrrhicSilva
 
         IEnumerator wakeUp()
         {
-            GameManager.gameManager.CharacterMovement(false);
+            gameManager.CharacterMovement(false);
             wakeUpCamera.gameObject.GetComponent<Animator>().Play("WakeUp");
             yield return new WaitForSeconds(4.5f);
             wakeUpCamera.Priority -= 20;
             yield return new WaitForSeconds(2f);
-            GameManager.gameManager.CharacterMovement(true);
-            alarmClock.DisableTrigger();
+            gameManager.CharacterMovement(true);
+            MorningClothes(); 
         }
 
         /****** Get Ready ******/
@@ -221,7 +220,7 @@ namespace PyrrhicSilva
         {
             task  = Task.EatBreakfast; 
             UpdateClocks("08:46");
-            // food.EnableTrigger();
+            // food.enabled = true;
             CleanUpBreakfast(); 
         }
 
@@ -240,15 +239,15 @@ namespace PyrrhicSilva
         {
             task = Task.Work; 
             UpdateClocks("09:00");
-            computer.EnableTrigger();
+            computer.enabled = true;
             objectiveText.text = "Work";
             subObjectiveText.text = string.Empty;
         }
 
         public void ReturnFromWork() {
             UpdateClocks("17:00");
-            GameManager.gameManager.TeleportCharacter(computer.ExitTransform); 
-            GameManager.gameManager.GetUnSeated(); 
+            gameManager.TeleportCharacter(computer.ExitTransform); 
+            gameManager.GetUnSeated(); 
         }
 
         /****** Unwind ******/
@@ -285,7 +284,7 @@ namespace PyrrhicSilva
         public void EatDinner() {
             task = Task.EatDinner; 
             UpdateClocks("17:37");
-            // food.EnableTrigger(); 
+            // food.enabled = true; 
             CleanUpDinner(); 
         }
 
@@ -298,15 +297,15 @@ namespace PyrrhicSilva
         {
             task = Task.UnwindTV; 
             UpdateClocks("17:43");
-            // unwindTV.EnableTrigger();
+            // unwindTV.enabled = true;
             subObjectiveText.text = "Play games on the TV"; 
             GetNightClothes(); 
         }
 
         public void ReturnFromTV() {
             UpdateClocks("23:30");
-            GameManager.gameManager.TeleportCharacter(unwindTV.ExitTransform); 
-            GameManager.gameManager.GetUnSeated(); 
+            gameManager.TeleportCharacter(unwindTV.ExitTransform); 
+            gameManager.GetUnSeated(); 
         }
 
         /****** Bedtime *******/
@@ -349,7 +348,7 @@ namespace PyrrhicSilva
         }
 
         public void ReturnFromTravel() {
-            GameManager.gameManager.TeleportCharacter(frontDoor.ExitTransform); 
+            gameManager.TeleportCharacter(frontDoor.ExitTransform); 
         }
 
     }

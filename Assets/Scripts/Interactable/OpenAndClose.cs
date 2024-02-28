@@ -48,6 +48,7 @@ public class OpenAndClose : Interactable {
                 }
             }
         }
+        base.InteractAction(); 
     }
 
     protected virtual IEnumerator opening()

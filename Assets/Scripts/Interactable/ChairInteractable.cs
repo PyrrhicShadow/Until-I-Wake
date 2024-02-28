@@ -21,16 +21,18 @@ namespace PyrrhicSilva.Interactable
 
         public override void InteractAction()
         {
-            base.InteractAction();
-
-            // initiate animation that moves camera to seated view 
-            gameManager.GetSeated(chairCamera);
-
-            if (gameManager.isSeated)
+            if (interactable)
             {
-                // move to target view
-                StartCoroutine(LookAtTarget());
+                // initiate animation that moves camera to seated view 
+                gameManager.GetSeated(chairCamera);
+
+                if (gameManager.isSeated)
+                {
+                    // move to target view
+                    StartCoroutine(LookAtTarget());
+                }
             }
+            base.InteractAction();
         }
 
         protected IEnumerator LookAtTarget()

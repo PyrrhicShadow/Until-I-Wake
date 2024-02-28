@@ -24,88 +24,88 @@ namespace PyrrhicSilva.Interactable
 
         public override void InteractAction()
         {
-            base.InteractAction();
-
-
-            if (isTaken)
+            if (interactable)
             {
-                if (gameManager.IsHolding)
+                if (isTaken)
                 {
-                    if (destroyOnDrop)
+                    if (gameManager.IsHolding)
                     {
-                        gameManager.EmptyHands();
+                        if (destroyOnDrop)
+                        {
+                            gameManager.EmptyHands();
+                            switch (gameManager.Agenda.task)
+                            {
+                                case Task.MorningBathroom:
+                                    // gameManager.Agenda.BeginBreakfast();
+                                    break;
+                                case Task.NightBathroom:
+                                    // gameManager.Agenda.SleepTunes();
+                                    break;
+                                case Task.MakeBreakfast:
+                                    gameManager.Agenda.TakeBreakfast();
+                                    break;
+                                case Task.MakeDinner:
+                                    // gameManager.Agenda.TakeDinner(); 
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            gameManager.Drop(this);
+                            if (audioSource != null)
+                            {
+                                audioSource.PlayOneShot(putDown);
+                            }
+                        }
+                        isTaken = false;
+
                         switch (gameManager.Agenda.task)
                         {
-                            case Task.MorningBathroom:
-                                // gameManager.Agenda.BeginBreakfast();
+                            case Task.TakeBreakfast:
+                                gameManager.Agenda.EatBreakfast();
                                 break;
-                            case Task.NightBathroom:
-                                // gameManager.Agenda.SleepTunes();
+                            case Task.TakeDinner:
+                                gameManager.Agenda.EatDinner();
                                 break;
-                            case Task.MakeBreakfast:
-                                gameManager.Agenda.TakeBreakfast();
+                            case Task.TakeBreakfastHQ:
                                 break;
-                            case Task.MakeDinner:
-                                // gameManager.Agenda.TakeDinner(); 
+                            case Task.TakeDinnerHQ:
+                                break;
+                            case Task.TakeLunch:
                                 break;
                             default:
                                 break;
                         }
                     }
-                    else
+                }
+                else
+                {
+                    if (contents != null)
                     {
-                        gameManager.Drop(this);
+                        gameManager.Hold(this);
                         if (audioSource != null)
                         {
-                            audioSource.PlayOneShot(putDown);
+                            audioSource.PlayOneShot(pickUp);
+                        }
+                        isTaken = true;
+
+                        switch (gameManager.Agenda.task)
+                        {
+                            case Task.MorningClothes:
+                                gameManager.Agenda.MorningBathroom();
+                                break;
+                            case Task.NightClothes:
+                                gameManager.Agenda.NightBathroom();
+                                break;
+                            default:
+                                break;
                         }
                     }
-                    isTaken = false;
-
-                    switch (gameManager.Agenda.task)
-                    {
-                        case Task.TakeBreakfast:
-                            gameManager.Agenda.EatBreakfast();
-                            break;
-                        case Task.TakeDinner:
-                            gameManager.Agenda.EatDinner();
-                            break;
-                        case Task.TakeBreakfastHQ:
-                            break;
-                        case Task.TakeDinnerHQ:
-                            break;
-                        case Task.TakeLunch:
-                            break;
-                        default:
-                            break;
-                    }
                 }
             }
-            else
-            {
-                if (contents != null)
-                {
-                    gameManager.Hold(this);
-                    if (audioSource != null)
-                    {
-                        audioSource.PlayOneShot(pickUp);
-                    }
-                    isTaken = true;
-
-                    switch (gameManager.Agenda.task)
-                    {
-                        case Task.MorningClothes:
-                            gameManager.Agenda.MorningBathroom();
-                            break;
-                        case Task.NightClothes:
-                            gameManager.Agenda.NightBathroom();
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-
+            base.InteractAction();
         }
     }
 }

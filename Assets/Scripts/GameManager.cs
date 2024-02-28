@@ -10,7 +10,7 @@ namespace PyrrhicSilva
 {
     public class GameManager : MonoBehaviour
     {
-        public static GameManager gameManager;
+        // public static GameManager gameManager;
         [SerializeField] Interact interact;
         [SerializeField] Canvas uiCanvas;
         [SerializeField] PlayerInput playerInput;
@@ -54,7 +54,7 @@ namespace PyrrhicSilva
             // if restarting week day 
             if (Agenda.task == Task.Asleep || Agenda.task == Task.EndTask)
             {
-                Agenda.WakeUp();
+                Agenda.Asleep();
             }
 
             // if returning from computer 
@@ -263,7 +263,7 @@ namespace PyrrhicSilva
 
             uiCanvas.enabled = state;
 
-            Debug.Log(playerInput.currentActionMap.name);
+            // Debug.Log(playerInput.currentActionMap.name);
 
         }
 

@@ -22,8 +22,11 @@ namespace PyrrhicSilva.Interactable
 
         public override void InteractAction()
         {
+            if (interactable)
+            {
+                StartCoroutine(doorEnter());
+            }
             base.InteractAction();
-            StartCoroutine(doorEnter());
         }
 
         IEnumerator doorEnter()

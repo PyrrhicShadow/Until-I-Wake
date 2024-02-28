@@ -6,7 +6,7 @@ namespace PyrrhicSilva.Interactable
 {
     public class AudioPlayable : Interactable
     {
-        [SerializeField] AudioSource audioSource; 
+        [SerializeField] AudioSource audioSource;
 
         // Start is called before the first frame update
         void Start()
@@ -16,18 +16,19 @@ namespace PyrrhicSilva.Interactable
 
         public override void InteractAction()
         {
-            base.InteractAction();
-
-
-            if (audioSource.isPlaying)
+            if (interactable)
             {
-                audioSource.Stop();
-                gameManager.Agenda.AlarmOff(); 
+                if (audioSource.isPlaying)
+                {
+                    audioSource.Stop();
+                    gameManager.Agenda.AlarmOff();
+                }
+                else
+                {
+                    audioSource.Play();
+                }
             }
-            else
-            {
-                audioSource.Play();
-            }
-        }   
+            // base.InteractAction();
+        }
     }
 }
