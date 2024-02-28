@@ -235,6 +235,7 @@ namespace PyrrhicSilva
 
         /***** Computer Work ******/
 
+        [ContextMenu("Work")]
         public void WorkTime()
         {
             task = Task.Work; 
@@ -293,6 +294,7 @@ namespace PyrrhicSilva
             UnwindTV(); 
         }
 
+        [ContextMenu("Unwind TV")]
         public void UnwindTV()
         {
             task = Task.UnwindTV; 

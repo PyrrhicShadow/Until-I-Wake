@@ -7,6 +7,7 @@ You get a paid position testing something for the Company. Your job is to do som
 ## Tutorials used: 
 
 ### Among Us tasks
+
 * https://youtu.be/bG-nZiJnx6s 
 * https://youtu.be/JHIHqNhHHJY
 * https://youtu.be/n2cYUbtt28M
@@ -18,3 +19,15 @@ sample assets for tasks ripped from Among Us
 Computer keyboard texture: Photo by <a href="https://unsplash.com/@stefentan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Stefen Tan</a> on <a href="https://unsplash.com/photos/black-and-orange-computer-keyboard-KYw1eUx1J7Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
 Talking Giberish: https://freesound.org/people/170026/sounds/407767/ CC-BY-NC 4.0 
+
+## ToDo: 
+
+* MicrowaveInteractable 
+* AlarmClockInteractable 
+* Switch between Container and FoodInteractable on table 
+* Door canvas animation 
+* Sink and its Container (DestroyOnPlace)
+* Couch and UnwindTVInteractable 
+* Cook dinner (more steps and more objects) 
+* Dresser and Fridge store more items
+* Fix WakeUpGame and then make the game

@@ -5,7 +5,7 @@ using Cinemachine;
 
 namespace PyrrhicSilva.Interactable
 {
-    public class DoorInteractable : Interactable
+    public class DoorInteractable : Container
     {
         [SerializeField] Canvas doorCanvas;
         [SerializeField] Animator canvasAnimator;
@@ -51,7 +51,7 @@ namespace PyrrhicSilva.Interactable
             exitCamera.Priority += 20;
             // canvasAnimator.Play("FadeOut"); 
             doorCanvas.enabled = false;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(5f);
             exitCamera.Priority -= 20;
             yield return new WaitForSeconds(2f);
             gameManager.CharacterMovement(true);
