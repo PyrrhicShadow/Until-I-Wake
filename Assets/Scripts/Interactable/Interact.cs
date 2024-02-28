@@ -2,25 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PyrrhicSilva {
-    public class Interact : MonoBehaviour {
-        [SerializeField] GameManager gameManager; 
+namespace PyrrhicSilva
+{
+    public class Interact : MonoBehaviour
+    {
+        [SerializeField] GameManager gameManager;
+        [SerializeField] float maxInteractDistance; 
 
-        private void Awake() {
-            if (gameManager == null) {
-                gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>(); 
+        private void Awake()
+        {
+            if (gameManager == null)
+            {
+                gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
             }
         }
 
-        public void Press() {
+        public void Press()
+        {
             RaycastHit hit;
-            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 2);
-            GameObject target = hit.transform?.gameObject; 
+            Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit);
 
-            // Interact action
-            Interactable.Interactable interactable = target.GetComponent<Interactable.Interactable>();
-            interactable?.InteractAction();
-            interactable = null; 
+            // Make sure target is within arm's reach
+            if (hit.distance < maxInteractDistance)
+            {
+                GameObject target = hit.transform.gameObject;
+
+                // Interact action
+                Interactable.Interactable interactable = target.GetComponent<Interactable.Interactable>();
+                interactable?.InteractAction();
+                interactable = null;
+            }
+
         }
     }
 }

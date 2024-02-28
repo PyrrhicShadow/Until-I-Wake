@@ -21,10 +21,19 @@ public class WakeUp : MonoBehaviour
         {
             mainCanvas = gameObject.GetComponent<Canvas>();
         }
+
+        if (mainAnimator == null) 
+        {
+            mainAnimator = gameObject.GetComponent<Animator>(); 
+        }
+
+        StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
     }
 
+    [ContextMenu("End Minigame")]
     public void EndMinigame()
     {
+        Debug.Log("Minigame complete!"); 
         StartCoroutine(fadeBackground()); 
     }
 
@@ -32,5 +41,10 @@ public class WakeUp : MonoBehaviour
         mainAnimator.Play("FadeBackground");
         yield return new WaitForSeconds(1f); 
         gameManager.WakeUpCheck(); 
+    }
+
+    IEnumerator BypassMinigame() {
+        yield return new WaitForSeconds(2f); 
+        EndMinigame(); 
     }
 }
