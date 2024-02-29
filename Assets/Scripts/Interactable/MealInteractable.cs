@@ -24,6 +24,9 @@ namespace PyrrhicSilva.Interactable
                     audioSource.Play();
                 }
                 StartCoroutine(EatingParticles());
+                if (isTask) {
+                    gameManager.Agenda.TaskComplete(); 
+                }
             }
             base.InteractAction();
         }
@@ -33,6 +36,8 @@ namespace PyrrhicSilva.Interactable
             particles.Play();
             yield return new WaitForSeconds(interactDelay);
             particles.Stop();
+            yield return new WaitForEndOfFrame(); 
+            Destroy(this.gameObject); 
         }
     }
 }

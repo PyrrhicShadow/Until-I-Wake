@@ -16,7 +16,7 @@ namespace PyrrhicSilva.Interactable
 
         }
 
-        protected new IEnumerator LookAtTarget()
+        protected override IEnumerator LookAtTarget()
         {
             gameManager.CharacterMovement(false); 
             targetCamera.Priority += 20;

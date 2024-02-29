@@ -38,9 +38,11 @@ namespace PyrrhicSilva
 
         IEnumerator fadeBackground()
         {
+            mainAnimator.enabled = true; 
             mainAnimator.Play("FadeBackground");
             yield return new WaitForSeconds(1f);
-            gameManager.WakeUpCheck();
+            mainAnimator.enabled = false;  
+            gameManager.Agenda.TaskComplete();
         }
 
         IEnumerator BypassMinigame()
@@ -57,27 +59,6 @@ namespace PyrrhicSilva
 
         public void StartInterviewMinigame() {
             Debug.Log("Interview day wake up mini game start"); 
-            StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
-        }
-
-        private void GuidedWeek()
-        {
-            StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
-        }
-        private void GuidedInterview()
-        {
-            StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
-        }
-        private void StandardWeek()
-        {
-            StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
-        }
-        private void StandardInterview()
-        {
-            StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
-        }
-        private void FinalNightmare()
-        {
             StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
         }
 

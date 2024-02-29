@@ -22,9 +22,9 @@ Talking Giberish: https://freesound.org/people/170026/sounds/407767/ CC-BY-NC 4.
 
 ## ToDo: 
 
-* MicrowaveInteractable 
+* CookingInteractable 
 * AlarmClockInteractable
-  * duplicate AudioPlayable and extend a more general AudioPlayable for the alarm clock / wake up featurss
+  * duplicate AudioPlayable and extend a more general AudioPlayable for the alarm clock / wake up features
 * Sit at the table, eat food, and unsit
   * Switch between Container and FoodInteractable on table 
 * Door canvas animation

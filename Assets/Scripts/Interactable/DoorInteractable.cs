@@ -38,6 +38,8 @@ namespace PyrrhicSilva.Interactable
             doorCanvas.enabled = true;
             enterCamera.Priority -= 20;
             gameManager.TeleportCharacter(ExitTransform);
+            exitCamera.Priority += 20;
+            ExitButton(); // until I get the actual in-game button to work
         }
 
         [ContextMenu("Exit Screen")]
@@ -48,16 +50,12 @@ namespace PyrrhicSilva.Interactable
 
         IEnumerator doorExit()
         {
-            exitCamera.Priority += 20;
             // canvasAnimator.Play("FadeOut"); 
-            doorCanvas.enabled = false;
             yield return new WaitForSeconds(5f);
+            doorCanvas.enabled = false;
             exitCamera.Priority -= 20;
             yield return new WaitForSeconds(2f);
             gameManager.CharacterMovement(true);
-
-            if (isTask) {
-                gameManager.Agenda.TaskComplete(); }
         }
     }
 }

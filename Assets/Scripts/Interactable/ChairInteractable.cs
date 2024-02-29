@@ -11,7 +11,7 @@ namespace PyrrhicSilva.Interactable
         [SerializeField] protected CinemachineVirtualCamera targetCamera;
         [SerializeField] protected Transform _exitTransform;
         public Transform ExitTransform { get { return _exitTransform; } protected set { _exitTransform = value; } }
-        [SerializeField] MealInteractable target;
+        [SerializeField] Interactable target;
 
         // Start is called before the first frame update
         void Start()
@@ -35,7 +35,7 @@ namespace PyrrhicSilva.Interactable
             base.InteractAction();
         }
 
-        protected IEnumerator LookAtTarget()
+        protected virtual IEnumerator LookAtTarget()
         {
             gameManager.CharacterMovement(false);
             targetCamera.Priority += 20;

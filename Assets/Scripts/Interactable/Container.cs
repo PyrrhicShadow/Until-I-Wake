@@ -7,11 +7,11 @@ namespace PyrrhicSilva.Interactable
     public class Container : Interactable
     {
         [SerializeField] public GameObject contents;
-        [SerializeField] AudioSource audioSource;
-        [SerializeField] AudioClip pickUp;
-        [SerializeField] AudioClip putDown;
-        [SerializeField] bool isTaken = false;
-        [SerializeField] bool destroyOnDrop = false;
+        [SerializeField] protected AudioSource audioSource;
+        [SerializeField] protected AudioClip pickUp;
+        [SerializeField] protected AudioClip putDown;
+        [SerializeField] protected bool isTaken = false;
+        [SerializeField] protected bool destroyOnDrop = false;
 
         // Start is called before the first frame update
         void Start()
@@ -34,10 +34,6 @@ namespace PyrrhicSilva.Interactable
                         {
                             gameManager.EmptyHands();
 
-                            if (isTask)
-                            {
-                                gameManager.Agenda.TaskComplete();
-                            }
                         }
                         else
                         {

@@ -283,7 +283,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   _col: {fileID: 7422168768231447896}
-  repeatable: 1
+  isTask: 1
+  repeatable: 0
   interactDelay: 0.5
   interactable: 1
   audioSource: {fileID: 7099998802460742387}

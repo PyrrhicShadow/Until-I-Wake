@@ -47,6 +47,12 @@ namespace PyrrhicSilva
         public Task task { get { return _task; } protected set { _task = value; } }
         public Step step { get { return _step; } protected set { _step = value; } }
 
+        public Objective()
+        {
+            task = Task.Asleep;
+            step = Step.Begin;
+        }
+
         public void NewObjective(Task task, Step step)
         {
             this.task = task;
@@ -58,19 +64,20 @@ namespace PyrrhicSilva
             this.task = task;
             this.step = Step.Begin;
         }
+
+        public override string ToString()
+        {
+            return "" + task + ": " + step;
+        }
     }
 
     public class AgendaManager : MonoBehaviour
     {
         [SerializeField] GameManager gameManager;
         [Header("Temporal Positioning")]
-        [SerializeField] Cycle _cycle = Cycle.Guided;
-        [SerializeField] Day _day = Day.Mon;
-        // [SerializeField] Task _task = Task.WakeUp;
-        public Cycle cycle { get { return _cycle; } internal set { _cycle = value; } }
-        public Day day { get { return _day; } internal set { _day = value; } }
-        // public Task task { get { return _task; } internal set { _task = value; } }
-        internal Objective objective;
+        [SerializeField] internal Cycle cycle = Cycle.Guided;
+        [SerializeField] internal Day day = Day.Mon;
+        [SerializeField] internal Objective objective;
         [Header("Agenda Setup")]
         [SerializeField] Canvas agendaCanvas;
         [SerializeField] TMP_Text objectiveText;
@@ -83,9 +90,9 @@ namespace PyrrhicSilva
         [SerializeField] Canvas wakeUpCanvas;
         [Header("Get Ready")]
         [SerializeField] Container dresser;
-        [SerializeField] Container bathroomDoor;
+        [SerializeField] DoorInteractable bathroomDoor;
         [SerializeField] Container fridge;
-        [SerializeField] Container microwave;
+        [SerializeField] CookingInteractable microwave;
         [SerializeField] Container placeSetting;
         [SerializeField] MealInteractable food;
         [SerializeField] ChairInteractable mealChair;
@@ -93,13 +100,13 @@ namespace PyrrhicSilva
         [SerializeField] ComputerInteractable computer;
         [SerializeField] ChairInteractable deskChair;
         [Header("Unwind")]
+        [SerializeField] CookingInteractable stove;
         [SerializeField] ChairInteractable unwindTV;
         [SerializeField] ChairInteractable couch;
         [Header("Bedtime")]
         [SerializeField] AudioPlayable speaker;
         [SerializeField] Interactable.Interactable bed;
-        [SerializeField] SplashController dreamLoader;
-        [SerializeField] Canvas dreamCanvas;
+        [SerializeField] SplashController dreamCanvas;
         [Header("Travel")]
         [SerializeField] DoorInteractable frontDoor;
 
@@ -110,6 +117,7 @@ namespace PyrrhicSilva
             {
                 gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
             }
+            objective = new Objective();
         }
 
         private void Start()
@@ -121,15 +129,16 @@ namespace PyrrhicSilva
             dresser.DisableTrigger();
             bathroomDoor.DisableTrigger();
             fridge.DisableTrigger();
-            microwave.DisableTrigger();
+            microwave.enabled = false;
             placeSetting.DisableTrigger();
-            // food.enabled = false;
+            food.enabled = false;
             // mealChair.enabled = false(); 
 
             // computer work 
             computer.enabled = false;
 
             // unwind 
+            // stove.DisableTrigger(); 
             // unwindTV.DisableTrigger();
             // couch.enabled = false; 
 
@@ -169,8 +178,12 @@ namespace PyrrhicSilva
             }
         }
 
+        [ContextMenu("Refresh Objective")]
         public void TaskComplete()
         {
+            Debug.Log(objective.ToString());
+            gameManager.SaveGame();
+
             switch (objective.task)
             {
                 case Task.Asleep:
@@ -228,6 +241,11 @@ namespace PyrrhicSilva
         private void BeginDay()
         {
             // setup 
+            gameManager.CharacterMovement(false);
+
+            // start day with camera laying on the bed
+            wakeUpCamera.Priority += 20;
+            wakeUpCanvas.enabled = true;
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
@@ -255,6 +273,8 @@ namespace PyrrhicSilva
         private void Asleep()
         {
             objective.NewObjective(Task.WakeUp, Step.Perform);
+            gameManager.CharacterMovement(false);
+
             switch (day)
             {
                 case > Day.Fri:
@@ -282,13 +302,18 @@ namespace PyrrhicSilva
         //     {
         //         FinalNightmare();
         //     }
-        public void OpenEyes()
+
+        void OpenEyes()
         {
+            // advance objective 
             objective.NewObjective(Task.WakeUp, Step.Finish);
+
+            // advance clocks 
             UpdateClocks("08:00");
-            wakeUpCamera.Priority += 20;
-            wakeUpCanvas.enabled = true;
-            gameManager.CharacterMovement(false);
+
+            gameManager.CharacterMovement(true);
+
+            // pass task completion to alarm clock
             alarmClock.InteractAction();
         }
 
@@ -370,7 +395,7 @@ namespace PyrrhicSilva
         }
 
         void TakeFromFridge()
-        {
+        { 
             fridge.EnableTrigger();
             // fridge.Store(0);
 
@@ -417,7 +442,6 @@ namespace PyrrhicSilva
 
         void BeginDinner()
         {
-            fridge.EnableTrigger();
             // update objective text
             objectiveText.text = "Unwind";
             subObjectiveText.text = "Make Dinner \nEat dinner";
@@ -426,7 +450,7 @@ namespace PyrrhicSilva
             {
                 // fridge.Store(1);
                 case Day.Sun:
-                    objective.NewObjective(Task.CookDinner);
+                    objective.NewObjective(Task.CookDinner, Step.Perform);
                     // PrepareFood();
                     break;
                 case > Day.Thur:
@@ -437,7 +461,7 @@ namespace PyrrhicSilva
                     break;
                 default:
                     // PrepareFood();
-                    objective.NewObjective(Task.CookDinner);
+                    objective.NewObjective(Task.TakePan);
                     break;
             }
         }
@@ -457,6 +481,7 @@ namespace PyrrhicSilva
 
         void MicrowaveFood()
         {
+            microwave.enabled = true;
             microwave.EnableTrigger();
             switch (objective.task)
             {
@@ -505,7 +530,7 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.CookDinner, Step.Perform);
 
             // cabinet.EnableTrigger(); 
-            gameManager.TemporaryTask(); 
+            gameManager.TemporaryTask();
         }
 
         void CookDinner()
@@ -514,7 +539,7 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.CookDinner, Step.Finish);
 
             // stove.EnableTrigger(); 
-            gameManager.TemporaryTask(); 
+            gameManager.TemporaryTask();
         }
 
         void TakeMeal()
@@ -534,6 +559,7 @@ namespace PyrrhicSilva
 
         void EatFood()
         {
+            microwave.enabled = false;
             switch (objective.step)
             {
                 case Step.Begin:
@@ -550,9 +576,9 @@ namespace PyrrhicSilva
 
         void EatMeal()
         {
+            gameManager.TemporaryTask();
             switch (objective.task)
             {
-                // food.EnableTrigger(); 
                 case Task.EatBreakfast:
                     EatBreakfast();
                     break;
@@ -566,13 +592,12 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.EatBreakfast, Step.Perform);
             UpdateClocks("08:46");
-            gameManager.TemporaryTask(); 
         }
+
         void EatDinner()
         {
             objective.NewObjective(Task.EatDinner);
             UpdateClocks("17:37");
-            gameManager.TemporaryTask(); 
         }
 
 
@@ -596,14 +621,14 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.EatBreakfast, Step.Finish);
 
-            gameManager.TemporaryTask(); 
+            gameManager.TemporaryTask();
         }
 
         void DinnerPlate()
         {
             objective.NewObjective(Task.EatDinner, Step.Finish);
 
-            gameManager.TemporaryTask(); 
+            gameManager.TemporaryTask();
         }
 
         void CleanUp()
@@ -624,7 +649,7 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Work);
 
-            gameManager.TemporaryTask(); 
+            gameManager.TemporaryTask();
         }
 
 
@@ -632,7 +657,7 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Unwind);
 
-            gameManager.TemporaryTask(); 
+            gameManager.TemporaryTask();
         }
 
         /***** Computer Work ******/
@@ -653,8 +678,10 @@ namespace PyrrhicSilva
         void WorkTime()
         {
             objective.NewObjective(Task.Work, Step.Perform);
+            gameManager.SaveGame();
             UpdateClocks("09:00");
             computer.enabled = true;
+            computer.EnableTrigger(); 
             objectiveText.text = "Work";
             subObjectiveText.text = string.Empty;
         }
@@ -664,6 +691,7 @@ namespace PyrrhicSilva
             UpdateClocks("17:00");
             gameManager.TeleportCharacter(computer.ExitTransform);
             gameManager.GetUnSeated();
+            gameManager.CharacterMovement(true);
             objective.NewObjective(Task.CookDinner);
             TaskComplete();
         }
@@ -706,20 +734,25 @@ namespace PyrrhicSilva
             UpdateClocks("17:43");
             // unwindTV.enabled = true;
             subObjectiveText.text = "Play games on the TV";
-            gameManager.TemporaryTask(); 
+            objective.NewObjective(Task.Unwind, Step.Perform);
+            gameManager.SaveGame();
+            gameManager.TemporaryTask();
         }
 
         void UnwindInterview()
         {
             subObjectiveText.text = "Interact with other people(?) \nHide in your room";
-            gameManager.TemporaryTask(); 
+            objective.NewObjective(Task.Night); 
+            gameManager.TemporaryTask();
         }
 
         void ReturnFromTV()
         {
             UpdateClocks("23:30");
-            gameManager.TeleportCharacter(unwindTV.ExitTransform);
+            // gameManager.TeleportCharacter(unwindTV.ExitTransform);
             gameManager.GetUnSeated();
+            gameManager.CharacterMovement(true);
+            objective.NewObjective(Task.Night); 
             TaskComplete();
         }
 
@@ -801,7 +834,7 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.Bedtime, Step.Finish);
             UpdateClocks("23:14");
             // bed.EnableTrigger();
-            gameManager.TemporaryTask(); 
+            gameManager.TemporaryTask();
         }
 
         void Leave()
@@ -839,9 +872,11 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Asleep);
             IncrementDay();
+            gameManager.SaveGame();
+
             // Load dream sequence
             dreamCanvas.enabled = true;
-            dreamLoader.StartGame();
+            dreamCanvas.StartGame();
         }
     }
 }

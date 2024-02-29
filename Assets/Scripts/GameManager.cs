@@ -11,7 +11,6 @@ namespace PyrrhicSilva
 {
     public class GameManager : MonoBehaviour
     {
-        // public static GameManager gameManager;
         [SerializeField] Interact interact;
         [SerializeField] Canvas uiCanvas;
         [SerializeField] Canvas debugCanvas; 
@@ -47,12 +46,13 @@ namespace PyrrhicSilva
             if (uiCanvas == null) {
                 this.enabled = false; 
             }
-            LoadGame();
         }
 
         // Start is called before the first frame update
         void Start()
         {
+            CharacterMovement(true); 
+            LoadGame();
             Agenda.TaskComplete(); 
 
         }
@@ -63,21 +63,10 @@ namespace PyrrhicSilva
 
         }
 
-        void OnExit()
-        {
-            SaveGame();
-        }
-
         void OnInteract()
         {
             interact.Press();
 
-        }
-
-        internal void WakeUpCheck()
-        {
-            // enable 3D interaction 
-            CharacterMovement(true);
         }
 
         [ContextMenu("Save Game")]
@@ -87,6 +76,7 @@ namespace PyrrhicSilva
             PlayerPrefs.SetInt("cycle", (int)Agenda.cycle);
             PlayerPrefs.SetInt("day", (int)Agenda.day);
             PlayerPrefs.SetInt("task", (int)Agenda.objective.task);
+            PlayerPrefs.SetInt("step", (int)Agenda.objective.step); 
         }
 
         [ContextMenu("Load Game")]
@@ -94,7 +84,7 @@ namespace PyrrhicSilva
         {
             Agenda.cycle = (Cycle)PlayerPrefs.GetInt("cycle", 0);
             Agenda.day = (Day)PlayerPrefs.GetInt("day", 0);
-            Agenda.objective.NewObjective((Task)PlayerPrefs.GetInt("task", 0));
+            Agenda.objective.NewObjective((Task)PlayerPrefs.GetInt("task", 0), (Step)PlayerPrefs.GetInt("step", 0));
         }
 
         [ContextMenu("Clear Save Data")]
@@ -199,6 +189,16 @@ namespace PyrrhicSilva
             // currentChairCamera.GetComponent<Animator>().Play("StandFromChair");
             yield return new WaitForSeconds(2f);
             isSeated = false;
+        }
+
+        [ContextMenu("Character Movement")]
+        public void EnableCharacterMovement() {
+            CharacterMovement(true); 
+        }
+
+        [ContextMenu("Mouse Pointer")]
+        public void DisableCharacterMovement() {
+            CharacterMovement(false); 
         }
 
         internal void CharacterMovement(bool state)
