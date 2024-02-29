@@ -6,6 +6,7 @@ namespace PyrrhicSilva.Interactable {
     public abstract class Interactable : MonoBehaviour {
         [SerializeField] protected GameManager gameManager; 
         [SerializeField] protected Collider _col; 
+        [SerializeField] protected bool isTask = false; 
         [SerializeField] protected bool repeatable = false; 
         [SerializeField] protected float interactDelay = 0.5f; 
         [SerializeField] protected bool interactable = true; 

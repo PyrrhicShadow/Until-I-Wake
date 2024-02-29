@@ -21,7 +21,10 @@ namespace PyrrhicSilva.Interactable
                 if (audioSource.isPlaying)
                 {
                     audioSource.Stop();
-                    gameManager.Agenda.AlarmOff();
+                    if (isTask)
+                    {
+                        gameManager.Agenda.TaskComplete();
+                    }
                 }
                 else
                 {

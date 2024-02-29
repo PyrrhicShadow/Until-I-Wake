@@ -51,38 +51,7 @@ namespace PyrrhicSilva
         // Start is called before the first frame update
         void Start()
         {
-            // if restarting week day 
-            if (Agenda.task == Task.Asleep || Agenda.task == Task.EndTask)
-            {
-                Agenda.Asleep();
-            }
-
-            // if returning from computer 
-            if (Agenda.task == Task.Work)
-            {
-                isSeated = true;
-                Agenda.ReturnFromWork();
-
-            }
-
-            // if returning from TV 
-            if (Agenda.task == Task.UnwindTV)
-            {
-                isSeated = true;
-                Agenda.ReturnFromTV();
-            }
-            // Agenda: get ready for bed 
-            // current camera: couch 
-            // is seated: true 
-
-            // if returning from Travel
-            // Agenda: unwind 
-            // current camera: front door
-            // is seated: false
-
-            // if starting last day 
-            // Nightmare(); 
-
+            Agenda.TaskComplete(); 
 
         }
 
@@ -115,7 +84,7 @@ namespace PyrrhicSilva
             // cycle, day, task
             PlayerPrefs.SetInt("cycle", (int)Agenda.cycle);
             PlayerPrefs.SetInt("day", (int)Agenda.day);
-            PlayerPrefs.SetInt("task", (int)Agenda.task);
+            PlayerPrefs.SetInt("task", (int)Agenda.objective.task);
         }
 
         [ContextMenu("Load Game")]
@@ -123,7 +92,7 @@ namespace PyrrhicSilva
         {
             Agenda.cycle = (Cycle)PlayerPrefs.GetInt("cycle", 0);
             Agenda.day = (Day)PlayerPrefs.GetInt("day", 0);
-            Agenda.task = (Task)PlayerPrefs.GetInt("task", 0);
+            Agenda.objective.NewObjective((Task)PlayerPrefs.GetInt("task", 0));
         }
 
         [ContextMenu("Clear Save Data")]
@@ -228,24 +197,6 @@ namespace PyrrhicSilva
             // currentChairCamera.GetComponent<Animator>().Play("StandFromChair");
             yield return new WaitForSeconds(2f);
             isSeated = false;
-
-            switch (Agenda.task)
-            {
-                case Task.Work:
-                    Agenda.BeginDinner();
-                    break;
-                case Task.EatBreakfast:
-                    Agenda.EatBreakfast();
-                    break;
-                case Task.EatDinner:
-                    Agenda.EatDinner(); 
-                    break;
-                case Task.UnwindTV:
-                    Agenda.UnwindTV(); 
-                    break;
-                default:
-                    break;
-            }
         }
 
         internal void CharacterMovement(bool state)

@@ -49,51 +49,14 @@ namespace PyrrhicSilva
             EndMinigame();
         }
 
-        public void StartMinigame()
+        public void StartNormalMinigame()
         {
-            Debug.Log("Wake up mini game start"); 
-            // AgendaManager agenda = gameManager.Agenda;
-            // if (agenda.cycle == Cycle.Guided)
-            // {
-            //     if (agenda.day < Day.Sat)
-            //     {
-            //         GuidedWeek();
-            //     }
-            //     else
-            //     {
-            //         GuidedInterview();
-            //     }
-            // }
-            // else if (agenda.cycle == Cycle.Standard)
-            // {
-            //     if (agenda.day < Day.Sat)
-            //     {
-            //         StandardWeek();
-            //     }
-            //     else
-            //     {
-            //         StandardInterview();
-            //     }
-            // }
-            // else
-            // {
-            //     if (agenda.day < Day.Thur)
-            //     {
-            //         int rand = Random.Range(0, 7);
-            //         if (((int)agenda.day + rand) % 2 == 0)
-            //         {
-            //             StandardInterview();
-            //         }
-            //         else
-            //         {
-            //             StandardWeek();
-            //         }
-            //     }
-            //     else
-            //     {
-            //         FinalNightmare();
-            //     }
-            // }
+            Debug.Log("Normal day wake up mini game start"); 
+            StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
+        }
+
+        public void StartInterviewMinigame() {
+            Debug.Log("Interview day wake up mini game start"); 
             StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
         }
 

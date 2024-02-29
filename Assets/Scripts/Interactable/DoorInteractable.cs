@@ -6,7 +6,7 @@ using Cinemachine;
 namespace PyrrhicSilva.Interactable
 {
     public class DoorInteractable : Container
-    {
+    { 
         [SerializeField] Canvas doorCanvas;
         [SerializeField] Animator canvasAnimator;
         [SerializeField] CinemachineVirtualCamera enterCamera;
@@ -56,22 +56,8 @@ namespace PyrrhicSilva.Interactable
             yield return new WaitForSeconds(2f);
             gameManager.CharacterMovement(true);
 
-            switch (gameManager.Agenda.task)
-            {
-                case Task.MorningBathroom:
-                    gameManager.Agenda.BeginBreakfast();
-                    break;
-                case Task.NightBathroom:
-                    gameManager.Agenda.SleepTunes();
-                    break;
-                case Task.ArriveDorm:
-                    break;
-                case Task.ArriveHQ:
-                    break;
-                default:
-                    break;
-            }
-
+            if (isTask) {
+                gameManager.Agenda.TaskComplete(); }
         }
     }
 }
