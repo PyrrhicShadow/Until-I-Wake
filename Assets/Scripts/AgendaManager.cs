@@ -517,28 +517,13 @@ namespace PyrrhicSilva
             switch (objective.task)
             {
                 case Task.CookBreakfast:
-                    TakeBreakfast();
-                    // objective.NewObjective(Task.EatBreakfast);
+                    UpdateClocks("08:39");
+                    objective.NewObjective(Task.EatBreakfast);
                     break;
                 case Task.CookDinner:
-                    TakeDinner();
-                    // objective.NewObjective(Task.EatDinner);
+                    objective.NewObjective(Task.EatDinner);
                     break;
             }
-        }
-
-        void TakeBreakfast()
-        {
-            UpdateClocks("08:39");
-            objective.NewObjective(Task.EatBreakfast);
-            placeSetting.EnableTrigger();
-        }
-
-        void TakeDinner()
-        {
-            objective.NewObjective(Task.EatDinner);
-            // stove.EnableTrigger(); 
-            TaskComplete();
         }
 
         void EatFood()
@@ -561,6 +546,7 @@ namespace PyrrhicSilva
         {
             switch (objective.task)
             {
+                // food.EnableTrigger(); = true; 
                 case Task.EatBreakfast:
                     EatBreakfast();
                     break;
@@ -574,14 +560,12 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.EatBreakfast, Step.Perform);
             UpdateClocks("08:46");
-            // food.enabled = true;
             TaskComplete();
         }
         void EatDinner()
         {
             objective.NewObjective(Task.EatDinner);
             UpdateClocks("17:37");
-            // food.enabled = true; 
             TaskComplete();
         }
 
@@ -589,6 +573,7 @@ namespace PyrrhicSilva
         void TakePlate()
         {
             subObjectiveText.text = "Clean up";
+            // placeSetting.EnableTrigger(); 
 
             switch (objective.task)
             {
@@ -744,7 +729,7 @@ namespace PyrrhicSilva
             switch (objective.step)
             {
                 case Step.Begin:
-                    SleepTunes();
+                    PrepareForBed();
                     break;
                 case Step.Perform:
                     Sleep();
@@ -752,6 +737,20 @@ namespace PyrrhicSilva
                 case Step.Finish:
                     EndDay();
                     break;
+            }
+        }
+
+        void PrepareForBed() {
+            switch (day) {
+                case Day.Fri: 
+                    Sleep(); 
+                    break; 
+                case Day.Sat:
+                    Sleep(); 
+                    break; 
+                default: 
+                    SleepTunes(); 
+                    break; 
             }
         }
 
@@ -765,17 +764,14 @@ namespace PyrrhicSilva
 
         void Sleep()
         {
+            if (objective.step == Step.Begin) 
+            {
+                subObjectiveText.text = "No tunes tonight \nGo to sleep";
+            }
             objective.NewObjective(Task.Bedtime, Step.Finish);
             UpdateClocks("23:14");
             // bed.EnableTrigger();
             TaskComplete();
-        }
-
-        void EndDay()
-        {
-            objective.NewObjective(Task.Asleep);
-            IncrementDay();
-            // Load dream sequence
         }
 
         void Leave()
@@ -807,6 +803,13 @@ namespace PyrrhicSilva
             gameManager.TeleportCharacter(frontDoor.ExitTransform);
             objective.NewObjective(Task.Arrive, Step.Perform);
             TaskComplete();
+        }
+
+        void EndDay()
+        {
+            objective.NewObjective(Task.Asleep);
+            IncrementDay();
+            // Load dream sequence
         }
     }
 }
