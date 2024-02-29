@@ -27,7 +27,7 @@ namespace PyrrhicSilva
         CookBreakfast, EatBreakfast,
         Work,
         CookDinner, TakePan, EatDinner,
-        UnwindTV,
+        Unwind,
         Night,
         Bedtime,
         Leave, Arrive,
@@ -98,6 +98,8 @@ namespace PyrrhicSilva
         [Header("Bedtime")]
         [SerializeField] AudioPlayable speaker;
         [SerializeField] Interactable.Interactable bed;
+        [SerializeField] SplashController dreamLoader;
+        [SerializeField] Canvas dreamCanvas;
         [Header("Travel")]
         [SerializeField] DoorInteractable frontDoor;
 
@@ -201,8 +203,8 @@ namespace PyrrhicSilva
                 case Task.EatDinner:
                     EatFood();
                     break;
-                case Task.UnwindTV:
-                    TV();
+                case Task.Unwind:
+                    Unwind();
                     break;
                 // Bedtime 
                 case Task.Night:
@@ -399,13 +401,16 @@ namespace PyrrhicSilva
                     }
                     // update Objective Text
                     subObjectiveText.text = "Grab breakfast \nEat breakfast";
+
                     break;
+
                 default:
                     // advance to next task
                     objective.NewObjective(Task.CookBreakfast, Step.Perform);
 
                     // update Objective Text
                     subObjectiveText.text = "Make breakfast \nEat breakfast";
+
                     break;
             }
         }
@@ -498,8 +503,9 @@ namespace PyrrhicSilva
 
             // advance objective 
             objective.NewObjective(Task.CookDinner, Step.Perform);
+
             // cabinet.EnableTrigger(); 
-            TaskComplete();
+            gameManager.TemporaryTask(); 
         }
 
         void CookDinner()
@@ -508,7 +514,7 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.CookDinner, Step.Finish);
 
             // stove.EnableTrigger(); 
-            TaskComplete();
+            gameManager.TemporaryTask(); 
         }
 
         void TakeMeal()
@@ -546,7 +552,7 @@ namespace PyrrhicSilva
         {
             switch (objective.task)
             {
-                // food.EnableTrigger(); = true; 
+                // food.EnableTrigger(); 
                 case Task.EatBreakfast:
                     EatBreakfast();
                     break;
@@ -560,13 +566,13 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.EatBreakfast, Step.Perform);
             UpdateClocks("08:46");
-            TaskComplete();
+            gameManager.TemporaryTask(); 
         }
         void EatDinner()
         {
             objective.NewObjective(Task.EatDinner);
             UpdateClocks("17:37");
-            TaskComplete();
+            gameManager.TemporaryTask(); 
         }
 
 
@@ -588,16 +594,16 @@ namespace PyrrhicSilva
 
         void BreakfastPlate()
         {
-            objective.NewObjective(Task.Work);
+            objective.NewObjective(Task.EatBreakfast, Step.Finish);
 
-            TaskComplete();
+            gameManager.TemporaryTask(); 
         }
 
         void DinnerPlate()
         {
-            objective.NewObjective(Task.UnwindTV);
+            objective.NewObjective(Task.EatDinner, Step.Finish);
 
-            TaskComplete();
+            gameManager.TemporaryTask(); 
         }
 
         void CleanUp()
@@ -618,15 +624,15 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Work);
 
-            TaskComplete(); 
+            gameManager.TemporaryTask(); 
         }
 
 
         void DinnerCleanUp()
         {
-            objective.NewObjective(Task.UnwindTV); 
+            objective.NewObjective(Task.Unwind);
 
-            TaskComplete(); 
+            gameManager.TemporaryTask(); 
         }
 
         /***** Computer Work ******/
@@ -664,6 +670,23 @@ namespace PyrrhicSilva
 
         /****** Unwind ******/
 
+        void Unwind()
+        {
+            objective.NewObjective(Task.Unwind, Step.Perform);
+
+            switch (day)
+            {
+                case Day.Sun:
+                    TV();
+                    break;
+                case > Day.Fri:
+                    UnwindInterview();
+                    break;
+                default:
+                    TV();
+                    break;
+            }
+        }
         void TV()
         {
             switch (objective.step)
@@ -680,11 +703,16 @@ namespace PyrrhicSilva
         [ContextMenu("Unwind TV")]
         void UnwindTV()
         {
-            objective.NewObjective(Task.UnwindTV, Step.Perform);
             UpdateClocks("17:43");
             // unwindTV.enabled = true;
             subObjectiveText.text = "Play games on the TV";
-            TaskComplete();
+            gameManager.TemporaryTask(); 
+        }
+
+        void UnwindInterview()
+        {
+            subObjectiveText.text = "Interact with other people(?) \nHide in your room";
+            gameManager.TemporaryTask(); 
         }
 
         void ReturnFromTV()
@@ -740,17 +768,19 @@ namespace PyrrhicSilva
             }
         }
 
-        void PrepareForBed() {
-            switch (day) {
-                case Day.Fri: 
-                    Sleep(); 
-                    break; 
+        void PrepareForBed()
+        {
+            switch (day)
+            {
+                case Day.Fri:
+                    Sleep();
+                    break;
                 case Day.Sat:
-                    Sleep(); 
-                    break; 
-                default: 
-                    SleepTunes(); 
-                    break; 
+                    Sleep();
+                    break;
+                default:
+                    SleepTunes();
+                    break;
             }
         }
 
@@ -764,14 +794,14 @@ namespace PyrrhicSilva
 
         void Sleep()
         {
-            if (objective.step == Step.Begin) 
+            if (objective.step == Step.Begin)
             {
                 subObjectiveText.text = "No tunes tonight \nGo to sleep";
             }
             objective.NewObjective(Task.Bedtime, Step.Finish);
             UpdateClocks("23:14");
             // bed.EnableTrigger();
-            TaskComplete();
+            gameManager.TemporaryTask(); 
         }
 
         void Leave()
@@ -810,6 +840,8 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.Asleep);
             IncrementDay();
             // Load dream sequence
+            dreamCanvas.enabled = true;
+            dreamLoader.StartGame();
         }
     }
 }

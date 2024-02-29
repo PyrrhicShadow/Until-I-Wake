@@ -5,6 +5,7 @@ using PyrrhicSilva.Interactable;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.Rendering.UI;
 
 namespace PyrrhicSilva
 {
@@ -13,6 +14,7 @@ namespace PyrrhicSilva
         // public static GameManager gameManager;
         [SerializeField] Interact interact;
         [SerializeField] Canvas uiCanvas;
+        [SerializeField] Canvas debugCanvas; 
         [SerializeField] PlayerInput playerInput;
         [Header("Agenda Setup")]
         [SerializeField] AgendaManager _agenda;
@@ -221,6 +223,16 @@ namespace PyrrhicSilva
         public void TeleportCharacter(Transform newTransform)
         {
             this.transform.SetPositionAndRotation(newTransform.position, newTransform.rotation);
+        }
+
+        public void TemporaryTask() {
+            debugCanvas.enabled = true; 
+            StartCoroutine(temporaryTask()); 
+        }
+        IEnumerator temporaryTask() {
+            yield return new WaitForSeconds(2f); 
+            debugCanvas.enabled = false; 
+            Agenda.TaskComplete(); 
         }
     }
 }
