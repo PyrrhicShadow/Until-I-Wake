@@ -8,23 +8,39 @@ You get a paid position testing something for the Company. Your job is to do som
 
 ### Among Us tasks
 
-* https://youtu.be/bG-nZiJnx6s 
-* https://youtu.be/JHIHqNhHHJY
-* https://youtu.be/n2cYUbtt28M
+[SmartPenguins](https://www.youtube.com/@SmartPenguins)'s YouTube series on making Among Us in Unity with C# (these specific videos): 
+* [Unity-C#: Making Among Us - Beginner Tutorial Part 1 - Fix The Light Task](https://youtu.be/bG-nZiJnx6s) 
+* [Unity: Making Among Us - Beginner Tutorial Part 2 - Wire Task](https://youtu.be/JHIHqNhHHJY)
+* [Unity-C#: Making Among Us - Beginner Tutorial Part 3 - Wire Task](https://youtu.be/n2cYUbtt28M)
 
-## Assets used: 
+## Credits 
 
-sample assets for tasks ripped from Among Us 
+sample image assets for work tasks ripped from Among Us by 
+* scratch-art only; I fully intend to replace them later on in development 
+
+Starter Assets - First Person Character Controller by [Unity Technologies](https://assetstore.unity.com/publishers/1) from the [Unity Asset Store](https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525)
+
+Crosshair Pack by [Kenney Vleugels](https://www.Kenney.nl)
 
 Computer keyboard texture: Photo by <a href="https://unsplash.com/@stefentan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Stefen Tan</a> on <a href="https://unsplash.com/photos/black-and-orange-computer-keyboard-KYw1eUx1J7Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+* modified by PyrrhicSilva to add a trackpad
   
-Talking Giberish: https://freesound.org/people/170026/sounds/407767/ CC-BY-NC 4.0 
+Talking Giberish by [170026](https://freesound.org/people/170026/) on [Freesound](https://freesound.org/people/170026/sounds/407767/) - [CC-BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
-## ToDo: 
+[*Elementary* by Scott Buckley](https://youtu.be/YBvKqoRNJ9c), [Creative Commons Attribution 3.0](http://bit.ly/RFP_CClicense)
 
-* CookingInteractable 
-* AlarmClockInteractable
-  * duplicate AudioPlayable and extend a more general AudioPlayable for the alarm clock / wake up features
+*Prairie Wolf’s View* by [Jaylitical](https://soundcloud.com/jaylitical)
+Promoted by [@RoyaltyFreePlanet](https://royaltyfreeplanet.com) 
+[Creative Commons Attribution 3.0](http://bit.ly/RFP_CClicense)
+
+Button: https://pixabay.com/sound-effects/button-124476/ by StudioAlivioGlobal 
+
+collect: https://pixabay.com/sound-effects/collect-5930/ by Wagna
+
+Interface: https://pixabay.com/sound-effects/interface-124464/ by StudioAlivioGlobal
+
+# ToDo: 
+
 * Sit at the table, eat food, and unsit
   * Switch between Container and FoodInteractable on table 
 * Door canvas animation
@@ -33,7 +49,6 @@ Talking Giberish: https://freesound.org/people/170026/sounds/407767/ CC-BY-NC 4.
 * Couch and UnwindTVInteractable 
 * Cook dinner
   * more steps and more objects
-  * microwave dinner on travel return days 
 * Dresser and Fridge store more items
   * randomize what items you get while syncing food from fridge to table
 * Fix WakeUpGame and then make the mini games
