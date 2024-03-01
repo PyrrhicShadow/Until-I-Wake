@@ -38,9 +38,8 @@ namespace PyrrhicSilva
 
         IEnumerator fadeBackground()
         {
-            mainAnimator.enabled = true; 
             mainAnimator.Play("FadeBackground");
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             mainAnimator.enabled = false;  
             gameManager.Agenda.TaskComplete();
         }
@@ -53,11 +52,13 @@ namespace PyrrhicSilva
 
         public void StartNormalMinigame()
         {
+            mainAnimator.enabled = true; 
             Debug.Log("Normal day wake up mini game start"); 
             StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
         }
 
         public void StartInterviewMinigame() {
+            mainAnimator.enabled = true; 
             Debug.Log("Interview day wake up mini game start"); 
             StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
         }

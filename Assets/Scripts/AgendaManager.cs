@@ -87,7 +87,6 @@ namespace PyrrhicSilva
         [SerializeField] WakeUpGame wakeUpGame;
         [SerializeField] AudioPlayable alarmClock;
         [SerializeField] CinemachineVirtualCamera wakeUpCamera;
-        [SerializeField] Canvas wakeUpCanvas;
         [Header("Get Ready")]
         [SerializeField] Container dresser;
         [SerializeField] DoorInteractable bathroomDoor;
@@ -122,9 +121,6 @@ namespace PyrrhicSilva
 
         private void Start()
         {
-            // wake up
-            wakeUpCanvas.enabled = false;
-
             // get ready 
             dresser.DisableTrigger();
             bathroomDoor.DisableTrigger();
@@ -176,6 +172,15 @@ namespace PyrrhicSilva
                     Debug.Log("Game complete!");
                 }
             }
+        }
+
+        public void UpdateAgendaText(string obj, string sub) {
+            objectiveText.text = obj; 
+            subObjectiveText.text = sub; 
+        }
+
+        public void UpdateAgendaText(string sub) {
+            subObjectiveText.text = sub; 
         }
 
         [ContextMenu("Refresh Objective")]
@@ -245,7 +250,6 @@ namespace PyrrhicSilva
 
             // start day with camera laying on the bed
             wakeUpCamera.Priority += 20;
-            wakeUpCanvas.enabled = true;
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
@@ -307,6 +311,7 @@ namespace PyrrhicSilva
         {
             // advance objective 
             objective.NewObjective(Task.WakeUp, Step.Finish);
+            UpdateAgendaText("Wake up", "Turn off your alarm"); 
 
             // advance clocks 
             UpdateClocks("08:00");
@@ -353,13 +358,10 @@ namespace PyrrhicSilva
         {
             // advance to next objective
             objective.NewObjective(Task.Morning, Step.Perform);
+            UpdateAgendaText("Get ready for the day", "Get dressed \nUse the bathroom"); 
 
             dresser.EnableTrigger();
             // dresser.Store(0); 
-
-            // update objective text
-            objectiveText.text = "Get ready for the day";
-            subObjectiveText.text = "Get dressed \nUse the bathroom";
         }
 
         void MorningBathroom()
@@ -425,7 +427,7 @@ namespace PyrrhicSilva
                         UpdateClocks("12:27");
                     }
                     // update Objective Text
-                    subObjectiveText.text = "Grab breakfast \nEat breakfast";
+                    UpdateAgendaText("Grab breakfast \nEat breakfast");
 
                     break;
 
@@ -434,7 +436,7 @@ namespace PyrrhicSilva
                     objective.NewObjective(Task.CookBreakfast, Step.Perform);
 
                     // update Objective Text
-                    subObjectiveText.text = "Make breakfast \nEat breakfast";
+                    UpdateAgendaText("Make breakfast \nEat breakfast");
 
                     break;
             }
@@ -443,8 +445,7 @@ namespace PyrrhicSilva
         void BeginDinner()
         {
             // update objective text
-            objectiveText.text = "Unwind";
-            subObjectiveText.text = "Make Dinner \nEat dinner";
+            UpdateAgendaText("Unwind", "Make Dinner \nEat dinner");
 
             switch (day)
             {
@@ -457,7 +458,7 @@ namespace PyrrhicSilva
                     // TakeFood();
                     objective.NewObjective(Task.EatDinner);
                     // update objective text
-                    subObjectiveText.text = "Grab Dinner \nEat dinner";
+                    UpdateAgendaText("Grab Dinner \nEat dinner");
                     break;
                 default:
                     // PrepareFood();
@@ -577,6 +578,7 @@ namespace PyrrhicSilva
         void EatMeal()
         {
             gameManager.TemporaryTask();
+            microwave.enabled = false; 
             switch (objective.task)
             {
                 case Task.EatBreakfast:
@@ -596,7 +598,7 @@ namespace PyrrhicSilva
 
         void EatDinner()
         {
-            objective.NewObjective(Task.EatDinner);
+            objective.NewObjective(Task.EatDinner, Step.Perform);
             UpdateClocks("17:37");
         }
 
@@ -678,12 +680,11 @@ namespace PyrrhicSilva
         void WorkTime()
         {
             objective.NewObjective(Task.Work, Step.Perform);
+            UpdateAgendaText("Work", string.Empty);
             gameManager.SaveGame();
             UpdateClocks("09:00");
             computer.enabled = true;
             computer.EnableTrigger(); 
-            objectiveText.text = "Work";
-            subObjectiveText.text = string.Empty;
         }
 
         void ReturnFromWork()
@@ -733,7 +734,7 @@ namespace PyrrhicSilva
         {
             UpdateClocks("17:43");
             // unwindTV.enabled = true;
-            subObjectiveText.text = "Play games on the TV";
+            UpdateAgendaText("Play games on the TV");
             objective.NewObjective(Task.Unwind, Step.Perform);
             gameManager.SaveGame();
             gameManager.TemporaryTask();
@@ -741,7 +742,7 @@ namespace PyrrhicSilva
 
         void UnwindInterview()
         {
-            subObjectiveText.text = "Interact with other people(?) \nHide in your room";
+            UpdateAgendaText("Interact with other people(?) \nHide in your room");
             objective.NewObjective(Task.Night); 
             gameManager.TemporaryTask();
         }
@@ -775,8 +776,7 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.Night, Step.Perform);
             dresser.EnableTrigger();
             // dresser.Store(1); 
-            objectiveText.text = "Get ready for bed";
-            subObjectiveText.text = "Grab bed clothes \nTake a shower";
+            UpdateAgendaText("Get ready for bed", "Grab bed clothes \nTake a shower");
         }
 
         void NightBathroom()
@@ -822,14 +822,14 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.Bedtime, Step.Perform);
             UpdateClocks("23:04");
             speaker.EnableTrigger();
-            subObjectiveText.text = "Put on some tunes \nGo to sleep";
+            UpdateAgendaText("Put on some tunes \nGo to sleep");
         }
 
         void Sleep()
         {
             if (objective.step == Step.Begin)
             {
-                subObjectiveText.text = "No tunes tonight \nGo to sleep";
+                UpdateAgendaText("No tunes tonight \nGo to sleep");
             }
             objective.NewObjective(Task.Bedtime, Step.Finish);
             UpdateClocks("23:14");
@@ -871,6 +871,7 @@ namespace PyrrhicSilva
         void EndDay()
         {
             objective.NewObjective(Task.Asleep);
+            UpdateAgendaText("Sleep", string.Empty); 
             IncrementDay();
             gameManager.SaveGame();
 
