@@ -124,6 +124,9 @@ namespace PyrrhicSilva
                 dreamManager = GameObject.FindWithTag("Dream").GetComponent<DreamManager>(); 
             }
 
+            // wake up 
+            alarmClock.DisableTrigger(); 
+
             // get ready 
             dresser.DisableTrigger();
             bathroomDoor.DisableTrigger();
@@ -265,6 +268,7 @@ namespace PyrrhicSilva
 
         private void WakeUp()
         {
+            alarmClock.EnableTrigger(); 
             switch (objective.step)
             {
                 case Step.Begin:
@@ -330,6 +334,7 @@ namespace PyrrhicSilva
         private void AlarmOff()
         {
             alarmClock.enabled = false;
+            alarmClock.DisableTrigger(); 
             objective.NewObjective(Task.Morning);
             StartCoroutine(getOutOfBed());
         }
@@ -591,7 +596,6 @@ namespace PyrrhicSilva
             // gameManager.TemporaryTask();
             diningTable.enabled = true; 
             diningTable.EnableTrigger(); 
-            diningTable.InteractAction(); 
             
             microwave.enabled = false; 
             switch (objective.task)

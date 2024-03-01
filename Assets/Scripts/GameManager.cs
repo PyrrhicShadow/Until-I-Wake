@@ -159,7 +159,7 @@ namespace PyrrhicSilva
             }
             else
             {
-                Debug.Log("You are not sitting in a chair.");
+                Debug.Log("You are already sitting in a chair.");
             }
         }
 

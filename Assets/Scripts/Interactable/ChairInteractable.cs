@@ -26,13 +26,18 @@ namespace PyrrhicSilva.Interactable
                 // initiate animation that moves camera to seated view 
                 gameManager.GetSeated(chairCamera);
 
-                if (gameManager.isSeated)
-                {
-                    // move to target view
-                    StartCoroutine(LookAtTarget());
-                }
+                StartCoroutine(WaitUntilSeated());
             }
             base.InteractAction();
+        }
+
+        protected virtual IEnumerator WaitUntilSeated()
+        {
+            yield return new WaitForSeconds(2f);
+
+            // move to target view
+            StartCoroutine(LookAtTarget());
+
         }
 
         protected virtual IEnumerator LookAtTarget()
@@ -41,6 +46,8 @@ namespace PyrrhicSilva.Interactable
             targetCamera.Priority += 20;
             yield return new WaitForSeconds(2f);
 
+            target.enabled = true;
+            target.EnableTrigger();
             target.InteractAction();
             yield return new WaitForSeconds(interactDelay);
             gameManager.CharacterMovement(true);

@@ -16,9 +16,19 @@ namespace PyrrhicSilva.Interactable
 
         }
 
+        protected override IEnumerator WaitUntilSeated()
+        {
+            yield return new WaitForEndOfFrame();
+            
+            if (gameManager.isSeated)
+            {
+                StartCoroutine(LookAtTarget());
+            }
+        }
+
         protected override IEnumerator LookAtTarget()
         {
-            gameManager.CharacterMovement(false); 
+            gameManager.CharacterMovement(false);
             targetCamera.Priority += 20;
             yield return new WaitForSeconds(2f);
 
