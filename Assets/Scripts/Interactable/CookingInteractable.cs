@@ -22,7 +22,7 @@ namespace PyrrhicSilva.Interactable
 
         public override void EnableTrigger()
         {
-            if (!isTaken)
+            if (isTaken)
             {
                 audioSource.Play();
                 interactDelay = 3f;

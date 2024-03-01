@@ -93,11 +93,13 @@ namespace PyrrhicSilva
         [SerializeField] Container placeSetting;
         [SerializeField] MealInteractable food;
         [SerializeField] ChairInteractable diningTable;
+        [SerializeField] Container sink;  
         [Header("Computer Work")]
         [SerializeField] ComputerInteractable computer;
         [Header("Unwind")]
+        [SerializeField] Container cabinet; 
         [SerializeField] CookingInteractable stove;
-        [SerializeField] ComputerInteractable unwindTV;
+        [SerializeField] ComputerInteractable couch;
         [Header("Bedtime")]
         [SerializeField] AudioPlayable speaker;
         [SerializeField] Interactable.Interactable bed;
@@ -123,28 +125,30 @@ namespace PyrrhicSilva
             }
 
             // get ready 
-            dresser.enabled = false;
-            bathroomDoor.enabled = false;
-            fridge.enabled = false;
-            microwave.enabled = false;
-            placeSetting.enabled = false;
-            food.enabled = false;
-            // mealChair.enabled = false(); 
+            dresser.DisableTrigger();
+            bathroomDoor.DisableTrigger();
+            fridge.DisableTrigger();
+            microwave.enabled = false; 
+            microwave.DisableTrigger();
+            placeSetting.DisableTrigger();
+            food.DisableTrigger();
+            sink.DisableTrigger(); 
 
             // computer work 
-            computer.enabled = false;
+            computer.DisableTrigger();
 
             // unwind 
-            // stove.DisableTrigger(); 
-            unwindTV.enabled = false;
+            stove.DisableTrigger(); 
+            cabinet.DisableTrigger();
+            couch.DisableTrigger();
 
             // bedtime 
-            speaker.enabled = false;
-            bed.enabled = false;
+            speaker.DisableTrigger();
+            bed.DisableTrigger();
             dreamManager.enabled = false; 
 
             // travel
-            // frontDoor.enabled = false; 
+            // frontDoor.DisableTrigger(); 
         }
 
         void UpdateClocks(string time)
@@ -534,8 +538,8 @@ namespace PyrrhicSilva
             // advance objective 
             objective.NewObjective(Task.CookDinner, Step.Perform);
 
-            // cabinet.enabled = true; 
-            // cabinet.EnableTrigger(); 
+            cabinet.enabled = true; 
+            cabinet.EnableTrigger(); 
             gameManager.TemporaryTask();
         }
 
@@ -544,8 +548,8 @@ namespace PyrrhicSilva
             // advance objective 
             objective.NewObjective(Task.CookDinner, Step.Finish);
 
-            // stove.enabled = true; 
-            // stove.EnableTrigger(); 
+            stove.enabled = true; 
+            stove.EnableTrigger(); 
             gameManager.TemporaryTask();
         }
 
@@ -617,7 +621,7 @@ namespace PyrrhicSilva
         void TakePlate()
         {
             subObjectiveText.text = "Clean up";
-            // placeSetting.EnableTrigger(); 
+            placeSetting.EnableTrigger(); 
 
             switch (objective.task)
             {
@@ -634,19 +638,20 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.EatBreakfast, Step.Finish);
 
-            gameManager.TemporaryTask();
+            // gameManager.TemporaryTask();
         }
 
         void DinnerPlate()
         {
             objective.NewObjective(Task.EatDinner, Step.Finish);
 
-            gameManager.TemporaryTask();
+            // gameManager.TemporaryTask();
         }
 
         void CleanUp()
         {
-            // sink.EnableTrigger(); 
+            sink.EnableTrigger(); 
+            gameManager.GetUnSeated(); 
             switch (objective.task)
             {
                 case Task.EatBreakfast:
@@ -662,7 +667,7 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Work);
 
-            gameManager.TemporaryTask();
+            // gameManager.TemporaryTask();
         }
 
 
@@ -670,7 +675,7 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Unwind);
 
-            gameManager.TemporaryTask();
+            // gameManager.TemporaryTask();
         }
 
         /***** Computer Work ******/
@@ -744,7 +749,8 @@ namespace PyrrhicSilva
         void UnwindTV()
         {
             UpdateClocks("17:43");
-            // unwindTV.enabled = true;
+            couch.enabled = true;
+            couch.EnableTrigger(); 
             UpdateAgendaText("Play games on the TV");
             objective.NewObjective(Task.Unwind, Step.Perform);
             gameManager.SaveGame();
@@ -761,7 +767,7 @@ namespace PyrrhicSilva
         void ReturnFromTV()
         {
             UpdateClocks("23:30");
-            // gameManager.TeleportCharacter(unwindTV.ExitTransform);
+            gameManager.TeleportCharacter(couch.ExitTransform);
             gameManager.GetUnSeated();
             gameManager.CharacterMovement(true);
             objective.NewObjective(Task.Night); 
