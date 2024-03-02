@@ -48,10 +48,12 @@ namespace PyrrhicSilva.Interactable {
         /// <summary>After calling InteractAction, disable the trigger to prevent trigger spamming.</summary>
         public virtual void DisableTrigger() {
             interactable = false; 
+            Debug.Log(name + " has been disabled.");
         }
 
         public virtual void EnableTrigger() {
             interactable = true; 
+            Debug.Log(name + " has been enabled.");
         }
     }
 }

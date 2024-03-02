@@ -6,11 +6,14 @@ namespace PyrrhicSilva.Interactable
 {
     public class CookingInteractable : Container
     {
+        [SerializeField] GameObject foodItem; 
+
         // Start is called before the first frame update
         void Start()
         {
             if (destroyOnDrop) isTaken = true;
-            
+            foodItem.SetActive(false);
+
         }
 
         public override void InteractAction()
@@ -24,7 +27,10 @@ namespace PyrrhicSilva.Interactable
         {
             if (isTaken)
             {
-                audioSource.Play();
+                if (audioSource != null)
+                {
+                    audioSource.Play();
+                }
                 interactDelay = 3f;
                 StartCoroutine(cookFood());
             }
@@ -34,6 +40,7 @@ namespace PyrrhicSilva.Interactable
 
         IEnumerator cookFood()
         {
+            foodItem.SetActive(true); 
             yield return new WaitForSeconds(interactDelay);
             base.EnableTrigger();
         }

@@ -54,8 +54,6 @@ namespace PyrrhicSilva
         {
             CharacterMovement(true); 
             LoadGame();
-            Agenda.TaskComplete(); 
-
         }
 
         // Update is called once per frame
