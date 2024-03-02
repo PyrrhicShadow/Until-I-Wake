@@ -343,7 +343,7 @@ namespace PyrrhicSilva
         {
             gameManager.CharacterMovement(false);
             wakeUpCamera.gameObject.GetComponent<Animator>().Play("WakeUp");
-            yield return new WaitForSeconds(4.5f);
+            yield return new WaitForSeconds(2.5f);
             wakeUpCamera.Priority -= 20;
             yield return new WaitForSeconds(2f);
             gameManager.CharacterMovement(true);
@@ -690,7 +690,7 @@ namespace PyrrhicSilva
         void WorkTime()
         {
             objective.NewObjective(Task.Work, Step.Perform);
-            UpdateAgendaText("Work", string.Empty);
+            UpdateAgendaText("Work", "Work at the computer");
             gameManager.SaveGame();
             UpdateClocks("09:00");
             computer.enabled = true;
@@ -711,8 +711,6 @@ namespace PyrrhicSilva
 
         void Unwind()
         {
-            objective.NewObjective(Task.Unwind, Step.Perform);
-
             switch (day)
             {
                 case Day.Sun:
@@ -748,7 +746,7 @@ namespace PyrrhicSilva
             UpdateAgendaText("Play games on the TV");
             objective.NewObjective(Task.Unwind, Step.Perform);
             gameManager.SaveGame();
-            gameManager.TemporaryTask();
+            // gameManager.TemporaryTask();
         }
 
         void UnwindInterview()

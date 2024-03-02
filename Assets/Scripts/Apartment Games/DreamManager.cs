@@ -34,4 +34,8 @@ public class DreamManager : MonoBehaviour
     public void StartDream() {
         startSplash.StartGame(); 
     }
+
+    public void EndDream() {
+        endSplash.StartGame(); 
+    }
 }
