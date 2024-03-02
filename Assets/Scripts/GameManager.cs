@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.Rendering.UI;
+using Unity.Mathematics;
 
 namespace PyrrhicSilva
 {
@@ -103,7 +104,7 @@ namespace PyrrhicSilva
         {
             GameObject thing = container.contents.transform.GetChild(0).gameObject;
             thing.transform.SetParent(hands.transform);
-            thing.transform.SetLocalPositionAndRotation(Vector3.zero, thing.transform.localRotation);
+            thing.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
             IsHolding = true;
         }
 
@@ -129,7 +130,7 @@ namespace PyrrhicSilva
         {
             GameObject dropItem = hands.transform.GetChild(0).gameObject;
             dropItem.transform.SetParent(newSpot.contents.transform);
-            dropItem.transform.SetLocalPositionAndRotation(Vector3.zero, dropItem.transform.localRotation);
+            dropItem.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
 
             if (hands.transform.childCount == 0)
             {

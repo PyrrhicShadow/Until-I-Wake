@@ -91,7 +91,7 @@ namespace PyrrhicSilva
         [SerializeField] Container fridge;
         [SerializeField] CookingInteractable microwave;
         [SerializeField] Container placeSetting;
-        [SerializeField] MealInteractable food;
+        [SerializeField] MealInteractable plateFood;
         [SerializeField] ChairInteractable diningTable;
         [SerializeField] Container sink;  
         [Header("Computer Work")]
@@ -99,6 +99,7 @@ namespace PyrrhicSilva
         [Header("Unwind")]
         [SerializeField] Container cabinet; 
         [SerializeField] CookingInteractable stove;
+        [SerializeField] MealInteractable panFood; 
         [SerializeField] ComputerInteractable couch;
         [Header("Bedtime")]
         [SerializeField] AudioPlayable speaker;
@@ -134,7 +135,7 @@ namespace PyrrhicSilva
             microwave.enabled = false; 
             microwave.DisableTrigger();
             placeSetting.DisableTrigger();
-            food.DisableTrigger();
+            plateFood.DisableTrigger();
             sink.DisableTrigger(); 
 
             // computer work 
@@ -143,6 +144,7 @@ namespace PyrrhicSilva
             // unwind 
             stove.DisableTrigger(); 
             cabinet.DisableTrigger();
+            panFood.DisableTrigger(); 
             couch.DisableTrigger();
 
             // bedtime 
@@ -612,12 +614,18 @@ namespace PyrrhicSilva
         void EatBreakfast()
         {
             objective.NewObjective(Task.EatBreakfast, Step.Perform);
+            diningTable.InteractAction(); 
+            plateFood.EnableTrigger(); 
             UpdateClocks("08:46");
         }
 
         void EatDinner()
         {
             objective.NewObjective(Task.EatDinner, Step.Perform);
+            if (day < Day.Fri) {
+                panFood.EnableTrigger(); 
+            }
+            else { plateFood.EnableTrigger(); }
             UpdateClocks("17:37");
         }
 
@@ -625,6 +633,7 @@ namespace PyrrhicSilva
         void TakePlate()
         {
             subObjectiveText.text = "Clean up";
+
             placeSetting.EnableTrigger(); 
 
             switch (objective.task)

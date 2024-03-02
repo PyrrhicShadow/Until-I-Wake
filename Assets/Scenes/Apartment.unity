@@ -281,13 +281,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19816979}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.027, y: 0, z: 0.11}
-  m_LocalScale: {x: 1, y: 0.6, z: 0.2}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.4, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2019550332}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!23 &19816982
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1202,7 +1202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164625527}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.27059802, y: -0.6532815, z: 0.27059805, w: 0.6532815}
+  m_LocalRotation: {x: 0.27059802, y: -0.6532815, z: 0.270598, w: 0.6532815}
   m_LocalPosition: {x: 1.806, y: 1.805, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2350,7 +2350,7 @@ GameObject:
   - component: {fileID: 383837835}
   - component: {fileID: 383837834}
   m_Layer: 6
-  m_Name: Food
+  m_Name: Pan Food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7182,7 +7182,7 @@ MonoBehaviour:
   _col: {fileID: 383837837}
   isTask: 1
   repeatable: 0
-  interactDelay: 0.5
+  interactDelay: 2
   interactable: 1
   particles: {fileID: 383837835}
   audioSource: {fileID: 0}
@@ -7841,13 +7841,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587608032}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.027, y: 0, z: 0.04}
-  m_LocalScale: {x: 1, y: 0.6, z: 0.2}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.4, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2019550332}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!23 &587608035
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -8507,7 +8507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844496379}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8515,7 +8515,7 @@ Transform:
   - {fileID: 1555620972}
   - {fileID: 1307367692}
   m_Father: {fileID: 1882043548}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &845007798 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7868979626261209056, guid: 35e8227cb4e4b3049a94edf0885b9152, type: 3}
@@ -9703,13 +9703,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307367691}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.027, y: 0, z: 0.11}
-  m_LocalScale: {x: 1, y: 0.6, z: 0.2}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.4, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 844496380}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!23 &1307367694
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9772,7 +9772,7 @@ GameObject:
   - component: {fileID: 1319902936}
   - component: {fileID: 1319902935}
   m_Layer: 6
-  m_Name: Plate
+  m_Name: Bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9873,8 +9873,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1319902934}
-  - {fileID: 383837833}
   - {fileID: 893244484}
+  - {fileID: 383837833}
   m_Father: {fileID: 337540002}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1333775154 stripped
@@ -10450,7 +10450,7 @@ Transform:
   m_GameObject: {fileID: 1496811927}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.7449999, z: 1.138}
+  m_LocalPosition: {x: 0, y: 1.7449999, z: 0.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10472,8 +10472,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1496811927}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -10484,7 +10484,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
+  - {fileID: 2100000, guid: 816f163a2fed53645b957b33f985606e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10532,13 +10532,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1555620971}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.027, y: 0, z: 0.04}
-  m_LocalScale: {x: 1, y: 0.6, z: 0.2}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: 0, y: 0.05, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.4, z: 0.15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 844496380}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
 --- !u!23 &1555620974
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -11202,7 +11202,7 @@ GameObject:
   - component: {fileID: 1854795837}
   - component: {fileID: 1854795836}
   m_Layer: 6
-  m_Name: Food
+  m_Name: Plate Food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16107,7 +16107,7 @@ MonoBehaviour:
   _col: {fileID: 1854795833}
   isTask: 1
   repeatable: 0
-  interactDelay: 0.5
+  interactDelay: 2
   interactable: 1
   particles: {fileID: 1854795837}
   audioSource: {fileID: 0}
@@ -16957,7 +16957,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019550331}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -16965,7 +16965,7 @@ Transform:
   - {fileID: 587608033}
   - {fileID: 19816980}
   m_Father: {fileID: 1882043548}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2029891957
 GameObject:
   m_ObjectHideFlags: 0
@@ -17487,6 +17487,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 341505930}
     m_Modifications:
+    - target: {fileID: 3598557746609166093, guid: 1e04801bc8855244a9abf91dee03261d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6717274428287907170, guid: 1e04801bc8855244a9abf91dee03261d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.463
@@ -17628,7 +17632,6 @@ MonoBehaviour:
   chairCamera: {fileID: 364673470}
   targetCamera: {fileID: 164625529}
   _exitTransform: {fileID: 1868689928}
-  target: {fileID: 2029891959}
 --- !u!1001 &1724318679528437577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17823,7 +17826,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1162133641408578113, guid: d331322c9a789db48b01a478889ffc50, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4192894564554067419, guid: d331322c9a789db48b01a478889ffc50, type: 3}
       propertyPath: m_IsActive
@@ -19098,8 +19101,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5393215578589016655, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5393215578589016655, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5393215578589016655, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 816f163a2fed53645b957b33f985606e, type: 2}
     - target: {fileID: 5420857361349278248, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: cursorLocked
       value: 0
@@ -19269,12 +19280,13 @@ MonoBehaviour:
   fridge: {fileID: 898603911}
   microwave: {fileID: 1649974733}
   placeSetting: {fileID: 2029891959}
-  food: {fileID: 1854795838}
+  plateFood: {fileID: 1854795838}
   diningTable: {fileID: 1552261782115949950}
   sink: {fileID: 1697693960}
   computer: {fileID: 2003475379}
   cabinet: {fileID: 1847638321}
   stove: {fileID: 2668780408898453049}
+  panFood: {fileID: 383837836}
   couch: {fileID: 2670025187860169937}
   speaker: {fileID: 1776714889}
   bed: {fileID: 6485288627580086491}

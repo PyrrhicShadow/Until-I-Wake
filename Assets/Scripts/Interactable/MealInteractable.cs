@@ -36,6 +36,8 @@ namespace PyrrhicSilva.Interactable
             particles.Play();
             yield return new WaitForSeconds(interactDelay);
             particles.Stop();
+            gameManager.GetUnSeated(); 
+            yield return new WaitForEndOfFrame(); 
             yield return new WaitForEndOfFrame(); 
             Destroy(this.gameObject); 
         }
