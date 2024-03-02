@@ -139,6 +139,7 @@ namespace PyrrhicSilva
             sink.DisableTrigger(); 
 
             // computer work 
+            computer.enabled = false; 
             computer.DisableTrigger();
 
             // unwind 
@@ -547,7 +548,7 @@ namespace PyrrhicSilva
 
             cabinet.enabled = true; 
             cabinet.EnableTrigger(); 
-            gameManager.TemporaryTask();
+            // gameManager.TemporaryTask();
         }
 
         void CookDinner()
@@ -557,7 +558,7 @@ namespace PyrrhicSilva
 
             stove.enabled = true; 
             stove.EnableTrigger(); 
-            gameManager.TemporaryTask();
+            // gameManager.TemporaryTask();
         }
 
         void TakeMeal()

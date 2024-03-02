@@ -43,6 +43,7 @@ namespace PyrrhicSilva.Interactable
         protected virtual IEnumerator LookAtTarget()
         {
             gameManager.CharacterMovement(false);
+            gameManager.GetUnSeated(); 
             gameManager.GetSeated(targetCamera); 
             yield return new WaitForSeconds(2f);
             gameManager.CharacterMovement(true);
