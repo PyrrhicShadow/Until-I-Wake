@@ -1545,14 +1545,14 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   _col: {fileID: 8925515273596389071}
   isTask: 1
-  repeatable: 0
+  repeatable: 1
   interactDelay: 0.5
   interactable: 1
   contents: {fileID: 5146434872384570681}
   audioSource: {fileID: 0}
   pickUp: {fileID: 0}
   putDown: {fileID: 0}
-  isTaken: 0
+  isTaken: 1
   destroyOnDrop: 1
 --- !u!1 &5646889419076125192
 GameObject:
@@ -1715,7 +1715,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   pickUp: {fileID: 0}
   putDown: {fileID: 0}
-  isTaken: 0
+  isTaken: 1
   destroyOnDrop: 0
 --- !u!1 &6028809991428346816
 GameObject:

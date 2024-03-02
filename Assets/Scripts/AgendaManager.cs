@@ -143,7 +143,9 @@ namespace PyrrhicSilva
             computer.DisableTrigger();
 
             // unwind 
+            stove.enabled = false; 
             stove.DisableTrigger(); 
+            cabinet.enabled = false; 
             cabinet.DisableTrigger();
             panFood.DisableTrigger(); 
             couch.DisableTrigger();
