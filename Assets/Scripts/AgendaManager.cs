@@ -95,11 +95,13 @@ namespace PyrrhicSilva
         [SerializeField] ChairInteractable diningTable;
         [SerializeField] Container sink;
         [Header("Computer Work")]
-        [SerializeField] ChairInteractable computer;
+        [SerializeField] ChairInteractable desk;
+        [SerializeField] ComputerInteractable computer; 
         [Header("Unwind")]
         [SerializeField] CookingInteractable stove;
         [SerializeField] MealInteractable panFood;
-        [SerializeField] ChairInteractable couch;
+        [SerializeField] ChairInteractable couch; 
+        [SerializeField] ComputerInteractable tv; 
         [Header("Bedtime")]
         [SerializeField] AudioPlayable speaker;
         [SerializeField] Interactable.Interactable bed;
@@ -134,14 +136,18 @@ namespace PyrrhicSilva
             sink.DisableTrigger();
 
             // computer work 
-            computer.enabled = false;
-            computer.DisableTrigger();
+            desk.enabled = false;
+            desk.DisableTrigger();
+            computer.enabled = false; 
+            computer.DisableTrigger(); 
 
             // unwind 
             stove.enabled = false;
             stove.DisableTrigger();
             panFood.DisableTrigger();
             couch.DisableTrigger();
+            tv.enabled = false; 
+            tv.DisableTrigger(); 
 
             // bedtime 
             speaker.DisableTrigger();
@@ -152,7 +158,7 @@ namespace PyrrhicSilva
             // frontDoor.DisableTrigger(); 
 
             // Begin the game
-            TaskComplete();
+            // TaskComplete();
         }
 
         void UpdateClocks(string time)
@@ -258,7 +264,6 @@ namespace PyrrhicSilva
 
             // start day with camera laying on the bed
             wakeUpCamera.Priority += 20;
-            
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
@@ -694,14 +699,14 @@ namespace PyrrhicSilva
             UpdateAgendaText("Work", "Work at the computer");
             gameManager.SaveGame();
             UpdateClocks("09:00");
-            computer.enabled = true;
-            computer.EnableTrigger();
+            desk.enabled = true;
+            desk.EnableTrigger();
         }
 
         void ReturnFromWork()
         {
             UpdateClocks("17:00");
-            gameManager.TeleportCharacter(computer.ExitTransform);
+            gameManager.TeleportCharacter(desk.ExitTransform);
             gameManager.GetUnSeated();
             gameManager.CharacterMovement(true);
             objective.NewObjective(Task.CookDinner);
