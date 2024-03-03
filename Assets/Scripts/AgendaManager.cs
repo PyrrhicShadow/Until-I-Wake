@@ -95,11 +95,11 @@ namespace PyrrhicSilva
         [SerializeField] ChairInteractable diningTable;
         [SerializeField] Container sink;
         [Header("Computer Work")]
-        [SerializeField] ComputerInteractable computer;
+        [SerializeField] ChairInteractable computer;
         [Header("Unwind")]
         [SerializeField] CookingInteractable stove;
         [SerializeField] MealInteractable panFood;
-        [SerializeField] ComputerInteractable couch;
+        [SerializeField] ChairInteractable couch;
         [Header("Bedtime")]
         [SerializeField] AudioPlayable speaker;
         [SerializeField] Interactable.Interactable bed;
@@ -258,6 +258,7 @@ namespace PyrrhicSilva
 
             // start day with camera laying on the bed
             wakeUpCamera.Priority += 20;
+            
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
@@ -593,20 +594,20 @@ namespace PyrrhicSilva
         void EatBreakfast()
         {
             objective.NewObjective(Task.EatBreakfast, Step.Perform);
+            diningTable.SetTarget(plateFood);
             diningTable.InteractAction();
-            plateFood.EnableTrigger();
             UpdateClocks("08:46");
         }
 
         void EatDinner()
         {
             objective.NewObjective(Task.EatDinner, Step.Perform);
-            diningTable.InteractAction();
             if (day < Day.Fri)
             {
-                panFood.EnableTrigger();
+                diningTable.SetTarget(panFood); 
             }
-            else { plateFood.EnableTrigger(); }
+            else { diningTable.SetTarget(plateFood); }
+            diningTable.InteractAction();
             UpdateClocks("17:37");
         }
 

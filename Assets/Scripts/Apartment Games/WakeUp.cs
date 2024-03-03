@@ -27,6 +27,7 @@ namespace PyrrhicSilva
             {
                 mainAnimator = gameObject.GetComponent<Animator>();
             }
+            mainAnimator.enabled = false; 
         }
 
         [ContextMenu("End Minigame")]
@@ -39,7 +40,7 @@ namespace PyrrhicSilva
         IEnumerator fadeBackground()
         {
             mainAnimator.Play("FadeBackground");
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2.3f);
             mainAnimator.enabled = false;  
             gameManager.Agenda.TaskComplete();
         }

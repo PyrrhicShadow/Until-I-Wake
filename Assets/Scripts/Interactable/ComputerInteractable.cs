@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PyrrhicSilva.Interactable
 {
-    public class ComputerInteractable : ChairInteractable
+    public class ComputerInteractable : Interactable
     {
         [SerializeField] Canvas defaultCanvas;
         [SerializeField] SplashController splashController;
@@ -16,26 +16,15 @@ namespace PyrrhicSilva.Interactable
 
         }
 
-        protected override IEnumerator WaitUntilSeated()
+        public override void InteractAction()
         {
-            yield return new WaitForEndOfFrame();
-            
-            if (gameManager.isSeated)
+            if (interactable)
             {
-                StartCoroutine(LookAtTarget());
+                // begin loading other scene 
+                defaultCanvas.enabled = false;
+                splashController.StartGame();
             }
+            base.InteractAction();
         }
-
-        protected override IEnumerator LookAtTarget()
-        {
-            gameManager.CharacterMovement(false);
-            targetCamera.Priority += 20;
-            yield return new WaitForSeconds(2f);
-
-            // begin loading other scene 
-            defaultCanvas.enabled = false;
-            splashController.StartGame();
-        }
-
     }
 }

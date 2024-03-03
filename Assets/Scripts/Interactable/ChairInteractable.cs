@@ -10,13 +10,17 @@ namespace PyrrhicSilva.Interactable
         [SerializeField] protected CinemachineVirtualCamera chairCamera;
         [SerializeField] protected CinemachineVirtualCamera targetCamera;
         [SerializeField] protected Transform _exitTransform;
+        [SerializeField] protected Interactable target;
         public Transform ExitTransform { get { return _exitTransform; } protected set { _exitTransform = value; } }
-        // [SerializeField] Interactable target;
 
         // Start is called before the first frame update
         void Start()
         {
-
+            if (target != null)
+            {
+                target.enabled = false;
+                target.DisableTrigger();
+            }
         }
 
         public override void InteractAction()
@@ -43,10 +47,22 @@ namespace PyrrhicSilva.Interactable
         protected virtual IEnumerator LookAtTarget()
         {
             gameManager.CharacterMovement(false);
-            gameManager.GetUnSeated(); 
-            gameManager.GetSeated(targetCamera); 
+            gameManager.GetUnSeated();
+            gameManager.GetSeated(targetCamera);
+            target.enabled = true;
+            target.EnableTrigger();
             yield return new WaitForSeconds(2f);
+            target.InteractAction();
+            yield return new WaitForSeconds(2f);
+            target.enabled = false;
             gameManager.CharacterMovement(true);
+        }
+
+        public void SetTarget(Interactable target)
+        {
+            this.target = target;
+            target.enabled = false;
+            target.DisableTrigger();
         }
     }
 }

@@ -697,6 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4824936744336867760}
   - component: {fileID: 6940543976048415009}
+  - component: {fileID: 4630171457357994784}
   m_Layer: 6
   m_Name: TV
   m_TagString: Untagged
@@ -743,6 +744,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1.2834747, z: 1.75}
   m_Center: {x: 0, y: 1.1417373, z: -0}
+--- !u!114 &4630171457357994784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268631423323038235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ba987850a1413a47b8ebc1daabcb722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  _col: {fileID: 6940543976048415009}
+  isTask: 1
+  repeatable: 0
+  interactDelay: 0.5
+  interactable: 1
+  chairCamera: {fileID: 0}
+  targetCamera: {fileID: 0}
+  _exitTransform: {fileID: 0}
+  target: {fileID: 0}
+  defaultCanvas: {fileID: 7689722995620694128}
+  splashController: {fileID: 6360442213449812567}
 --- !u!1 &5316761889559619202
 GameObject:
   m_ObjectHideFlags: 0
