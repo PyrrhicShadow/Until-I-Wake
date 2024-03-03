@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 0caf2c4c84449eb45b4189ed8e715766, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 422c96e3e23a11148b84893be8e3b8bc, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1223,7 +1223,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164625527}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28252682, y: -0.64821184, z: 0.28252685, w: 0.64821184}
+  m_LocalRotation: {x: 0.28252685, y: -0.64821184, z: 0.28252685, w: 0.64821184}
   m_LocalPosition: {x: 1.806, y: 1.805, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7973,6 +7973,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1259091179123909562, guid: d331322c9a789db48b01a478889ffc50, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1374844616257114445, guid: d331322c9a789db48b01a478889ffc50, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -7980,6 +7984,10 @@ PrefabInstance:
     - target: {fileID: 1374844616257114445, guid: d331322c9a789db48b01a478889ffc50, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2150936725782565490, guid: d331322c9a789db48b01a478889ffc50, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3487070686969172715, guid: d331322c9a789db48b01a478889ffc50, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
