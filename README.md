@@ -20,6 +20,8 @@ sample image assets for work tasks ripped from Among Us by
 
 Starter Assets - First Person Character Controller by [Unity Technologies](https://assetstore.unity.com/publishers/1) from the [Unity Asset Store](https://assetstore.unity.com/packages/essentials/starter-assets-first-person-character-controller-196525)
 
+SIMPLE modular human by [255 pixel studios](https://assetstore.unity.com/publishers/26773) from the [Unity Asset Store](https://assetstore.unity.com/packages/3d/characters/humanoids/humans/simple-modular-human-100162)
+
 Crosshair Pack by [Kenney Vleugels](https://www.Kenney.nl)
 
 Computer keyboard texture: Photo by <a href="https://unsplash.com/@stefentan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Stefen Tan</a> on <a href="https://unsplash.com/photos/black-and-orange-computer-keyboard-KYw1eUx1J7Y?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
