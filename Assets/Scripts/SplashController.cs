@@ -23,6 +23,7 @@ namespace PyrrhicSilva {
                 loadingBar.fillAmount = asyncLoad.progress; 
                 yield return new WaitForEndOfFrame(); 
             }
+            loadingScreen.enabled = false;  
         }
     }
 }

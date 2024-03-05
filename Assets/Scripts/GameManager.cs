@@ -14,7 +14,7 @@ namespace PyrrhicSilva
     {
         [SerializeField] Interact interact;
         [SerializeField] Canvas uiCanvas;
-        [SerializeField] Canvas debugCanvas; 
+        [SerializeField] Canvas debugCanvas;
         [SerializeField] PlayerInput playerInput;
         [Header("Agenda Setup")]
         [SerializeField] AgendaManager _agenda;
@@ -44,17 +44,16 @@ namespace PyrrhicSilva
                 playerInput = gameObject.GetComponent<PlayerInput>();
             }
 
-            if (uiCanvas == null) {
-                this.enabled = false; 
+            if (uiCanvas == null)
+            {
+                this.enabled = false;
             }
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            CharacterMovement(true); 
-            LoadGame();
-            Agenda.TaskComplete(); 
+            CharacterMovement(true);
         }
 
         // Update is called once per frame
@@ -76,7 +75,8 @@ namespace PyrrhicSilva
             PlayerPrefs.SetInt("cycle", (int)Agenda.cycle);
             PlayerPrefs.SetInt("day", (int)Agenda.day);
             PlayerPrefs.SetInt("task", (int)Agenda.objective.task);
-            PlayerPrefs.SetInt("step", (int)Agenda.objective.step); 
+            PlayerPrefs.SetInt("step", (int)Agenda.objective.step);
+            Debug.Log("Game saved");
         }
 
         [ContextMenu("Load Game")]
@@ -85,6 +85,7 @@ namespace PyrrhicSilva
             Agenda.cycle = (Cycle)PlayerPrefs.GetInt("cycle", 0);
             Agenda.day = (Day)PlayerPrefs.GetInt("day", 0);
             Agenda.objective.NewObjective((Task)PlayerPrefs.GetInt("task", 0), (Step)PlayerPrefs.GetInt("step", 0));
+            Debug.Log("Game loaded");
         }
 
         [ContextMenu("Clear Save Data")]
@@ -93,6 +94,7 @@ namespace PyrrhicSilva
             PlayerPrefs.SetInt("cycle", 0);
             PlayerPrefs.SetInt("day", 0);
             PlayerPrefs.SetInt("task", 0);
+            Debug.Log("Saved data cleared"); 
         }
 
         /// <summary>
@@ -192,13 +194,15 @@ namespace PyrrhicSilva
         }
 
         [ContextMenu("Character Movement")]
-        public void EnableCharacterMovement() {
-            CharacterMovement(true); 
+        public void EnableCharacterMovement()
+        {
+            CharacterMovement(true);
         }
 
         [ContextMenu("Mouse Pointer")]
-        public void DisableCharacterMovement() {
-            CharacterMovement(false); 
+        public void DisableCharacterMovement()
+        {
+            CharacterMovement(false);
         }
 
         internal void CharacterMovement(bool state)
@@ -225,14 +229,16 @@ namespace PyrrhicSilva
             this.transform.SetPositionAndRotation(newTransform.position, newTransform.rotation);
         }
 
-        public void TemporaryTask() {
-            debugCanvas.enabled = true; 
-            StartCoroutine(temporaryTask()); 
+        public void TemporaryTask()
+        {
+            debugCanvas.enabled = true;
+            StartCoroutine(temporaryTask());
         }
-        IEnumerator temporaryTask() {
-            yield return new WaitForSeconds(2f); 
-            debugCanvas.enabled = false; 
-            Agenda.TaskComplete(); 
+        IEnumerator temporaryTask()
+        {
+            yield return new WaitForSeconds(2f);
+            debugCanvas.enabled = false;
+            Agenda.TaskComplete();
         }
     }
 }

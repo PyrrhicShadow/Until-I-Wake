@@ -31,10 +31,12 @@ public class DreamManager : MonoBehaviour
         
     }
 
+    [ContextMenu("Start Dream")]
     public void StartDream() {
         startSplash.StartGame(); 
     }
 
+    [ContextMenu("End Dream")]
     public void EndDream() {
         endSplash.StartGame(); 
     }

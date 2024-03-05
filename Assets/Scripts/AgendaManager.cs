@@ -87,7 +87,7 @@ namespace PyrrhicSilva
         [SerializeField] GameObject tempBedroom;
         [SerializeField] GameObject interviewOffice;
         [Header("Wake Up")]
-        [SerializeField] WakeUpGame wakeUpGame;
+        // [SerializeField] WakeUpGame wakeUpGame;
         [SerializeField] AudioPlayable alarmClock;
         [SerializeField] CinemachineVirtualCamera normalWakeUpCamera;
         [SerializeField] CinemachineVirtualCamera interviewWakeUpCamera;
@@ -139,10 +139,14 @@ namespace PyrrhicSilva
 
         private void Start()
         {
+            gameManager.LoadGame(); 
+
+            // set up
             apartment.SetActive(false);
             mainHouse.SetActive(false);
             tempBedroom.SetActive(false);
             interviewOffice.SetActive(false);
+
             // wake up 
             alarmClock.DisableTrigger();
 
@@ -189,7 +193,7 @@ namespace PyrrhicSilva
             // frontDoor.DisableTrigger(); 
 
             // Begin the game
-            // TaskComplete();
+            TaskComplete();
         }
 
         void UpdateClocks(string time)
@@ -290,11 +294,10 @@ namespace PyrrhicSilva
 
         private void BeginDay()
         {
+            Debug.Log("Day setup begin");
+
             // setup 
             gameManager.CharacterMovement(false);
-
-            // start day with camera laying on the bed
-            normalWakeUpCamera.Priority += 20;
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
@@ -303,11 +306,17 @@ namespace PyrrhicSilva
             switch (day)
             {
                 case > Day.Fri:
+
+                    // start day with camera laying on the bed
+                    interviewWakeUpCamera.Priority += 20;
                     mainHouse.SetActive(true);
                     tempBedroom.SetActive(true);
                     Debug.Log("Main house day");
                     break;
                 default:
+
+                    // start day with camera laying on the bed
+                    normalWakeUpCamera.Priority += 20;
                     apartment.SetActive(true);
                     Debug.Log("Apartment day.");
                     break;
@@ -343,13 +352,14 @@ namespace PyrrhicSilva
             switch (day)
             {
                 case > Day.Fri:
-                    wakeUpGame.StartInterviewMinigame();
+                    // wakeUpGame.StartInterviewMinigame();
                     objective.NewObjective(Task.Morning);
                     break;
                 default:
-                    wakeUpGame.StartNormalMinigame();
+                    // wakeUpGame.StartNormalMinigame();
                     break;
             }
+            TaskComplete(); 
         }
 
         // if (agenda.day < Day.Thur)
@@ -783,6 +793,7 @@ namespace PyrrhicSilva
         void ReturnFromWork()
         {
             apartment.SetActive(true);
+            Debug.Log("Return from work");
             UpdateClocks("17:00");
             gameManager.TeleportCharacter(workDesk.ExitTransform);
             gameManager.GetUnSeated();
@@ -955,14 +966,17 @@ namespace PyrrhicSilva
 
             // Animate sleeping 
             gameManager.CharacterMovement(false);
-            if (day == Day.Sun) {
-                normalSleepCamera.Priority += 20; 
+            if (day == Day.Sun)
+            {
+                normalSleepCamera.Priority += 20;
             }
-            else if (day < Day.Thur) {
-                interviewSleepCamera.Priority += 20; 
+            else if (day < Day.Thur)
+            {
+                interviewSleepCamera.Priority += 20;
             }
-            else {
-            normalSleepCamera.Priority += 20;
+            else
+            {
+                normalSleepCamera.Priority += 20;
             }
             StartCoroutine(layInBed());
         }
