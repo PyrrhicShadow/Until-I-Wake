@@ -87,7 +87,7 @@ namespace PyrrhicSilva
         [SerializeField] GameObject tempBedroom;
         [SerializeField] GameObject interviewOffice;
         [Header("Wake Up")]
-        // [SerializeField] WakeUpGame wakeUpGame;
+        [SerializeField] Animator wakeUpAnimator;
         [SerializeField] AudioPlayable alarmClock;
         [SerializeField] CinemachineVirtualCamera normalWakeUpCamera;
         [SerializeField] CinemachineVirtualCamera interviewWakeUpCamera;
@@ -148,6 +148,7 @@ namespace PyrrhicSilva
             interviewOffice.SetActive(false);
 
             // wake up 
+            wakeUpAnimator.enabled = false; 
             alarmClock.DisableTrigger();
 
             // get ready 
@@ -298,6 +299,7 @@ namespace PyrrhicSilva
 
             // setup 
             gameManager.CharacterMovement(false);
+            wakeUpAnimator.enabled = true; 
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
@@ -348,18 +350,15 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.WakeUp, Step.Perform);
             gameManager.CharacterMovement(false);
+            StartCoroutine(fadeBackground());
+        }
 
-            switch (day)
-            {
-                case > Day.Fri:
-                    // wakeUpGame.StartInterviewMinigame();
-                    objective.NewObjective(Task.Morning);
-                    break;
-                default:
-                    // wakeUpGame.StartNormalMinigame();
-                    break;
-            }
-            TaskComplete(); 
+        IEnumerator fadeBackground()
+        {
+            wakeUpAnimator.Play("FadeBackground");
+            yield return new WaitForSeconds(2.3f);
+            wakeUpAnimator.enabled = false;  
+            TaskComplete();
         }
 
         // if (agenda.day < Day.Thur)

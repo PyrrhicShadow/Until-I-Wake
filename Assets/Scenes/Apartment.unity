@@ -12835,7 +12835,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164625527}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28252685, y: -0.64821184, z: 0.28252685, w: 0.64821184}
+  m_LocalRotation: {x: 0.28252685, y: -0.64821184, z: 0.28252688, w: 0.64821184}
   m_LocalPosition: {x: 1.806, y: 1.805, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -67819,7 +67819,6 @@ GameObject:
   - component: {fileID: 1942696028}
   - component: {fileID: 1942696027}
   - component: {fileID: 1942696026}
-  - component: {fileID: 1942696024}
   - component: {fileID: 1942696025}
   m_Layer: 5
   m_Name: Wake Up Canvas
@@ -67848,21 +67847,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1942696024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1942696022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a32f144a28871b43af660923fbf5204, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 8204767107365459085}
-  mainCanvas: {fileID: 1942696028}
-  mainAnimator: {fileID: 1942696025}
 --- !u!95 &1942696025
 Animator:
   serializedVersion: 5
@@ -77867,7 +77851,7 @@ PrefabInstance:
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: wakeUpGame
       value: 
-      objectReference: {fileID: 1942696024}
+      objectReference: {fileID: 0}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: diningTable
       value: 

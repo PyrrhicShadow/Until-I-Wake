@@ -6,16 +6,16 @@ namespace PyrrhicSilva
 {
     public class WakeUpGame : MonoBehaviour
     {
-        [SerializeField] GameManager gameManager;
+        [SerializeField] DreamManager dreamManager;
         [SerializeField] Canvas mainCanvas;
         [SerializeField] Animator mainAnimator;
 
         // Start is called before the first frame update
         void Start()
         {
-            if (gameManager == null)
+            if (dreamManager == null)
             {
-                gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+                dreamManager = GameObject.FindWithTag("Dream").GetComponent<DreamManager>();
             }
 
             if (mainCanvas == null)
@@ -34,15 +34,7 @@ namespace PyrrhicSilva
         public void EndMinigame()
         {
             Debug.Log("Minigame complete!");
-            StartCoroutine(fadeBackground());
-        }
-
-        IEnumerator fadeBackground()
-        {
-            mainAnimator.Play("FadeBackground");
-            yield return new WaitForSeconds(2.3f);
-            mainAnimator.enabled = false;  
-            gameManager.Agenda.TaskComplete();
+            dreamManager.EndDream(); 
         }
 
         IEnumerator BypassMinigame()
