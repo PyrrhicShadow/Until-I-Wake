@@ -4,25 +4,16 @@ using UnityEngine;
 
 namespace PyrrhicSilva
 {
-    class Dream : MonoBehaviour
-    {
-        [SerializeField] Animator animator;
-        [SerializeField] float _animationTime;
-        public float animationTime { get { return _animationTime; } private set { _animationTime = value; } }
-
-        public void Play()
-        {
-            animator.Play("dream");
-        }
-    }
     public class DreamManager : MonoBehaviour
     {
         public static DreamManager dreamManager;
         [SerializeField] SplashController startSplash;
         [SerializeField] SplashController endSplash;
+        [SerializeField] WakeUpGame wakeUpGame; 
         [SerializeField] AudioSource audioSource;
         [SerializeField] GameObject[] dreams;
         [SerializeField] GameObject[] nightmares;
+        [SerializeField] internal bool isNightmare = false; 
         [SerializeField] Dream currentDream;
 
         void Awake()
@@ -52,16 +43,19 @@ namespace PyrrhicSilva
 
         public void PlayDream()
         {
+            if (wakeUpGame == null) {
+                wakeUpGame = GameObject.FindWithTag("WakeUp").GetComponent<WakeUpGame>(); 
+            }
+
+            if (isNightmare) {
+                int randDream = Random.Range(0, nightmares.Length);
+            currentDream = Instantiate(nightmares[randDream]).GetComponent<Dream>();
+            }
+            else {
             int randDream = Random.Range(0, dreams.Length);
             currentDream = Instantiate(dreams[randDream]).GetComponent<Dream>();
-            StartCoroutine(playDream());
-        }
+            }
 
-        public void PlayNightmare()
-        {
-
-            int randDream = Random.Range(0, nightmares.Length);
-            currentDream = Instantiate(nightmares[randDream]).GetComponent<Dream>();
             StartCoroutine(playDream());
         }
 
@@ -69,6 +63,8 @@ namespace PyrrhicSilva
         {
             currentDream.Play();
             yield return new WaitForSeconds(currentDream.animationTime);
+            yield return new WaitForEndOfFrame(); 
+            wakeUpGame.StartMinigame(); 
         }
     }
 }

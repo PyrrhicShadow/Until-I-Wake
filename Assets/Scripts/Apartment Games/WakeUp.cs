@@ -9,6 +9,8 @@ namespace PyrrhicSilva
         [SerializeField] DreamManager dreamManager;
         [SerializeField] Canvas mainCanvas;
         [SerializeField] Animator mainAnimator;
+        Cycle cycle; 
+        Day day; 
 
         // Start is called before the first frame update
         void Start()
@@ -27,7 +29,11 @@ namespace PyrrhicSilva
             {
                 mainAnimator = gameObject.GetComponent<Animator>();
             }
+            cycle = (Cycle)PlayerPrefs.GetInt("cycle", 0); 
+            day = (Day)PlayerPrefs.GetInt("day", 0); 
+
             mainAnimator.enabled = false; 
+            dreamManager.PlayDream(); 
         }
 
         [ContextMenu("End Minigame")]
@@ -43,14 +49,23 @@ namespace PyrrhicSilva
             EndMinigame();
         }
 
-        public void StartNormalMinigame()
+        public void StartMinigame() {
+            if (day > Day.Fri) {
+                StartInterviewMinigame(); 
+            }
+            else {
+                StartNormalMinigame(); 
+            }
+        }
+
+        void StartNormalMinigame()
         {
             mainAnimator.enabled = true; 
             Debug.Log("Normal day wake up mini game start"); 
             StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
         }
 
-        public void StartInterviewMinigame() {
+        void StartInterviewMinigame() {
             mainAnimator.enabled = true; 
             Debug.Log("Interview day wake up mini game start"); 
             StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
