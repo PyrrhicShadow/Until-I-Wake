@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Pose
+{
+    walk = 1,
+    run = 2,
+    sit = 3,
+    idle = 4,
+    wall = 6,
+    hanging = 18,
+    ducking = 36,
+    pickUp = 32,
+}
+
 public class clothing : MonoBehaviour
 {
 
@@ -151,17 +163,25 @@ public class clothing : MonoBehaviour
 
 
     public bool show_run;
+    public Pose pose;
 
     bool hat;
 
-    void Start() {
-        RandomClothing(); 
+    void Start()
+    {
+        ani.SetInteger("legs", (int)pose);
+        ani.SetInteger("arms", (int)pose);
+
+        RandomHuman();
+        if (show_run)
+        {
+            RandomClothing();
+        }
     }
 
-    public void RandomClothing() {
+    public void RandomHuman()
+    {
         // disapear all cloth, for a new run
-
-        hat = true;
 
         hair_a.SetActive(false);
         hair_b.SetActive(false);
@@ -173,68 +193,6 @@ public class clothing : MonoBehaviour
         beard_b.SetActive(false);
         beard_c.SetActive(false);
         beard_d.SetActive(false);
-
-        cap.SetActive(false);
-        cap2.SetActive(false);
-        cap3.SetActive(false);
-
-        chain1.SetActive(false);
-        chain2.SetActive(false);
-        chain3.SetActive(false);
-
-        banker_suit.SetActive(false);
-
-        cock_suit.SetActive(false);
-        cock_suit_hat.SetActive(false);
-
-        farmer_suit.SetActive(false);
-        farmer_suit_hat.SetActive(false);
-
-        fireman_suit.SetActive(false);
-        fireman_suit_hat.SetActive(false);
-
-        mechanic_suit.SetActive(false);
-        mechanic_suit_hat.SetActive(false);
-
-        nurse_suit.SetActive(false);
-
-        police_suit.SetActive(false);
-        police_suit_hat.SetActive(false);
-
-        roober_suit.SetActive(false);
-        roober_suit_hat.SetActive(false);
-
-        security_guard_suit.SetActive(false);
-        security_guard_suit_hat.SetActive(false);
-
-        seller_suit.SetActive(false);
-
-        worker_suit.SetActive(false);
-        worker_suit_hat.SetActive(false);
-
-        glasses.SetActive(false);
-
-        jacket.SetActive(false);
-
-        pullover.SetActive(false);
-
-        scarf.SetActive(false);
-
-        shirt.SetActive(false);
-
-        shoes1.SetActive(false);
-
-        shoes2.SetActive(false);
-
-        shoes3.SetActive(false);
-
-        shortpants.SetActive(false);
-
-        t_shirt.SetActive(false);
-
-        tank_top.SetActive(false);
-
-        trousers.SetActive(false);
 
         // determining skin color
 
@@ -527,6 +485,76 @@ public class clothing : MonoBehaviour
                 }
             }
         }
+
+    }
+
+    public void RandomClothing()
+    {
+        // disapear all cloth, for a new run
+
+        hat = true;
+
+        cap.SetActive(false);
+        cap2.SetActive(false);
+        cap3.SetActive(false);
+
+        chain1.SetActive(false);
+        chain2.SetActive(false);
+        chain3.SetActive(false);
+
+        banker_suit.SetActive(false);
+
+        cock_suit.SetActive(false);
+        cock_suit_hat.SetActive(false);
+
+        farmer_suit.SetActive(false);
+        farmer_suit_hat.SetActive(false);
+
+        fireman_suit.SetActive(false);
+        fireman_suit_hat.SetActive(false);
+
+        mechanic_suit.SetActive(false);
+        mechanic_suit_hat.SetActive(false);
+
+        nurse_suit.SetActive(false);
+
+        police_suit.SetActive(false);
+        police_suit_hat.SetActive(false);
+
+        roober_suit.SetActive(false);
+        roober_suit_hat.SetActive(false);
+
+        security_guard_suit.SetActive(false);
+        security_guard_suit_hat.SetActive(false);
+
+        seller_suit.SetActive(false);
+
+        worker_suit.SetActive(false);
+        worker_suit_hat.SetActive(false);
+
+        glasses.SetActive(false);
+
+        jacket.SetActive(false);
+
+        pullover.SetActive(false);
+
+        scarf.SetActive(false);
+
+        shirt.SetActive(false);
+
+        shoes1.SetActive(false);
+
+        shoes2.SetActive(false);
+
+        shoes3.SetActive(false);
+
+        shortpants.SetActive(false);
+
+        t_shirt.SetActive(false);
+
+        tank_top.SetActive(false);
+
+        trousers.SetActive(false);
 
         // determining complet suits or normal cloth
         int suit_or_cloth = Random.Range(0, 2);
@@ -855,41 +883,6 @@ public class clothing : MonoBehaviour
             }
 
         }
-
-    }
-
-    Coroutine coroutine_random_clothing;
-
-    IEnumerator start_random_clothing()
-    {
-        yield return new WaitForSeconds(0);
-
-        RandomClothing(); 
-
-        yield return new WaitForSeconds(5);
-
-        StopCoroutine(coroutine_random_clothing);
-        coroutine_random_clothing = StartCoroutine(start_random_clothing());
-
-    }
-
-
-    void Update()
-    {
-        if (show_run)
-        {
-            // show_run = true;
-            show_run = false; 
-
-            coroutine_random_clothing = StartCoroutine(start_random_clothing());
-
-
-        }
-
-
-
-
-
 
     }
 }
