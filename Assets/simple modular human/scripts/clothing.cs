@@ -16,6 +16,8 @@ public enum Pose
 
 public class clothing : MonoBehaviour
 {
+    public bool show_run;
+    public Pose pose;
 
     [Header("Skin")]
     public GameObject skin_head;
@@ -160,10 +162,6 @@ public class clothing : MonoBehaviour
     public Texture[] trousers_textures;
 
     public Animator ani;
-
-
-    public bool show_run;
-    public Pose pose;
 
     bool hat;
 

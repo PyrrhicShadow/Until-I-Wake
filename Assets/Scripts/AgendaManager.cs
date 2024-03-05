@@ -81,38 +81,52 @@ namespace PyrrhicSilva
         [SerializeField] TMP_Text objectiveText;
         [SerializeField] TMP_Text subObjectiveText;
         [SerializeField] TMP_Text[] clocks;
+        [Header("Buildings")]
+        [SerializeField] GameObject apartment;
+        [SerializeField] GameObject mainHouse;
+        [SerializeField] GameObject tempBedroom;
+        [SerializeField] GameObject interviewOffice;
         [Header("Wake Up")]
         [SerializeField] WakeUpGame wakeUpGame;
         [SerializeField] AudioPlayable alarmClock;
         [SerializeField] CinemachineVirtualCamera normalWakeUpCamera;
-        [SerializeField] CinemachineVirtualCamera interviewWakeUpCamera; 
+        [SerializeField] CinemachineVirtualCamera interviewWakeUpCamera;
         [Header("Get Ready")]
         [SerializeField] Container normalDresser;
+        [SerializeField] Container interviewDresser;
         [SerializeField] DoorInteractable normalBathroomDoor;
+        [SerializeField] DoorInteractable interviewBathroomDoor;
         [SerializeField] Container fridge;
         [SerializeField] CookingInteractable microwave;
         [SerializeField] Container normalPlaceSetting;
+        [SerializeField] Container interviewPlaceSetting;
         [SerializeField] MealInteractable normalPlateFood;
+        [SerializeField] MealInteractable interviewPlateFood;
         [SerializeField] ChairInteractable normalDiningTable;
-        [SerializeField] Container sink;
+        [SerializeField] ChairInteractable interviewDiningTable;
+        [SerializeField] Container normalSink;
+        [SerializeField] Container interviewSink;
         [Header("Computer Work")]
         [SerializeField] ChairInteractable workDesk;
-        [SerializeField] ComputerInteractable computer; 
+        [SerializeField] ComputerInteractable computer;
+        [SerializeField] DoorInteractable interviewDoor;
+        [SerializeField] GameObject interviewGame;
         [Header("Unwind")]
         [SerializeField] CookingInteractable stove;
         [SerializeField] MealInteractable panFood;
-        [SerializeField] ChairInteractable couch; 
-        [SerializeField] ComputerInteractable tv; 
+        [SerializeField] ChairInteractable couch;
+        [SerializeField] ComputerInteractable tv;
+        [SerializeField] GameObject twinkCage;
         [Header("Bedtime")]
+        [SerializeField] DoorInteractable bedroomDoor;
         [SerializeField] AudioPlayable speaker;
         [SerializeField] Interactable.Interactable normalBed;
+        [SerializeField] Interactable.Interactable interviewBed;
         [SerializeField] CinemachineVirtualCamera normalSleepCamera;
+        [SerializeField] CinemachineVirtualCamera interviewSleepCamera;
         [SerializeField] DreamManager dreamManager;
         [Header("Travel")]
         [SerializeField] DoorInteractable frontDoor;
-        [SerializeField] DoorInteractable bedroomDoor; 
-        [SerializeField] DoorInteractable interviewDoor; 
-
 
         private void Awake()
         {
@@ -125,36 +139,50 @@ namespace PyrrhicSilva
 
         private void Start()
         {
+            apartment.SetActive(false);
+            mainHouse.SetActive(false);
+            tempBedroom.SetActive(false);
+            interviewOffice.SetActive(false);
             // wake up 
             alarmClock.DisableTrigger();
 
             // get ready 
             normalDresser.DisableTrigger();
+            interviewDresser.DisableTrigger();
             normalBathroomDoor.DisableTrigger();
+            interviewBathroomDoor.DisableTrigger();
             fridge.DisableTrigger();
             microwave.enabled = false;
             microwave.DisableTrigger();
             normalPlaceSetting.DisableTrigger();
+            interviewPlaceSetting.DisableTrigger();
             normalPlateFood.DisableTrigger();
-            sink.DisableTrigger();
+            // interviewPlateFood.DisableTrigger();
+            normalSink.DisableTrigger();
+            interviewSink.DisableTrigger();
 
             // computer work 
             workDesk.enabled = false;
             workDesk.DisableTrigger();
-            computer.enabled = false; 
-            computer.DisableTrigger(); 
+            computer.enabled = false;
+            computer.DisableTrigger();
+            // interviewDoor.DisableTrigger(); 
+            // interviewGame.SetActive(false);
 
             // unwind 
             stove.enabled = false;
             stove.DisableTrigger();
             panFood.DisableTrigger();
             couch.DisableTrigger();
-            tv.enabled = false; 
-            tv.DisableTrigger(); 
+            tv.enabled = false;
+            tv.DisableTrigger();
+            twinkCage.SetActive(false);
 
             // bedtime 
+            // bedroomDoor.EnableTrigger(); 
             speaker.DisableTrigger();
             normalBed.DisableTrigger();
+            interviewBed.DisableTrigger();
             dreamManager.enabled = false;
 
             // travel
@@ -249,10 +277,10 @@ namespace PyrrhicSilva
                     Bedtime();
                     break;
                 case Task.Leave:
-                    Leave();
+                    LeaveApartment();
                     break;
                 case Task.Arrive:
-                    Arrive();
+                    ArriveApartment();
                     break;
                 default:
                     BeginDay();
@@ -270,6 +298,21 @@ namespace PyrrhicSilva
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
+
+            // load room(s) based on day 
+            switch (day)
+            {
+                case > Day.Fri:
+                    mainHouse.SetActive(true);
+                    tempBedroom.SetActive(true);
+                    Debug.Log("Main house day");
+                    break;
+                default:
+                    apartment.SetActive(true);
+                    Debug.Log("Apartment day.");
+                    break;
+            }
+
             TaskComplete();
         }
 
@@ -301,6 +344,7 @@ namespace PyrrhicSilva
             {
                 case > Day.Fri:
                     wakeUpGame.StartInterviewMinigame();
+                    objective.NewObjective(Task.Morning);
                     break;
                 default:
                     wakeUpGame.StartNormalMinigame();
@@ -351,10 +395,28 @@ namespace PyrrhicSilva
         IEnumerator getOutOfBed()
         {
             gameManager.CharacterMovement(false);
-            normalWakeUpCamera.gameObject.GetComponent<Animator>().Play("WakeUp");
+            if (day > Day.Fri)
+            {
+                interviewWakeUpCamera.gameObject.GetComponent<Animator>().Play("WakeUp");
+            }
+            else
+            {
+                normalWakeUpCamera.gameObject.GetComponent<Animator>().Play("WakeUp");
+            }
+
             yield return new WaitForSeconds(2.5f);
-            normalWakeUpCamera.Priority -= 20;
+
+            if (day > Day.Fri)
+            {
+                interviewWakeUpCamera.Priority -= 20;
+            }
+            else
+            {
+                normalWakeUpCamera.Priority -= 20;
+            }
+
             yield return new WaitForSeconds(2f);
+
             gameManager.CharacterMovement(true);
             TaskComplete();
         }
@@ -381,7 +443,10 @@ namespace PyrrhicSilva
 
             normalDresser.enabled = true;
             normalDresser.EnableTrigger();
-            // dresser.Store(0); 
+            // normalDresser.Store(0); 
+
+            interviewDresser.enabled = true;
+            interviewDresser.EnableTrigger();
         }
 
         void MorningBathroom()
@@ -410,7 +475,6 @@ namespace PyrrhicSilva
                     TakeMeal();
                     break;
             }
-
         }
 
         void TakeFromFridge()
@@ -533,7 +597,7 @@ namespace PyrrhicSilva
                     TakeMeal();
                     break;
             }
-  
+
 
         }
 
@@ -587,6 +651,9 @@ namespace PyrrhicSilva
             normalDiningTable.enabled = true;
             normalDiningTable.EnableTrigger();
 
+            interviewDiningTable.enabled = true;
+            interviewDiningTable.EnableTrigger();
+
             microwave.enabled = false;
             switch (objective.task)
             {
@@ -604,6 +671,9 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.EatBreakfast, Step.Perform);
             normalDiningTable.SetTarget(normalPlateFood);
             normalDiningTable.InteractAction();
+
+            // interviewDiningTable.SetTarget(interviewPlateFood);
+            // interviewDiningTable.InteractAction();
             UpdateClocks("08:46");
         }
 
@@ -612,9 +682,12 @@ namespace PyrrhicSilva
             objective.NewObjective(Task.EatDinner, Step.Perform);
             if (day < Day.Fri)
             {
-                normalDiningTable.SetTarget(panFood); 
+                normalDiningTable.SetTarget(panFood);
             }
-            else { normalDiningTable.SetTarget(normalPlateFood); }
+            else
+            {
+                normalDiningTable.SetTarget(normalPlateFood);
+            }
             normalDiningTable.InteractAction();
             UpdateClocks("17:37");
         }
@@ -653,7 +726,8 @@ namespace PyrrhicSilva
 
         void CleanUp()
         {
-            sink.EnableTrigger();
+            normalSink.EnableTrigger();
+            interviewSink.EnableTrigger();
             gameManager.GetUnSeated();
             switch (objective.task)
             {
@@ -708,6 +782,7 @@ namespace PyrrhicSilva
 
         void ReturnFromWork()
         {
+            apartment.SetActive(true);
             UpdateClocks("17:00");
             gameManager.TeleportCharacter(workDesk.ExitTransform);
             gameManager.GetUnSeated();
@@ -767,6 +842,7 @@ namespace PyrrhicSilva
 
         void ReturnFromTV()
         {
+            apartment.SetActive(true);
             UpdateClocks("23:30");
             gameManager.TeleportCharacter(couch.ExitTransform);
             gameManager.GetUnSeated();
@@ -793,7 +869,11 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Night, Step.Perform);
             normalDresser.EnableTrigger();
-            // dresser.Store(1); 
+            // normalDresser.Store(1); 
+
+            interviewDresser.EnableTrigger();
+            // interviewDresser.Store(1);
+
             UpdateAgendaText("Get ready for bed", "Grab bed clothes \nTake a shower");
         }
 
@@ -801,6 +881,7 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Bedtime);
             normalBathroomDoor.EnableTrigger();
+            // interviewBathroomDoor.EnableTrigger();
         }
 
         void Bedtime()
@@ -853,10 +934,15 @@ namespace PyrrhicSilva
             if (objective.step == Step.Begin)
             {
                 UpdateAgendaText("No tunes tonight \nGo to sleep");
+                interviewBed.EnableTrigger();
+            }
+            else
+            {
+                normalBed.EnableTrigger();
             }
             objective.NewObjective(Task.Bedtime, Step.Finish);
             UpdateClocks("23:14");
-            normalBed.EnableTrigger();
+
             // gameManager.TemporaryTask();
         }
 
@@ -869,7 +955,15 @@ namespace PyrrhicSilva
 
             // Animate sleeping 
             gameManager.CharacterMovement(false);
+            if (day == Day.Sun) {
+                normalSleepCamera.Priority += 20; 
+            }
+            else if (day < Day.Thur) {
+                interviewSleepCamera.Priority += 20; 
+            }
+            else {
             normalSleepCamera.Priority += 20;
+            }
             StartCoroutine(layInBed());
         }
 
@@ -883,7 +977,7 @@ namespace PyrrhicSilva
             dreamManager.StartDream();
         }
 
-        void Leave()
+        void LeaveApartment()
         {
             switch (objective.step)
             {
@@ -894,7 +988,7 @@ namespace PyrrhicSilva
             }
         }
 
-        void Arrive()
+        void ArriveApartment()
         {
             switch (objective.step)
             {
