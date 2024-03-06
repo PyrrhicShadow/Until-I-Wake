@@ -6,7 +6,7 @@ namespace PyrrhicSilva.Interactable
 {
     public class MealInteractable : Interactable
     {
-        [SerializeField] ParticleSystem particles;
+        [SerializeField] ParticleSystem eatingParticles;
         [SerializeField] AudioSource audioSource;
 
         // Start is called before the first frame update
@@ -33,9 +33,9 @@ namespace PyrrhicSilva.Interactable
 
         IEnumerator EatingParticles()
         {
-            particles.Play();
+            eatingParticles.Play();
             yield return new WaitForSeconds(interactDelay);
-            particles.Stop();
+            eatingParticles.Stop();
             gameManager.GetUnSeated(); 
             yield return new WaitForEndOfFrame(); 
             yield return new WaitForEndOfFrame(); 

@@ -6,6 +6,8 @@ namespace PyrrhicSilva.Interactable {
     public abstract class Interactable : MonoBehaviour {
         [SerializeField] protected GameManager gameManager; 
         [SerializeField] protected Collider _col; 
+        [SerializeField] protected ParticleSystem particles; 
+        [SerializeField] protected bool hasGlow = false; 
         [SerializeField] protected bool isTask = false; 
         [SerializeField] protected bool repeatable = false; 
         [SerializeField] protected float interactDelay = 0.5f; 
@@ -20,6 +22,9 @@ namespace PyrrhicSilva.Interactable {
             }
             if (col == null) {
                 col = gameObject.GetComponent<Collider>();
+            }
+            if (particles == null) {
+                particles = gameObject.GetComponent<ParticleSystem>(); 
             }
         }
 
@@ -48,11 +53,21 @@ namespace PyrrhicSilva.Interactable {
         /// <summary>After calling InteractAction, disable the trigger to prevent trigger spamming.</summary>
         public virtual void DisableTrigger() {
             interactable = false; 
+
+            if (particles != null && hasGlow) {
+                particles.Stop(); 
+            }
+
             Debug.Log(name + " has been disabled.");
         }
 
         public virtual void EnableTrigger() {
             interactable = true; 
+
+            if (particles != null && hasGlow) {
+                particles.Play(); 
+            }
+
             Debug.Log(name + " has been enabled.");
         }
     }
