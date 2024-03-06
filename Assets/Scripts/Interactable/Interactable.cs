@@ -23,9 +23,6 @@ namespace PyrrhicSilva.Interactable {
             if (col == null) {
                 col = gameObject.GetComponent<Collider>();
             }
-            if (particles == null) {
-                particles = gameObject.GetComponent<ParticleSystem>(); 
-            }
         }
 
         protected virtual void Update() {

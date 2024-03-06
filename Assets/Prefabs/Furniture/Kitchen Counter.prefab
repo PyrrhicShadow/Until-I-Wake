@@ -1553,8 +1553,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
-  m_Height: 2
+  m_Radius: 0.5
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5063085419681611682
@@ -1571,13 +1571,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   _col: {fileID: 2636597760290893593}
-  particles: {fileID: 4576337795466971252}
+  particles: {fileID: 0}
   hasGlow: 0
   isTask: 1
   repeatable: 0
   interactDelay: 2
   interactable: 1
-  eatingParticles: {fileID: 0}
+  eatingParticles: {fileID: 4576337795466971252}
   audioSource: {fileID: 0}
 --- !u!198 &4576337795466971252
 ParticleSystem:
@@ -11837,7 +11837,7 @@ Transform:
   m_GameObject: {fileID: 8269404318930977975}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.404, y: 0.033, z: 0.356}
+  m_LocalPosition: {x: 0.499, y: 0.033, z: 0.356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

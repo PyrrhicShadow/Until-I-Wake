@@ -114,7 +114,7 @@ namespace PyrrhicSilva
         [Header("Unwind")]
         [SerializeField] CookingInteractable stove;
         [SerializeField] MealInteractable panFood;
-        [SerializeField] ChairInteractable couch;
+        [SerializeField] ChairInteractable gameConsole;
         [SerializeField] ComputerInteractable tv;
         [SerializeField] GameObject twinkCage;
         [Header("Bedtime")]
@@ -179,7 +179,7 @@ namespace PyrrhicSilva
             stove.enabled = false;
             stove.DisableTrigger();
             panFood.DisableTrigger();
-            couch.DisableTrigger();
+            gameConsole.DisableTrigger();
             tv.enabled = false;
             tv.DisableTrigger();
             twinkCage.SetActive(false);
@@ -315,6 +315,7 @@ namespace PyrrhicSilva
                     mainHouse.SetActive(true);
                     tempBedroom.SetActive(true);
                     Debug.Log("Main house day");
+                    TaskComplete();
                     break;
                 default:
 
@@ -322,17 +323,16 @@ namespace PyrrhicSilva
                     normalWakeUpCamera.Priority += 20;
                     apartment.SetActive(true);
                     Debug.Log("Apartment day.");
+                    alarmClock.EnableTrigger();
                     break;
             }
 
-            TaskComplete();
         }
 
         /******* Wake Up *******/
 
         private void WakeUp()
         {
-            alarmClock.EnableTrigger();
             switch (objective.step)
             {
                 case Step.Begin:
@@ -837,8 +837,8 @@ namespace PyrrhicSilva
         void UnwindTV()
         {
             UpdateClocks("17:43");
-            couch.enabled = true;
-            couch.EnableTrigger();
+            gameConsole.enabled = true;
+            gameConsole.EnableTrigger();
             UpdateAgendaText("Play games on the TV");
             objective.NewObjective(Task.Unwind, Step.Perform);
             gameManager.SaveGame();
@@ -856,7 +856,7 @@ namespace PyrrhicSilva
         {
             apartment.SetActive(true);
             UpdateClocks("23:30");
-            gameManager.TeleportCharacter(couch.ExitTransform);
+            gameManager.TeleportCharacter(gameConsole.ExitTransform);
             gameManager.GetUnSeated();
             gameManager.CharacterMovement(true);
             objective.NewObjective(Task.Night);

@@ -29,6 +29,10 @@ namespace PyrrhicSilva.Interactable
                 else
                 {
                     audioSource.Play();
+                    if (isTask)
+                    {
+                        gameManager.Agenda.TaskComplete();
+                    }
                 }
             }
             // base.InteractAction();

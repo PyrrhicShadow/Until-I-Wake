@@ -551,13 +551,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   _col: {fileID: 114609293578528939}
-  particles: {fileID: 3998240888403643667}
+  particles: {fileID: 0}
   hasGlow: 0
   isTask: 1
   repeatable: 0
   interactDelay: 2
   interactable: 1
-  eatingParticles: {fileID: 0}
+  eatingParticles: {fileID: 3998240888403643667}
   audioSource: {fileID: 0}
 --- !u!198 &3998240888403643667
 ParticleSystem:
