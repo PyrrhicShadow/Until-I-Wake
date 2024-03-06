@@ -542,10 +542,6 @@ MonoBehaviour:
   repeatable: 0
   interactDelay: 0.5
   interactable: 1
-  chairCamera: {fileID: 0}
-  targetCamera: {fileID: 0}
-  _exitTransform: {fileID: 0}
-  target: {fileID: 0}
   defaultCanvas: {fileID: 0}
   splashController: {fileID: 0}
 --- !u!1 &4414256843387420238
@@ -907,7 +903,7 @@ Transform:
   m_GameObject: {fileID: 7798963291469192923}
   serializedVersion: 2
   m_LocalRotation: {x: 0.078134105, y: -0, z: -0, w: 0.9969429}
-  m_LocalPosition: {x: 0.00000022351742, y: 0.773, z: 0.8909998}
+  m_LocalPosition: {x: 0.00000022351742, y: 0.728, z: 0.8909998}
   m_LocalScale: {x: 3, y: 1.3, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
