@@ -140,6 +140,7 @@ namespace PyrrhicSilva
         private void Start()
         {
             gameManager.LoadGame(); 
+            gameManager.CharacterMovement(true);
 
             // set up
             apartment.SetActive(false);
@@ -355,6 +356,7 @@ namespace PyrrhicSilva
 
         IEnumerator fadeBackground()
         {
+            yield return new WaitForSeconds(2f); 
             wakeUpAnimator.Play("FadeBackground");
             yield return new WaitForSeconds(2.3f);
             wakeUpAnimator.enabled = false;  

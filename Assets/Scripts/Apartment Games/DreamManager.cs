@@ -7,6 +7,7 @@ namespace PyrrhicSilva
     public class DreamManager : MonoBehaviour
     {
         public static DreamManager dreamManager;
+        [SerializeField] Skybox mainCamera; 
         [SerializeField] SplashController startSplash;
         [SerializeField] SplashController endSplash;
         [SerializeField] WakeUpGame wakeUpGame; 
@@ -47,6 +48,10 @@ namespace PyrrhicSilva
                 wakeUpGame = GameObject.FindWithTag("WakeUp").GetComponent<WakeUpGame>(); 
             }
 
+            if (mainCamera == null) {
+                mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Skybox>(); 
+            }
+
             if (isNightmare) {
                 int randDream = Random.Range(0, nightmares.Length);
             currentDream = Instantiate(nightmares[randDream]).GetComponent<Dream>();
@@ -55,6 +60,8 @@ namespace PyrrhicSilva
             int randDream = Random.Range(0, dreams.Length);
             currentDream = Instantiate(dreams[randDream]).GetComponent<Dream>();
             }
+
+            mainCamera.material = currentDream.skybox; 
 
             StartCoroutine(playDream());
         }

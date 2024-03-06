@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8aea1fddefaf34fbb9b3b815cbc927, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1940573841987572526}
   cycle: 0
   day: 0
   objective:
@@ -495,23 +495,42 @@ MonoBehaviour:
   clocks:
   - {fileID: 0}
   - {fileID: 0}
-  wakeUpGame: {fileID: 0}
+  apartment: {fileID: 0}
+  mainHouse: {fileID: 0}
+  tempBedroom: {fileID: 0}
+  interviewOffice: {fileID: 0}
+  wakeUpAnimator: {fileID: 0}
   alarmClock: {fileID: 0}
-  wakeUpCamera: {fileID: 0}
-  dresser: {fileID: 0}
-  bathroomDoor: {fileID: 0}
+  normalWakeUpCamera: {fileID: 0}
+  interviewWakeUpCamera: {fileID: 0}
+  normalDresser: {fileID: 0}
+  interviewDresser: {fileID: 0}
+  normalBathroomDoor: {fileID: 0}
+  interviewBathroomDoor: {fileID: 0}
   fridge: {fileID: 0}
   microwave: {fileID: 0}
-  placeSetting: {fileID: 0}
-  plateFood: {fileID: 0}
-  diningTable: {fileID: 0}
-  sink: {fileID: 0}
+  normalPlaceSetting: {fileID: 0}
+  interviewPlaceSetting: {fileID: 0}
+  normalPlateFood: {fileID: 0}
+  interviewPlateFood: {fileID: 0}
+  normalDiningTable: {fileID: 0}
+  interviewDiningTable: {fileID: 0}
+  normalSink: {fileID: 0}
+  interviewSink: {fileID: 0}
+  workDesk: {fileID: 0}
   computer: {fileID: 0}
+  interviewDoor: {fileID: 0}
+  interviewGame: {fileID: 0}
   stove: {fileID: 0}
   panFood: {fileID: 0}
   couch: {fileID: 0}
+  tv: {fileID: 0}
+  twinkCage: {fileID: 0}
+  bedroomDoor: {fileID: 0}
   speaker: {fileID: 0}
-  bed: {fileID: 0}
-  sleepCamera: {fileID: 0}
+  normalBed: {fileID: 0}
+  interviewBed: {fileID: 0}
+  normalSleepCamera: {fileID: 0}
+  interviewSleepCamera: {fileID: 0}
   dreamManager: {fileID: 0}
   frontDoor: {fileID: 0}

@@ -1957,9 +1957,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a9c270d22da2846a163821a5541a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
   startSplash: {fileID: 2137830681}
   endSplash: {fileID: 1917245165}
+  wakeUpGame: {fileID: 0}
   audioSource: {fileID: 99537866}
+  dreams: []
+  nightmares: []
+  isNightmare: 0
+  currentDream: {fileID: 0}
 --- !u!4 &99537865
 Transform:
   m_ObjectHideFlags: 0
@@ -12835,7 +12841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164625527}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28252685, y: -0.64821184, z: 0.28252688, w: 0.64821184}
+  m_LocalRotation: {x: 0.28252682, y: -0.64821184, z: 0.28252685, w: 0.64821184}
   m_LocalPosition: {x: 1.806, y: 1.805, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -77773,14 +77779,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9167441097597501506}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: bed
-      value: 
-      objectReference: {fileID: 6485288627580086491}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: sink
-      value: 
-      objectReference: {fileID: 1697693960}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: couch
       value: 
       objectReference: {fileID: 2670025187860169935}
@@ -77792,10 +77790,6 @@ PrefabInstance:
       propertyPath: fridge
       value: 
       objectReference: {fileID: 898603911}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: dresser
-      value: 
-      objectReference: {fileID: 1638438988}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: panFood
       value: 
@@ -77833,10 +77827,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6485288627580086491}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: plateFood
-      value: 
-      objectReference: {fileID: 1854795838}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: twinkCage
       value: 
       objectReference: {fileID: 1396716699}
@@ -77849,22 +77839,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1697693960}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: wakeUpGame
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: diningTable
-      value: 
-      objectReference: {fileID: 1552261782115949950}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: gameManager
-      value: 
-      objectReference: {fileID: 8204767107365459085}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: sleepCamera
-      value: 
-      objectReference: {fileID: 2048578401}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: tempBedroom
       value: 
       objectReference: {fileID: 867954009}
@@ -77873,10 +77847,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 379681890}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: bathroomDoor
-      value: 
-      objectReference: {fileID: 1004323652128986922}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: dreamManager
       value: 
       objectReference: {fileID: 99537864}
@@ -77884,14 +77854,6 @@ PrefabInstance:
       propertyPath: interviewBed
       value: 
       objectReference: {fileID: 1609743952}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: placeSetting
-      value: 
-      objectReference: {fileID: 2029891959}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: wakeUpCamera
-      value: 
-      objectReference: {fileID: 15281611}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: interviewSink
       value: 
@@ -77904,6 +77866,10 @@ PrefabInstance:
       propertyPath: objectiveText
       value: 
       objectReference: {fileID: 1845727026}
+    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: wakeUpAnimator
+      value: 
+      objectReference: {fileID: 1942696025}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: interviewOffice
       value: 
@@ -77920,10 +77886,6 @@ PrefabInstance:
       propertyPath: subObjectiveText
       value: 
       objectReference: {fileID: 524417216}
-    - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: interviewlDresser
-      value: 
-      objectReference: {fileID: 1557612428}
     - target: {fileID: 1577168532143375470, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: normalDiningTable
       value: 
@@ -77984,17 +77946,9 @@ PrefabInstance:
       propertyPath: debugCanvas
       value: 
       objectReference: {fileID: 48569414}
-    - target: {fileID: 5393215578589016655, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
-      objectReference: {fileID: 0}
-    - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228376, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Camera

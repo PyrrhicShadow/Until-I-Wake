@@ -7,14 +7,17 @@ namespace PyrrhicSilva
     class Dream : MonoBehaviour
     {
         [SerializeField] Animator animator;
-        [SerializeField] AudioSource dreamMusic; 
-        [SerializeField] float _animationTime;
+        [SerializeField] AudioSource dreamMusic;
+        [SerializeField] float _animationTime = 5f;
         public float animationTime { get { return _animationTime; } private set { _animationTime = value; } }
+        [SerializeField] Material _skybox;
+        public Material skybox { get { return _skybox; } private set { _skybox = value; } }
 
         public void Play()
         {
-            animator.Play("dream");
-            dreamMusic.Play(); 
+            // mainCamera.skybox = skybox; 
+            // animator.Play("dream");
+            // dreamMusic.Play(); 
         }
     }
 }
