@@ -523,26 +523,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6202543572446773457, guid: cec30d8517188504b866731aea0af8d8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6523248148738216047, guid: cec30d8517188504b866731aea0af8d8, type: 3}
-      propertyPath: m_Color.a
-      value: 0.49019608
-      objectReference: {fileID: 0}
-    - target: {fileID: 6523248148738216047, guid: cec30d8517188504b866731aea0af8d8, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6809266563913533080, guid: cec30d8517188504b866731aea0af8d8, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 540
-      objectReference: {fileID: 0}
-    - target: {fileID: 6809266563913533080, guid: cec30d8517188504b866731aea0af8d8, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 112
-      objectReference: {fileID: 0}
     - target: {fileID: 8130983407131624412, guid: cec30d8517188504b866731aea0af8d8, type: 3}
       propertyPath: m_Name
       value: Switches Game
