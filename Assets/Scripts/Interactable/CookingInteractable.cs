@@ -34,7 +34,7 @@ namespace PyrrhicSilva.Interactable
                 interactable = true;
                 if (hasGlow)
                 {
-                    particles.Play();
+                    particles.Play(false);
                 }
                 if (audioSource != null)
                 {

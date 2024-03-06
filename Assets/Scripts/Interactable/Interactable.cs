@@ -52,7 +52,7 @@ namespace PyrrhicSilva.Interactable {
             interactable = false; 
 
             if (particles != null && hasGlow) {
-                particles.Stop(); 
+                particles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear); 
             }
 
             Debug.Log(name + " has been disabled.");
@@ -62,7 +62,7 @@ namespace PyrrhicSilva.Interactable {
             interactable = true; 
 
             if (particles != null && hasGlow) {
-                particles.Play(); 
+                particles.Play(false); 
             }
 
             Debug.Log(name + " has been enabled.");

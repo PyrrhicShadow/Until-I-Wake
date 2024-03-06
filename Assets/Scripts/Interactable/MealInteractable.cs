@@ -33,9 +33,9 @@ namespace PyrrhicSilva.Interactable
 
         IEnumerator EatingParticles()
         {
-            eatingParticles.Play();
+            eatingParticles.Play(false);
             yield return new WaitForSeconds(interactDelay);
-            eatingParticles.Stop();
+            eatingParticles.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
             gameManager.GetUnSeated(); 
             yield return new WaitForEndOfFrame(); 
             yield return new WaitForEndOfFrame(); 
