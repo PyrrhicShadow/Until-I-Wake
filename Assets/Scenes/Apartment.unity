@@ -1942,8 +1942,10 @@ MonoBehaviour:
   endSplash: {fileID: 1917245165}
   wakeUpGame: {fileID: 0}
   audioSource: {fileID: 99537866}
-  dreams: []
-  nightmares: []
+  dreams:
+  - {fileID: 7924406874585476147, guid: 174ea043effb60840bb215ae5f8627f7, type: 3}
+  nightmares:
+  - {fileID: 7924406874585476147, guid: 174ea043effb60840bb215ae5f8627f7, type: 3}
   isNightmare: 0
   currentDream: {fileID: 0}
 --- !u!4 &99537865
