@@ -35,7 +35,7 @@ namespace PyrrhicSilva.Interactable
                     }
                 }
             }
-            // base.InteractAction();
+            base.InteractAction();
         }
     }
 }

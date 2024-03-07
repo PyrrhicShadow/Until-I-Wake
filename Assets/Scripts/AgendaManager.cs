@@ -109,7 +109,8 @@ namespace PyrrhicSilva
         [Header("Computer Work")]
         [SerializeField] ChairInteractable workDesk;
         [SerializeField] ComputerInteractable computer;
-        [SerializeField] DoorInteractable interviewDoor;
+        [SerializeField] DoorInteractable interviewGoDoor;
+        [SerializeField] DoorInteractable interviewLeaveDoor;
         [SerializeField] GameObject interviewGame;
         [Header("Unwind")]
         [SerializeField] CookingInteractable stove;
@@ -127,6 +128,7 @@ namespace PyrrhicSilva
         [SerializeField] DreamManager dreamManager;
         [Header("Travel")]
         [SerializeField] DoorInteractable frontDoor;
+        [SerializeField] DoorInteractable mainDoor;
 
         private void Awake()
         {
@@ -139,7 +141,7 @@ namespace PyrrhicSilva
 
         private void Start()
         {
-            gameManager.LoadGame(); 
+            gameManager.LoadGame();
             gameManager.CharacterMovement(true);
 
             // set up
@@ -149,7 +151,7 @@ namespace PyrrhicSilva
             interviewOffice.SetActive(false);
 
             // wake up 
-            wakeUpAnimator.enabled = false; 
+            wakeUpAnimator.enabled = false;
             alarmClock.DisableTrigger();
 
             // get ready 
@@ -172,8 +174,9 @@ namespace PyrrhicSilva
             workDesk.DisableTrigger();
             computer.enabled = false;
             computer.DisableTrigger();
-            // interviewDoor.DisableTrigger(); 
+            // interviewGoDoor.DisableTrigger(); 
             // interviewGame.SetActive(false);
+            // interviewLeaveDoor.DisableTrigger(); 
 
             // unwind 
             stove.enabled = false;
@@ -193,6 +196,7 @@ namespace PyrrhicSilva
 
             // travel
             // frontDoor.DisableTrigger(); 
+            // mainDoor.DisableTrigger(); 
 
             // Begin the game
             TaskComplete();
@@ -300,7 +304,7 @@ namespace PyrrhicSilva
 
             // setup 
             gameManager.CharacterMovement(false);
-            wakeUpAnimator.enabled = true; 
+            wakeUpAnimator.enabled = true;
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
@@ -324,6 +328,7 @@ namespace PyrrhicSilva
                     apartment.SetActive(true);
                     Debug.Log("Apartment day.");
                     alarmClock.EnableTrigger();
+                    TaskComplete();
                     break;
             }
 
@@ -356,10 +361,10 @@ namespace PyrrhicSilva
 
         IEnumerator fadeBackground()
         {
-            yield return new WaitForSeconds(2f); 
+            yield return new WaitForSeconds(2f);
             wakeUpAnimator.Play("FadeBackground");
             yield return new WaitForSeconds(2.3f);
-            wakeUpAnimator.enabled = false;  
+            wakeUpAnimator.enabled = false;
             TaskComplete();
         }
 
@@ -753,7 +758,18 @@ namespace PyrrhicSilva
 
         void BreakfastCleanUp()
         {
-            objective.NewObjective(Task.Work);
+            switch (day)
+            {
+                case < Day.Fri:
+                    objective.NewObjective(Task.Work);
+                    break;
+                case Day.Sat:
+                    objective.NewObjective(Task.Interview);
+                    break;
+                default:
+                    objective.NewObjective(Task.Leave);
+                    break;
+            }
 
             // gameManager.TemporaryTask();
         }
@@ -997,9 +1013,46 @@ namespace PyrrhicSilva
             switch (objective.step)
             {
                 case Step.Begin:
+                    PackThings();
                     break;
                 case Step.Perform:
+                    Leave();
                     break;
+            }
+        }
+
+        void PackThings()
+        {
+            objective.NewObjective(Task.Leave, Step.Perform);
+            // grab your suitcase 
+            gameManager.TemporaryTask();
+        }
+
+        void Leave()
+        {
+            if (day == Day.Sat)
+            {
+                if (objective.step == Step.Begin)
+                {
+                    // activate interviewGoDoor in main house
+                    gameManager.TemporaryTask();
+                }
+                else
+                {
+                    // activate interviewLeaveDoor in interview room
+                    gameManager.TemporaryTask();
+                }
+            }
+            else
+            {
+                apartment.SetActive(true);
+                mainHouse.SetActive(true);
+                tempBedroom.SetActive(true);
+
+                frontDoor.EnableTrigger();
+                mainDoor.EnableTrigger();
+
+                objective.NewObjective(Task.Arrive);
             }
         }
 
@@ -1011,18 +1064,31 @@ namespace PyrrhicSilva
                     ReturnFromTravel();
                     break;
                 case Step.Perform:
-                    // unpack your things
+                    UnpackThings();
                     break;
             }
         }
 
         void ReturnFromTravel()
         {
-            gameManager.TeleportCharacter(frontDoor.ExitTransform);
+            if (day == Day.Fri)
+            {
+                gameManager.TeleportCharacter(frontDoor.ExitTransform);
+            }
+            else if (day == Day.Sun)
+            {
+                gameManager.TeleportCharacter(bedroomDoor.ExitTransform);
+            }
             objective.NewObjective(Task.Arrive, Step.Perform);
             TaskComplete();
         }
 
+        void UnpackThings()
+        {
+            interviewDresser.EnableTrigger(); 
+            normalDresser.EnableTrigger(); 
+            objective.NewObjective(Task.CookDinner);
+        }
 
     }
 }

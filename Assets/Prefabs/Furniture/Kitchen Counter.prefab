@@ -6531,7 +6531,7 @@ MonoBehaviour:
   hasGlow: 0
   isTask: 1
   repeatable: 1
-  interactDelay: 0.5
+  interactDelay: 3
   interactable: 1
   contents: {fileID: 8269404318930977975}
   audioSource: {fileID: 0}
