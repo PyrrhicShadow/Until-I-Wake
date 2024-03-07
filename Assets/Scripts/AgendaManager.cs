@@ -624,8 +624,6 @@ namespace PyrrhicSilva
 
             stove.enabled = true;
             stove.EnableTrigger();
-
-            // gameManager.TemporaryTask();
         }
 
         void TakeMeal()
@@ -729,15 +727,11 @@ namespace PyrrhicSilva
         void BreakfastPlate()
         {
             objective.NewObjective(Task.EatBreakfast, Step.Finish);
-
-            // gameManager.TemporaryTask();
         }
 
         void DinnerPlate()
         {
             objective.NewObjective(Task.EatDinner, Step.Finish);
-
-            // gameManager.TemporaryTask();
         }
 
         void CleanUp()
@@ -770,16 +764,12 @@ namespace PyrrhicSilva
                     objective.NewObjective(Task.Leave);
                     break;
             }
-
-            // gameManager.TemporaryTask();
         }
 
 
         void DinnerCleanUp()
         {
             objective.NewObjective(Task.Unwind);
-
-            // gameManager.TemporaryTask();
         }
 
         /***** Computer Work ******/
@@ -858,7 +848,6 @@ namespace PyrrhicSilva
             UpdateAgendaText("Play games on the TV");
             objective.NewObjective(Task.Unwind, Step.Perform);
             gameManager.SaveGame();
-            // gameManager.TemporaryTask();
         }
 
         void UnwindInterview()
@@ -909,7 +898,7 @@ namespace PyrrhicSilva
         {
             objective.NewObjective(Task.Bedtime);
             normalBathroomDoor.EnableTrigger();
-            // interviewBathroomDoor.EnableTrigger();
+            interviewBathroomDoor.EnableTrigger();
         }
 
         void Bedtime()
@@ -1074,10 +1063,13 @@ namespace PyrrhicSilva
             if (day == Day.Fri)
             {
                 gameManager.TeleportCharacter(frontDoor.ExitTransform);
+                apartment.SetActive(false); 
             }
             else if (day == Day.Sun)
             {
                 gameManager.TeleportCharacter(bedroomDoor.ExitTransform);
+                mainHouse.SetActive(false); 
+                tempBedroom.SetActive(false); 
             }
             objective.NewObjective(Task.Arrive, Step.Perform);
             TaskComplete();
