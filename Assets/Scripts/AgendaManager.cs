@@ -984,13 +984,14 @@ namespace PyrrhicSilva
             {
                 normalSleepCamera.Priority += 20;
             }
+            normalSleepCamera.Priority += 20;
             StartCoroutine(layInBed());
         }
 
         IEnumerator layInBed()
         {
-
-            yield return new WaitForSeconds(3);
+            normalSleepCamera.gameObject.GetComponent<Animator>().Play("LayDown"); 
+            yield return new WaitForSeconds(2);
 
             // Load dream sequence
             dreamManager.enabled = true;
