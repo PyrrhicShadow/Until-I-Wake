@@ -365,7 +365,8 @@ namespace PyrrhicSilva
             wakeUpAnimator.Play("FadeBackground");
             yield return new WaitForSeconds(2.3f);
             wakeUpAnimator.enabled = false;
-            TaskComplete();
+            
+            alarmClock.InteractAction(); 
         }
 
         // if (agenda.day < Day.Thur)
@@ -397,7 +398,8 @@ namespace PyrrhicSilva
             gameManager.CharacterMovement(true);
 
             // pass task completion to alarm clock
-            alarmClock.InteractAction();
+            alarmClock.EnableTrigger(); 
+            
         }
 
         private void AlarmOff()

@@ -34,8 +34,8 @@ namespace PyrrhicSilva.Interactable
                         gameManager.Agenda.TaskComplete();
                     }
                 }
+                base.InteractAction();
             }
-            base.InteractAction();
         }
     }
 }
