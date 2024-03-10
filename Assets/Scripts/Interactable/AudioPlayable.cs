@@ -21,18 +21,14 @@ namespace PyrrhicSilva.Interactable
                 if (audioSource.isPlaying)
                 {
                     audioSource.Stop();
-                    if (isTask)
-                    {
-                        gameManager.Agenda.TaskComplete();
-                    }
                 }
                 else
                 {
                     audioSource.Play();
-                    if (isTask)
-                    {
-                        gameManager.Agenda.TaskComplete();
-                    }
+                }
+                if (isTask)
+                {
+                    gameManager.Agenda.TaskComplete();
                 }
                 base.InteractAction();
             }

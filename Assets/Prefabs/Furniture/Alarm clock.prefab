@@ -723,8 +723,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   _col: {fileID: 1120203935022923966}
-  isTask: 0
-  repeatable: 1
+  particles: {fileID: 0}
+  hasGlow: 0
+  isTask: 1
+  repeatable: 0
   interactDelay: 0.5
   interactable: 1
   audioSource: {fileID: 5854212243062485574}

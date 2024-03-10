@@ -220,7 +220,7 @@ namespace PyrrhicSilva
 
             uiCanvas.enabled = state;
 
-            // Debug.Log(playerInput.currentActionMap.name);
+            Debug.Log("Current action map: " +playerInput.currentActionMap.name);
 
         }
 

@@ -362,11 +362,12 @@ namespace PyrrhicSilva
         IEnumerator fadeBackground()
         {
             yield return new WaitForSeconds(2f);
+            alarmClock.InteractAction();
             wakeUpAnimator.Play("FadeBackground");
             yield return new WaitForSeconds(2.3f);
             wakeUpAnimator.enabled = false;
-            
-            alarmClock.InteractAction(); 
+            alarmClock.EnableTrigger(); 
+            gameManager.CharacterMovement(true);
         }
 
         // if (agenda.day < Day.Thur)
@@ -395,17 +396,15 @@ namespace PyrrhicSilva
             // advance clocks 
             UpdateClocks("08:00");
 
-            gameManager.CharacterMovement(true);
-
             // pass task completion to alarm clock
-            alarmClock.EnableTrigger(); 
             
+            Debug.Log("Open Eyes complete"); 
         }
 
         private void AlarmOff()
         {
             alarmClock.enabled = false;
-            alarmClock.DisableTrigger();
+            // alarmClock.DisableTrigger();
             objective.NewObjective(Task.Morning);
             StartCoroutine(getOutOfBed());
         }
