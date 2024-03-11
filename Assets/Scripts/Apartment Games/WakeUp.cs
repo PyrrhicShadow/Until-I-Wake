@@ -33,14 +33,20 @@ namespace PyrrhicSilva
             day = (Day)PlayerPrefs.GetInt("day", 0); 
 
             mainAnimator.enabled = false; 
-            dreamManager.PlayDream(); 
+            // dreamManager.PlayDream(); 
         }
 
         [ContextMenu("End Minigame")]
         public void EndMinigame()
         {
             Debug.Log("Minigame complete!");
-            dreamManager.EndDream(); 
+            StartCoroutine("FadeBackground");
+        }
+
+        IEnumerator FadeBackground() {
+            mainAnimator.Play("FadeBackground");
+            yield return new WaitForSeconds(2.3f); 
+            mainAnimator.enabled = false; 
         }
 
         IEnumerator BypassMinigame()
@@ -62,6 +68,7 @@ namespace PyrrhicSilva
         {
             mainAnimator.enabled = true; 
             Debug.Log("Normal day wake up mini game start"); 
+            
             StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
         }
 
@@ -70,6 +77,8 @@ namespace PyrrhicSilva
             Debug.Log("Interview day wake up mini game start"); 
             StartCoroutine(BypassMinigame()); // button doesn't work right now, let's move on for now
         }
+
+
 
     }
 }

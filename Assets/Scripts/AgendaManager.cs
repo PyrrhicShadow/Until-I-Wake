@@ -87,7 +87,7 @@ namespace PyrrhicSilva
         [SerializeField] GameObject tempBedroom;
         [SerializeField] GameObject interviewOffice;
         [Header("Wake Up")]
-        [SerializeField] Animator wakeUpAnimator;
+        // [SerializeField] Animator wakeUpAnimator;
         [SerializeField] AudioPlayable alarmClock;
         [SerializeField] CinemachineVirtualCamera normalWakeUpCamera;
         [SerializeField] CinemachineVirtualCamera interviewWakeUpCamera;
@@ -151,7 +151,7 @@ namespace PyrrhicSilva
             interviewOffice.SetActive(false);
 
             // wake up 
-            wakeUpAnimator.enabled = false;
+            // wakeUpAnimator.enabled = false;
             alarmClock.DisableTrigger();
 
             // get ready 
@@ -304,7 +304,7 @@ namespace PyrrhicSilva
 
             // setup 
             gameManager.CharacterMovement(false);
-            wakeUpAnimator.enabled = true;
+            // wakeUpAnimator.enabled = true;
 
             // update objectives
             objective.NewObjective(Task.WakeUp);
@@ -319,7 +319,7 @@ namespace PyrrhicSilva
                     mainHouse.SetActive(true);
                     tempBedroom.SetActive(true);
                     Debug.Log("Main house day");
-                    TaskComplete();
+                    // TaskComplete();
                     break;
                 default:
 
@@ -327,10 +327,11 @@ namespace PyrrhicSilva
                     normalWakeUpCamera.Priority += 20;
                     apartment.SetActive(true);
                     Debug.Log("Apartment day.");
-                    alarmClock.EnableTrigger();
-                    TaskComplete();
+                    // alarmClock.EnableTrigger();
+                    // TaskComplete();
                     break;
             }
+            dreamManager.WakeUp(); 
 
         }
 
@@ -361,12 +362,12 @@ namespace PyrrhicSilva
 
         IEnumerator fadeBackground()
         {
-            yield return new WaitForSeconds(2f);
-            alarmClock.InteractAction();
-            wakeUpAnimator.Play("FadeBackground");
+            // yield return new WaitForSeconds(2f);
+            // alarmClock.InteractAction();
+            // wakeUpAnimator.Play("FadeBackground");
             yield return new WaitForSeconds(2.3f);
-            wakeUpAnimator.enabled = false;
-            alarmClock.EnableTrigger(); 
+            // wakeUpAnimator.enabled = false;
+            alarmClock.EnableTrigger();
             gameManager.CharacterMovement(true);
         }
 

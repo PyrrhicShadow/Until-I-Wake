@@ -41,6 +41,8 @@ collect: https://pixabay.com/sound-effects/collect-5930/ by Wagna
 
 Interface: https://pixabay.com/sound-effects/interface-124464/ by StudioAlivioGlobal
 
+Wakeup Chill alarm by (SuperSymmetrik)[https://www.zedge.net/profile/2b575c36-8e9e-402d-b609-4e4471ea6592] on (Zedge)[https://www.zedge.net/ringtone/4b89f65b-dda6-381e-8e5e-23a65f688c25]
+
 # ToDo: 
 
 * Sit at the table, eat food, and unsit

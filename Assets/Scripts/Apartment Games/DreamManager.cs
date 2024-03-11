@@ -73,5 +73,9 @@ namespace PyrrhicSilva
             yield return new WaitForEndOfFrame(); 
             wakeUpGame.StartMinigame(); 
         }
+
+        public void WakeUp() {
+            wakeUpGame.StartMinigame(); 
+        }
     }
 }
