@@ -46,7 +46,9 @@ namespace PyrrhicSilva
         IEnumerator FadeBackground() {
             mainAnimator.Play("FadeBackground");
             yield return new WaitForSeconds(2.3f); 
-            mainAnimator.enabled = false; 
+            mainAnimator.enabled = false;
+            GameManager gameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+            gameManager.Agenda.TaskComplete(); 
         }
 
         IEnumerator BypassMinigame()

@@ -398,7 +398,7 @@ namespace PyrrhicSilva
             UpdateClocks("08:00");
 
             // pass task completion to alarm clock
-            
+            alarmClock.EnableTrigger(); 
             Debug.Log("Open Eyes complete"); 
         }
 
