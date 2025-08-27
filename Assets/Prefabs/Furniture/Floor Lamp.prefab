@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &323165762198647412
 Transform:
@@ -98,7 +98,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5799862666851863323
 Transform:
@@ -169,7 +169,7 @@ Light:
   m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
+  m_BounceIntensity: 2
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -193,7 +193,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &5004652333347676948
 Transform:
@@ -276,7 +276,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 0
 --- !u!4 &5818055593226958359
 Transform:
@@ -359,7 +359,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2168492617388305912
 Transform:
@@ -475,10 +475,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3578030457149950412, guid: fe5e7a17bd0da8e44aee5a45d2b91ff5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -3394455930868820943, guid: fe5e7a17bd0da8e44aee5a45d2b91ff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4215d87acff8949408b70bcfdf1f9b8e, type: 2}
+    - target: {fileID: -3133498875991405556, guid: fe5e7a17bd0da8e44aee5a45d2b91ff5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: -2859109400176981367, guid: fe5e7a17bd0da8e44aee5a45d2b91ff5, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -486,6 +494,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fe5e7a17bd0da8e44aee5a45d2b91ff5, type: 3}
       propertyPath: m_Name
       value: Floor lamp
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fe5e7a17bd0da8e44aee5a45d2b91ff5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 3974400149628006261, guid: fe5e7a17bd0da8e44aee5a45d2b91ff5, type: 3}
       propertyPath: m_CastShadows
@@ -495,6 +507,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 252b3814e8857db46be04369b928d0e4, type: 2}
+    - target: {fileID: 8208229975827745842, guid: fe5e7a17bd0da8e44aee5a45d2b91ff5, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

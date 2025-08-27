@@ -61,7 +61,7 @@ namespace PyrrhicSilva
             currentDream = Instantiate(dreams[randDream]).GetComponent<Dream>();
             }
 
-            mainCamera.material = currentDream.skybox; 
+            // mainCamera.material = currentDream.skybox; 
 
             StartCoroutine(playDream());
         }
@@ -70,6 +70,7 @@ namespace PyrrhicSilva
         {
             currentDream.Play();
             yield return new WaitForSeconds(currentDream.animationTime);
+            Destroy(currentDream); 
             yield return new WaitForEndOfFrame(); 
             wakeUpGame.StartMinigame(); 
         }

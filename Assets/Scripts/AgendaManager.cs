@@ -327,8 +327,8 @@ namespace PyrrhicSilva
                     normalWakeUpCamera.Priority += 20;
                     apartment.SetActive(true);
                     Debug.Log("Apartment day.");
-                    // alarmClock.EnableTrigger();
-                    // TaskComplete();
+                    alarmClock.EnableTrigger();
+                    TaskComplete();
                     break;
             }
             dreamManager.WakeUp(); 

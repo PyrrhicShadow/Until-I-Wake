@@ -33,7 +33,7 @@ namespace PyrrhicSilva
             day = (Day)PlayerPrefs.GetInt("day", 0); 
 
             mainAnimator.enabled = false; 
-            // dreamManager.PlayDream(); 
+            dreamManager.PlayDream(); 
         }
 
         [ContextMenu("End Minigame")]
