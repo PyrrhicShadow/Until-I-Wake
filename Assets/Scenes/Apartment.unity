@@ -55494,10 +55494,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6360442213449812567, guid: c7f22c166ec58f146b140ae031aa1a03, type: 3}
-      propertyPath: sceneToLoad
-      value: ComputerWork
-      objectReference: {fileID: 0}
     - target: {fileID: 7434349920402252972, guid: c7f22c166ec58f146b140ae031aa1a03, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0

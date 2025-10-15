@@ -5,7 +5,7 @@ namespace PyrrhicSilva
 {
     public enum WorkType
     {
-        switches, wires
+        switches, wires, questions
     }
     public class WorkGameManager : MonoBehaviour
     {

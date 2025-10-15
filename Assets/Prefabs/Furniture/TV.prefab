@@ -758,14 +758,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   _col: {fileID: 6940543976048415009}
+  particles: {fileID: 0}
+  hasGlow: 0
   isTask: 1
   repeatable: 0
   interactDelay: 0.5
   interactable: 1
-  chairCamera: {fileID: 0}
-  targetCamera: {fileID: 0}
-  _exitTransform: {fileID: 0}
-  target: {fileID: 0}
   defaultCanvas: {fileID: 7689722995620694128}
   splashController: {fileID: 6360442213449812567}
 --- !u!1 &5316761889559619202
@@ -1075,7 +1073,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b09e22671f83c4c9028248ec58bee4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: TV Game
+  sceneToLoad: TVGames
   loadingScreen: {fileID: 2436424929084885194}
   loadingBar: {fileID: 8081853422549533126}
 --- !u!1 &7998422907541933900
